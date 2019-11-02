@@ -1,5 +1,11 @@
-# Vue base project use Type Script
+# Vue base project 
 
+Project use:
+ - Type Script
+ - [Pug](https://pugjs.org/api/getting-started.html)
+ - [Vuetify](https://vuetifyjs.com/ru/getting-started/quick-start)
+ 
+  
 ## Project setup
 ```
 npm install
@@ -20,13 +26,11 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# (WEBSTORM / PHPSTORM) 
 
+### File template 
 
-## IDEA file template 
-
-Component
+Component 
 ```
 <template lang="pug">
     v-layout ${COMPONENT_NAME} #[[$END$]]#
@@ -44,4 +48,8 @@ Component
 
 <style lang="scss" scoped>
 </style>
-````
+```
+
+
+# Code style requirements
+

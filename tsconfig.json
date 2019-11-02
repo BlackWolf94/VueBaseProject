@@ -17,6 +17,39 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@/assets": [
+        "src/assets/*"
+      ],
+      "@/components": [
+        "src/components/*"
+      ],
+      "@/decorators": [
+        "src/decorators/*"
+      ],
+      "@/directives": [
+        "src/directives/*"
+      ],
+      "@/mixins": [
+        "src/mixins/*"
+      ],
+      "@/helper": [
+        "src/helper/*"
+      ],
+      "@/pages": [
+        "src/pages/*"
+      ],
+      "@/plugins": [
+        "src/plugins/*"
+      ],
+      "@/router": [
+        "src/router/*"
+      ],
+      "@/api": [
+        "src/services/api/*"
+      ],
+      "@/store": [
+        "src/store/*"
       ]
     },
     "lib": [
