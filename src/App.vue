@@ -8,15 +8,15 @@
       v-btn( text href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank")
         span.mr-2 Latest Release
     v-content
-      HelloWorld
+        hello-world
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-import Component from 'vue-class-component';
+    import Vue from "vue";
+    import HelloWorld from "./components/HelloWorld.vue";
+    import Component from "vue-class-component";
 
-@Component({
+    @Component({
     components: {
         HelloWorld,
     },
