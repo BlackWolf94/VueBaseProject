@@ -2,6 +2,7 @@
  * @author Dmytro Zataidukh
  * @created_at 11/3/19
  */
+import Vue from 'vue';
 import {VuetifyLocale} from 'vuetify/types/services/lang';
 
 declare module 'vue/types/vue' {
