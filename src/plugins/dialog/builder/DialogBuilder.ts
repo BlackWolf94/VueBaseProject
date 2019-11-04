@@ -27,7 +27,7 @@ export default class DialogBuilder {
         value: null,
     };
 
-    constructor(private store?: any) {
+    constructor(private store: any, private vuetify: any) {
     }
 
     public model(value: any): this {
@@ -68,6 +68,8 @@ export default class DialogBuilder {
             let dialog = new (Vue.extend(Dialog))({
                 computed: this.computed,
                 data: () => this.data,
+                store: this.store,
+                vuetify: this.vuetify,
             });
 
             this.close = () => {
@@ -81,17 +83,19 @@ export default class DialogBuilder {
             };
 
             if (this.cancel) {
-                this.cancel.actions = () => {
+                this.cancel.action = () => {
                     this.close();
                 };
             }
 
             if (this.ok) {
-                this.ok.actions = () => {
+                this.ok.action = () => {
                     dialog.$destroy();
                     resolve(dialog.value);
                 };
             }
+
+            dialog.$mount();
         });
     }
 

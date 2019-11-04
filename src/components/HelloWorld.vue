@@ -10,14 +10,14 @@
 
             v-flex( mb-5 xs12 )
                 h2.headline.font-weight-bold.mb-3 What's next?
+        v-divider
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+    import Vue from 'vue';
+    import Component from 'vue-class-component';
 
-@Component({})
-export default class HelloWorld extends Vue {
-
+    @Component({})
+    export default class HelloWorld extends Vue {
     }
 </script>

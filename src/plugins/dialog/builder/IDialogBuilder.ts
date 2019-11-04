@@ -9,7 +9,7 @@ export interface TDialogButtons {
     text?: string;
     icon?: string;
     color?: string;
-    actions?: () => any;
+    action?: () => any;
 }
 
 export interface TDialogTitle {
