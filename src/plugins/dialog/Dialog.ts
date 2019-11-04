@@ -18,7 +18,8 @@ export default {
         //         .buttonOk('ok')
         // }
 
-        // TODO add promt / error / loading confirm dialogs
+        // TODO add prompt / error / loading confirm dialogs
+        // TODO add toast here for analogue
 
     },
 } as PluginObject<TDialogPluginOptions>;
