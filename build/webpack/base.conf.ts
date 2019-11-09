@@ -1,13 +1,13 @@
 import path from 'path';
-import envLoader from './envLoader';
+import envLoader from '../envLoader';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import {Configuration} from 'webpack';
-import {createLoader, createRule} from './untils';
-import vueConfig from './vueLoader.config';
-import styleLoader from './styleLoader';
+import {createLoader, createRule} from '../untils';
+import vueConfig from '../vueLoader';
+import styleLoader from '../styleLoader';
 import TerserPlugin from 'terser-webpack-plugin';
 import {VueLoaderPlugin} from 'vue-loader';
 

@@ -85,3 +85,5 @@ export const WpClient = {
     },
 
 } as Configuration;
+
+export default WpClient

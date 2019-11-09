@@ -3,6 +3,7 @@ import {WpBase} from './base.conf';
 import nodeExternals from 'webpack-node-externals';
 import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
 import envLoader from '../envLoader';
+import WpClient from "./client.conf";
 
 const config = envLoader({
     customConfig: {
@@ -32,3 +33,5 @@ export const WpServe: Configuration = {
 
     ],
 };
+
+export default WpServe
