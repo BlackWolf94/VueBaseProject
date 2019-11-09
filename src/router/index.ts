@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import App from '@/App.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
 
 Vue.use(VueRouter);
 
@@ -8,7 +8,7 @@ const routes = [
     {
       path: '/',
       name: 'home',
-      component: App,
+      component: HelloWorld,
     },
     // {
     //   path: '/about',
@@ -20,10 +20,9 @@ const routes = [
     // },
 ];
 
-const router = new VueRouter({
+export const createRouter = () => new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
 });
 
-export default router;

@@ -1,18 +1,18 @@
 import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
-import router from './router';
-import store from './store';
+import {createRouter} from './router';
 import vuetify from './plugins/vuetify';
 import plugins from './plugins';
+import {createStore} from '@/store';
 
 Vue.use(plugins);
 
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
+  router: createRouter(),
+  store: createStore(),
   vuetify,
   render: (h) => h(App),
 }).$mount('#app');
