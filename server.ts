@@ -6,6 +6,8 @@ import envLoader from './build/envLoader';
 import {createBundleRenderer} from 'vue-server-renderer';
 import vhost from 'vhost-ts';
 import compression from 'compression';
+import {devServer} from './build/devServer';
+
 
 const config = envLoader({
     stringify: false,
@@ -59,7 +61,7 @@ if (isProd) {
 } else {
     // In development: setup the dev server with watch and hot-reload,
     // and create a new renderer on bundle / index template update.
-    readyPromise = require('./build/setup-dev-server')(
+    readyPromise = devServer(
         app,
         templatePath,
         (bundle: any, options: any) => {renderer = createRenderer(bundle, options); },

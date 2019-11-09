@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "alwaysStrict": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": ".",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "esnext.asynciterable"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "build/**/*.ts",
+    "server.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "dist",
+    "commands"
+  ]
+}
