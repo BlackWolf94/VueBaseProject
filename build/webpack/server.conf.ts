@@ -5,6 +5,7 @@ import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
 import envLoader from '../envLoader';
 
 const config = envLoader({
+    stringify: false,
     customConfig: {
         VUE_ENV: 'server',
     },

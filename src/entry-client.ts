@@ -9,6 +9,8 @@ import {createApp} from '@/createApp';
 
 const {app, router, store} = createApp();
 
+console.error('asdasdasd');
+
 if ((window as any).__INITIAL_STATE__) {
     store.replaceState((window as any).__INITIAL_STATE__);
 }

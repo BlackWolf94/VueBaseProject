@@ -8,7 +8,7 @@
             v-btn( text href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank")
                 span.mr-2 Latest Release
         v-content
-            hello-world
+            router-view
 </template>
 
 <script lang="ts">
@@ -16,11 +16,7 @@
     import HelloWorld from './components/HelloWorld.vue';
     import Component from 'vue-class-component';
 
-    @Component({
-        components: {
-            HelloWorld,
-        },
-    })
+    @Component({})
     export default class App extends Vue {
 
     }

@@ -60,7 +60,6 @@ export const devServer = (app: Express, templatePath: string, cb: (...props: any
 
     app.use(devMiddleware);
 
-
     clientCompiler.hooks.done.tap('dev server', (stats) => {
         stats.compilation.errors.forEach(console.error);
         stats.compilation.warnings.forEach(console.warn);
@@ -68,6 +67,7 @@ export const devServer = (app: Express, templatePath: string, cb: (...props: any
         if (stats.hasErrors()) {
             return;
         }
+
 
         clientManifest = JSON.parse(readFile(
             devMiddleware.fileSystem,
