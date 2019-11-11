@@ -1,8 +1,9 @@
-import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import * as path from 'path';
 
-const loadDotEnv = (filePath: string) => dotenv.parse(fs.readFileSync(path.resolve(__dirname, filePath)));
+const loadDotEnv = (filePath: string) => dotenv.parse(
+    fs.readFileSync(path.resolve(__dirname, filePath)));
 
 const defaultConfig = loadDotEnv('../.env');
 const defaultConfigKey = [

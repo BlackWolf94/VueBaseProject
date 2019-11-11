@@ -4,12 +4,22 @@ import {NewLoader} from 'webpack';
 
 const defaultLoaders: NewLoader[] = [
     createLoader('css-loader', {minimize: false}),
+    // createLoader('scss-loader', {minimize: false}),
+    createLoader('sass-loader', {
+        sassOptions: {
+            indentedSyntax: true,
+        },
+        prependData: '@import \'vuetify/src/styles/styles.sass\'',
+    }),
     createLoader('resolve-url-loader'),
 ];
 
 const generateExtractLoaders = (loaderName: string, minimize: boolean = false) => {
     const loaders = defaultLoaders.map((loader) => {
-        loader.options.minimize = minimize;
+        if (loader.loader !== 'sass-loader') {
+            loader.options.minimize = minimize;
+        }
+
         return loader;
     });
 
@@ -27,10 +37,11 @@ const generateExtractLoaders = (loaderName: string, minimize: boolean = false) =
 
 
 const generateInlineLoaders = (loaderName: string, minimize: boolean = false) => {
+
     return [
         createLoader('vue-style-loader'),
-        ...defaultLoaders.map(({loader, options}) => {
-            const loaderOptions = Object.keys(options);
+        ...(defaultLoaders.map(({loader, options}: any) => {
+            const loaderOptions = Object.keys(options || {});
             if (minimize) {
                 loaderOptions.push('minimize');
             }
@@ -38,7 +49,7 @@ const generateInlineLoaders = (loaderName: string, minimize: boolean = false) =>
                 loader += `?${loaderOptions.join('&')}`;
             }
             return createLoader(loader);
-        }),
+        })),
         createLoader(`${loaderName}-loader?sourceMap`),
     ];
 };
@@ -49,7 +60,7 @@ export default {
     },
     getVueLoaders(extract: boolean = false, minimize: boolean = false) {
         return {
-            scss: this.getLoaders('sass', extract, minimize),
+            sass: this.getLoaders('sass', extract, minimize),
             css: this.getLoaders('css', extract, minimize),
         };
     },

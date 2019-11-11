@@ -86,4 +86,4 @@ export const WpClient = {
 
 } as Configuration;
 
-export default WpClient
+export default WpClient;

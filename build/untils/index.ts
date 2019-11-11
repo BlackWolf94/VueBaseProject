@@ -1,38 +1,54 @@
 import {NewLoader, RuleSetCondition, RuleSetQuery, RuleSetRule, RuleSetUse} from 'webpack';
 
-export const createLoader = <T>(loader: string, options: Partial<T> = {}): NewLoader => ({loader, options});
+export const createLoader = <T>(loader: string, options?: Partial<T>): NewLoader =>
+    (options ? {loader, options} : {loader});
 
 
-class WebpackRuleBuilder implements RuleSetRule {
+class WebpackRuleBuilder {
 
-    public options = {};
-    public exclude: any = null;
-    public use: RuleSetUse;
+    public conf: RuleSetRule = {};
 
-    constructor(public test: RuleSetCondition, public loader?: string) {
+    constructor(test: RuleSetCondition, loader?: string) {
+        this.conf.test = test;
+        if (loader) {
+            this.conf.loader = loader;
+        }
     }
 
-    public setUse(use: RuleSetUse) {
-        this.use = use;
+    public use(use: RuleSetUse) {
+        this.conf.use = use;
         return this;
     }
 
-    public setOptions(options: RuleSetQuery) {
-        this.options = options;
+    public options(options: RuleSetQuery) {
+        this.conf.options = options;
         return this;
     }
 
-    public setExclude(exclude: RuleSetCondition) {
-        this.exclude = exclude;
+    public exclude(exclude: RegExp) {
+        this.conf.exclude = new RegExp(exclude);
         return this;
     }
 
+    public oneOf(resourceQuery: RegExp, use: NewLoader[]) {
+        if (resourceQuery) {
+            this.conf.oneOf = [...this.conf.oneOf || [], {resourceQuery, use}];
+        }
+        else {
 
-
+            this.conf.oneOf = [...this.conf.oneOf || [], {use}];
+        }
+        return this;
+    }
 }
 
 
-export const createRule = (test: RegExp, loader?: string , options = {}): WebpackRuleBuilder =>  {
-    return  new WebpackRuleBuilder(test, loader).setOptions(options);
+export const createRule = (test: RegExp, loader?: string, options?: RuleSetQuery): WebpackRuleBuilder => {
+    const rule = new WebpackRuleBuilder(new RegExp(test), loader);
+    if (options) {
+        rule.options(options);
+    }
+
+    return rule;
 };
 
