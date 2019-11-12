@@ -2,19 +2,12 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import LRU from 'lru-cache';
-import envLoader from './build/envLoader';
 import {createBundleRenderer} from 'vue-server-renderer';
 import vhost from 'vhost-ts';
 import compression from 'compression';
 import {devServer} from './build/devServer';
+import {buildConf, isProd} from './build/untils/env';
 
-
-const config = envLoader({
-    stringify: false,
-});
-
-
-const isProd = config.NODE_ENV === 'production';
 const useMicroCache = process.env.MICRO_CACHE !== 'false';
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -64,7 +57,9 @@ if (isProd) {
     readyPromise = devServer(
         app,
         templatePath,
-        (bundle: any, options: any) => {renderer = createRenderer(bundle, options); },
+        (bundle: any, options: any) => {
+            renderer = createRenderer(bundle, options);
+        },
     );
 }
 
@@ -72,7 +67,7 @@ const serve = (path: string, cache: any) => express.static(resolve(path), {
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0,
 });
 
-app.use(compression({ threshold: 0 }));
+app.use(compression({threshold: 0}));
 app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 
@@ -96,7 +91,7 @@ function render(req: any, res: any) {
     };
 
     const context = {
-        title: config.TITLE, // default title
+        title: (buildConf as any).TITLE, // default title
         url: req.url,
     };
     renderer.renderToString(context, (err: any, html: string) => {
@@ -111,10 +106,10 @@ function render(req: any, res: any) {
     });
 }
 
-const host = config.HOST || 'localhost';
-const port = config.PORT || 9000;
+const host = (buildConf as any).HOST || 'localhost';
+const port = (buildConf as any).PORT || 9000;
 
-app.use(vhost(host, express.static( '/' )));
+app.use(vhost(host, express.static('/')));
 
 app.get('*', isProd ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
