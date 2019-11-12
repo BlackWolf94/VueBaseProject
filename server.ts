@@ -77,7 +77,6 @@ app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 
 function render(req: any, res: any) {
-    console.error('render', 1111);
     const s = Date.now();
 
     res.setHeader('Content-Type', 'text/html');
@@ -102,6 +101,7 @@ function render(req: any, res: any) {
     };
     renderer.renderToString(context, (err: any, html: string) => {
         if (err) {
+            console.error(err);
             return handleError(err);
         }
         res.send(html);

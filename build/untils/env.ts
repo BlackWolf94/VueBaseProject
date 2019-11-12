@@ -36,3 +36,4 @@ export const makeConf = (conf: any = {}, stringify: boolean = true) => {
 export const makeEntry = (entry: string) => path.resolve(srcDir, `entry-${entry}.ts`);
 
 
+export const pathResolve = (name: string) => path.resolve(rootDir, name);

@@ -14,11 +14,11 @@ export const WpServe = {
         // filename: 'server-bundle.js',
         libraryTarget: 'commonjs2',
     },
-    externals: nodeExternals({
-        // do not externalize CSS files in case we need to import it from a dep
-        whitelist: /\.css$/,
-    }),
-    plugins: loadPlugins('server', false),
+    // externals: nodeExternals({
+    //     // do not externalize CSS files in case we need to import it from a dep
+    //     whitelist: /\.css$/,
+    // }),
+    plugins: loadPlugins('server'),
 } as Configuration;
 
 export default WpServe;

@@ -1,9 +1,8 @@
 import {VueLoaderPlugin} from 'vue-loader';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
-import {isProd, makeConf, tsconfig} from '../untils/env';
+import {makeConf, tsconfig} from '../untils/env';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 // @ts-ignore
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
 import chalk from 'chalk';
@@ -41,9 +40,6 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
     //     }),
     // ];
 
-    defaultPlugins.unshift(new ProgressBarPlugin({
-        format: `Build ${VUE_ENV} [:bar] ` + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-    }));
 
     return [...defaultPlugins,
         new VuetifyLoaderPlugin(),
@@ -51,6 +47,8 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
             'process.env': makeConf({VUE_ENV}, stringify),
         }),
         VUE_ENV === 'client' ? new VueSSRClientPlugin() : new VueSSRServerPlugin(),
-
+        new ProgressBarPlugin({
+            format: `Build ${VUE_ENV} [:bar] ` + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+        })
     ];
 };
