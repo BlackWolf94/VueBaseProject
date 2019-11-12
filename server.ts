@@ -77,6 +77,7 @@ app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 
 function render(req: any, res: any) {
+    console.error('render', 1111);
     const s = Date.now();
 
     res.setHeader('Content-Type', 'text/html');
@@ -111,7 +112,7 @@ function render(req: any, res: any) {
 }
 
 const host = config.HOST || 'localhost';
-const port = config.PORT || 8080;
+const port = config.PORT || 9000;
 
 app.use(vhost(host, express.static( '/' )));
 

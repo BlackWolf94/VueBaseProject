@@ -1,37 +1,24 @@
-import {Configuration, DefinePlugin} from 'webpack';
 import {WpBase} from './base.conf';
 import nodeExternals from 'webpack-node-externals';
-import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
-import envLoader from '../envLoader';
+import {loadPlugins} from './plugins';
+import {Configuration} from 'webpack';
+import {makeEntry} from '../untils/env';
 
-const config = envLoader({
-    stringify: false,
-    customConfig: {
-        VUE_ENV: 'server',
-    },
-});
 
-export const WpServe: Configuration = {
+export const WpServe = {
     ...WpBase,
     target: 'node',
     devtool: '#source-map',
-    entry: './src/entry-server.js',
+    entry: makeEntry('server'),
     output: {
-        filename: 'server-bundle.js',
+        // filename: 'server-bundle.js',
         libraryTarget: 'commonjs2',
     },
     externals: nodeExternals({
         // do not externalize CSS files in case we need to import it from a dep
         whitelist: /\.css$/,
     }),
-    plugins: [
-        ...WpBase.plugins,
-        new DefinePlugin({
-            'process.env': config,
-        }),
-        new VueSSRClientPlugin(),
-
-    ],
-};
+    plugins: loadPlugins('server', false),
+} as Configuration;
 
 export default WpServe;

@@ -1,11 +1,19 @@
 import {createLoader, createRule} from '../untils';
 import * as path from 'path';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import {isProd, rootDir} from '../untils/env';
+
+const srcPath = path.resolve(process.cwd(), 'src');
 
 const defaultStyleLoader = (modules?: any) => ([
     createLoader('vue-style-loader', {
         sourceMap: false,
         shadowMode: false,
     }),
+    // createLoader(MiniCssExtractPlugin.loader, {
+    //     hmr: !isProd,
+    //     reloadAll: true,
+    // }),
     createLoader('css-loader', {
         sourceMap: false,
         importLoaders: 2,
@@ -13,7 +21,7 @@ const defaultStyleLoader = (modules?: any) => ([
     }),
     createLoader('postcss-loader', {
         sourceMap: false,
-    })
+    }),
 ]);
 
 const sassLoader = (modules?: any) => [...defaultStyleLoader(modules), createLoader('sass-loader', {
@@ -37,14 +45,15 @@ const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
         }),
     }));
 
-export const moduleRules = [
+export const rules = [
     createRule(/\.vue$/)
         .use([
             createLoader('cache-loader', {
-                // cacheDirectory: path.resolve(__dirname, '../../node_modules/.cache/vue-loader'),
+                cacheDirectory: path.resolve(rootDir, '/node_modules/.cache/vue-loader'),
             }),
             createLoader('vue-loader', {
-                // cacheDirectory: path.resolve(__dirname, '../../node_modules/.cache/vue-loader'),
+                include: [srcPath],
+                cacheDirectory: path.resolve(rootDir, '/node_modules/.cache/vue-loader'),
                 compilerOptions: {
                     whitespace: 'condense',
                 },
