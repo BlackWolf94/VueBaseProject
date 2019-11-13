@@ -15,13 +15,13 @@ export const WpClient = {
         splitChunks: {
             cacheGroups: {
                 vendors: {
-                    name: 'js/chunk-vendors',
+                    name: 'chunk-vendors',
                     test: /[\\/]node_modules[\\/]/,
                     priority: -10,
                     chunks: 'initial',
                 },
                 common: {
-                    name: 'js/chunk-common',
+                    name: 'chunk-common',
                     minChunks: 2,
                     priority: -20,
                     chunks: 'initial',
