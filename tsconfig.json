@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es2017",
+    "module": "commonjs",
     "strict": true,
     "declaration": true,
     "removeComments": true,
@@ -15,17 +15,19 @@
     "strictNullChecks": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "typeRoots": [
-      "/node_modules/@types"
-    ],
+    "incremental": true,
     "types": [
       "node",
       "webpack-env",
-      "vuetify"
+      "vuetify",
+      "/node_modules/@types"
     ],
     "paths": {
       "@web/*": [
         "web/*"
+      ],
+      "@server/*": [
+        "server/*"
       ]
     },
     "lib": [
@@ -39,12 +41,13 @@
   },
   "exclude": [
     "node_modules",
-    "www",
+    "dist",
     "public",
     "runtime",
     "tests",
     "**/*spec.ts",
-    "**/*test.ts"
+    "**/*test.ts",
+    "build"
   ],
   "include": [
     "web/**/*.ts",
