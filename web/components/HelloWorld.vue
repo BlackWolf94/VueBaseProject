@@ -11,6 +11,7 @@
             v-flex( mb-5 xs12 )
                 h2.headline.font-weight-bold.mb-3 What's next?
         v-divider
+        v-img.my-3( src="https://picsum.photos/id/11/100/60" contain height="200")
 </template>
 
 <script lang="ts">

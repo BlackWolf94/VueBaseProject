@@ -11,7 +11,7 @@ export const WpServe = {
     devtool: '#source-map',
     entry: makeEntry('server'),
     output: {
-        path: WpBase.output.path,
+        // path: WpBase.output.path,
         libraryTarget: 'commonjs2',
     },
     // externals: nodeExternals({

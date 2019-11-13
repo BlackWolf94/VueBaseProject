@@ -42,15 +42,15 @@
     "www",
     "public",
     "runtime",
-    "test",
+    "tests",
     "**/*spec.ts",
     "**/*test.ts"
   ],
   "include": [
     "web/**/*.ts",
     "web/**/*.tsx",
-    "web/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "web/**/*.vue"
+//    "tests/**/*.ts",
+//    "tests/**/*.tsx"
   ]
 }

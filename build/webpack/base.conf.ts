@@ -7,8 +7,8 @@ export const WpBase = {
     devtool: isProd ? false : '#cheap-module-source-map',
     mode: isProd ? 'production' : 'development',
     output: {
-        path: outDir(publicDir),
-        publicPath: `.${publicDir}`,
+        path: outDir('./dist'),
+        publicPath: '/dist/',
         filename: '[name].[chunkhash].js',
     },
     resolve: {

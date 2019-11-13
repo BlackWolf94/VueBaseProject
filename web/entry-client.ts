@@ -1,5 +1,5 @@
 import Vue from 'vue';
-// import 'es6-promise/auto';
+import 'es6-promise/auto';
 import ProgressBar from '@/component/ProgressBar.vue';
 import {createApp} from '@web/createApp';
 

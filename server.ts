@@ -26,7 +26,7 @@ function createRenderer(bundle: any, options: any) {
             maxAge: 1000 * 60 * 15,
         }),
         // this is only needed when vue-server-renderer is npm-linked
-        basedir: resolve(outDir(publicDir)),
+        basedir: resolve('./dist'),
         // recommended for performance
         runInNewContext: false,
     }));
@@ -67,7 +67,7 @@ const serve = (path: string, cache: any) => express.static(resolve(path), {
 });
 
 app.use(compression({threshold: 0}));
-app.use('/www', serve('./www', true));
+app.use('/dist', serve('./dist', true));
 app.use('/public', serve('./public', true));
 
 function render(req: any, res: any) {
@@ -106,7 +106,7 @@ function render(req: any, res: any) {
 }
 
 const host = (buildConf as any).HOST || 'localhost';
-const port = (buildConf as any).PORT || 9000;
+const port = (buildConf as any).PORT || 3000;
 
 app.use(vhost(host, express.static('/')));
 
