@@ -40,11 +40,13 @@ const stylusLoader = (modules?: any) => [...defaultStyleLoader(modules), createL
 const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
     .use(createLoader('file-loader', {
         limit: 4096,
+        outputPath: `${prefix}/`,
         fallback: createLoader('file-loader', {
             name: `${prefix}/[name].[hash:8].[ext]`,
         }),
     }));
 
+// @ts-ignore
 export const rules = [
     createRule(/\.vue$/)
         .use([

@@ -9,7 +9,7 @@ export const WpBase = {
     output: {
         path: outDir('./dist'),
         publicPath: '/dist/',
-        filename: '[name].[chunkhash].js',
+        filename: 'js/[name].[chunkhash].js',
     },
     resolve: {
         alias: {
