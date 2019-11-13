@@ -4,7 +4,7 @@ import App from './App.vue';
 import {createRouter} from './router';
 import vuetify from './plugins/vuetify';
 import plugins from './plugins';
-import {createStore} from '@/store';
+import {createStore} from '@web/store';
 Vue.use(plugins);
 
 
@@ -15,7 +15,7 @@ export function createApp() {
             router,
             store,
             vuetify,
-            render: h => h(App),
+            render: (h) => h(App),
         });
 
     return {app, router, store};

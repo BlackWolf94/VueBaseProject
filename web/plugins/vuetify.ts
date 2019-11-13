@@ -3,9 +3,9 @@ import Vuetify from 'vuetify/lib';
 import 'vuetify/dist/vuetify.min.css';
 import '@mdi/font/css/materialdesignicons.min.css';
 
-import ru_RU from '@/locale/ru.json';
-import uk_UK from '@/locale/uk.json';
-import en_EN from '@/locale/en.json';
+import ru_RU from '@web/locale/ru.json';
+import uk_UK from '@web/locale/uk.json';
+import en_EN from '@web/locale/en.json';
 import ru from 'vuetify/src/locale/ru';
 import en from 'vuetify/src/locale/en';
 import uk from 'vuetify/src/locale/uk';

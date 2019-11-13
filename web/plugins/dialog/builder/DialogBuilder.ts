@@ -2,10 +2,10 @@
  * @author Dmytro Zataidukh
  * @created_at 11/3/19
  */
-import {TDialogButtons, TDialogProperty} from '@/plugins/dialog/builder/IDialogBuilder';
-import {TObject} from '@/types/IGeneral';
+import {TDialogButtons, TDialogProperty} from '@web/plugins/dialog/builder/IDialogBuilder';
+import {TObject} from '@web/types/IGeneral';
 import Vue, {Component} from 'vue';
-import Dialog from '@/plugins/dialog/components/Dialog.vue';
+import Dialog from '@web/plugins/dialog/Dialog';
 
 export default class DialogBuilder {
 

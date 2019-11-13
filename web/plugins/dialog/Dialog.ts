@@ -1,6 +1,6 @@
 import {PluginObject, VueConstructor} from 'vue';
 import {Store} from 'vuex';
-import DialogBuilder from '@/plugins/dialog/builder/DialogBuilder';
+import DialogBuilder from '@web/plugins/dialog/builder/DialogBuilder';
 
 interface TDialogPluginOptions {
     store: Store<any>;

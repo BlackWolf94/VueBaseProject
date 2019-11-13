@@ -1,15 +1,13 @@
 import Vue from 'vue';
-import 'es6-promise/auto';
+// import 'es6-promise/auto';
 import ProgressBar from '@/component/ProgressBar.vue';
-import {createApp} from '@/createApp';
+import {createApp} from '@web/createApp';
 
 // global progress bar
 // const progressBar = Vue.prototype.$progressBar = new Vue(ProgressBar).$mount();
 // document.body.appendChild(progressBar.$el);
 
 const {app, router, store} = createApp();
-
-console.error('asdasdasd');
 
 if ((window as any).__INITIAL_STATE__) {
     store.replaceState((window as any).__INITIAL_STATE__);

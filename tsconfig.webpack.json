@@ -1,41 +1,7 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "experimentalDecorators": true,
-    "target": "ES5",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "sourceMap": false,
-    "typeRoots": [
-      "/node_modules/@types"
-    ],
-    "types": [
-      "webpack-env",
-      "vuetify"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "lib": [
-      "dom",
-      "es6",
-      "dom.iterable",
-      "scripthost",
-      "es2017"
-    ]
-  },
-  "include": [
-    "src/**/*.ts",
-    "build/**/*.ts",
-    "server.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "test",
-    "**/*spec.ts"
-  ]
+    "target": "ES5"
+  }
 }

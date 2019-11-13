@@ -1,19 +1,19 @@
 import {Configuration} from 'webpack';
 import {rules} from './rules';
-import {isProd, outDir, pathResolve, srcDir} from '../untils/env';
-import TerserPlugin from 'terser-webpack-plugin';
+import {isProd, outDir, pathResolve, publicDir, srcDir} from '../untils/env';
+
 
 export const WpBase = {
     devtool: isProd ? false : '#cheap-module-source-map',
     mode: isProd ? 'production' : 'development',
     output: {
-        path: outDir,
-        publicPath: '/dist/',
+        path: outDir(publicDir),
+        publicPath: `.${publicDir}`,
         filename: '[name].[chunkhash].js',
     },
     resolve: {
         alias: {
-            '@': srcDir,
+            '@web': srcDir,
             'vue$': 'vue/dist/vue.runtime.esm.js',
         },
         extensions: ['.ts', '.tsx', '.js', '.vue', '.json', '.wasm'],

@@ -1,4 +1,5 @@
-import {createApp} from '@/createApp';
+import {createApp} from '@web/createApp';
+
 const isDev = process.env.NODE_ENV !== 'production';
 
 // This exported function will be called by `bundleRenderer`.

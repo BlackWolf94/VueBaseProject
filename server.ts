@@ -1,14 +1,13 @@
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 import LRU from 'lru-cache';
 import {createBundleRenderer} from 'vue-server-renderer';
 import vhost from 'vhost-ts';
 import compression from 'compression';
 import {devServer} from './build/devServer';
-import {buildConf, isProd} from './build/untils/env';
+import {buildConf, isProd, outDir, publicDir} from './build/untils/env';
 
-const useMicroCache = process.env.MICRO_CACHE !== 'false';
 const serverInfo =
     `express/${require('express/package.json').version} ` +
     `vue-server-renderer/${require('vue-server-renderer/package.json').version}`;
@@ -27,7 +26,7 @@ function createRenderer(bundle: any, options: any) {
             maxAge: 1000 * 60 * 15,
         }),
         // this is only needed when vue-server-renderer is npm-linked
-        basedir: resolve('./dist'),
+        basedir: resolve(outDir(publicDir)),
         // recommended for performance
         runInNewContext: false,
     }));
@@ -68,7 +67,7 @@ const serve = (path: string, cache: any) => express.static(resolve(path), {
 });
 
 app.use(compression({threshold: 0}));
-app.use('/dist', serve('./dist', true));
+app.use('/www', serve('./www', true));
 app.use('/public', serve('./public', true));
 
 function render(req: any, res: any) {

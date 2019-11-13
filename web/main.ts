@@ -4,7 +4,7 @@ import './registerServiceWorker';
 import {createRouter} from './router';
 import vuetify from './plugins/vuetify';
 import plugins from './plugins';
-import {createStore} from '@/store';
+import {createStore} from '@web/store';
 
 Vue.use(plugins);
 

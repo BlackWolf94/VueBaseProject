@@ -4,7 +4,7 @@
  */
 import Vue from 'vue';
 import {VuetifyLocale} from 'vuetify/types/services/lang';
-import DialogBuilder from '@/plugins/dialog/builder/DialogBuilder';
+import DialogBuilder from '@web/plugins/dialog/builder/DialogBuilder';
 
 declare module 'vue/types/vue' {
     interface Vue {
