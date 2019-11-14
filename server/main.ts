@@ -13,6 +13,11 @@ const serve = (path: string, cache: any) => express.static(AppHelper.pathResolve
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  if (AppHelper.isDev()) {
+    app.enableCors();
+  }
+
   app.use(compression({threshold: 0}));
   app.use('/dist', serve('./dist', true));
   app.use('/public', serve('./public', true));
