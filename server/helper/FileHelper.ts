@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import { dirname } from 'path';
-import * as rimraf from 'rimraf';
+import rimraf from 'rimraf';
 
 export class FileHelper {
     static readFile(fileName: string, options: string = 'utf8'): Promise<string> {

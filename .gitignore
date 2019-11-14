@@ -22,3 +22,5 @@ yarn-error.log*
 .nuxt
 *.tmp*
 package.log.json
+package-lock.json
+

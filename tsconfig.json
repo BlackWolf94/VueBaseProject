@@ -17,6 +17,7 @@
     "esModuleInterop": true,
     "incremental": true,
     "types": [
+      "node_modules",
       "node",
       "webpack-env",
       "vuetify",

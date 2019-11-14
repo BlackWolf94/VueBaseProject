@@ -42,6 +42,9 @@ export default class AppHelper {
 
     public static ssrDevPort() {
         return this.getEnv('SSR_DEV_PORT') || 5001;
+    }
 
+    public static ssrTemplatePath() {
+        return this.pathResolve('/public/index.ssr.html');
     }
 }

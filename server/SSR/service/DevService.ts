@@ -9,6 +9,8 @@ import MFS from 'memory-fs';
 
 export type TOnReady = (bunble: any, options: any) => void;
 
+let onStart: () => any;
+
 @Injectable()
 export class DevService {
 
@@ -18,22 +20,24 @@ export class DevService {
 
     public static instant(app: INestApplication) {
         this.app = app;
+        return onStart();
     }
 
     private static app: INestApplication;
     public mfs: MFS;
     public devMiddleware: any;
-    private ready: (value?: unknown) => void;
+    public ready: (value?: unknown) => void;
 
     private bundle: any;
     private manifest: any;
     private template: any;
 
     constructor(private templatePath: string, private onReadyCb: TOnReady) {
+        onStart = this.run.bind(this);
     }
 
 
-    public async compile(): Promise<any> {
+    public async run(): Promise<any> {
         const compile = new Promise((res) => {
             this.ready = res;
         });
@@ -57,7 +61,7 @@ export class DevService {
         });
 
         this.app.use(this.devMiddleware);
-        clientCompiler.hooks.done.tap('dev server', this.updateManifest.bind(this));
+        clientCompiler.hooks.done.tap('dev server', (stats: Stats) => this.updateManifest(stats));
         this.update();
         // hot middleware
         this.app.use(require('webpack-hot-middleware')(clientCompiler, {heartbeat: 5000}));
@@ -66,22 +70,21 @@ export class DevService {
         const serverCompiler = webpack(WpServe);
         this.mfs = new MFS();
         serverCompiler.outputFileSystem = this.mfs;
-        serverCompiler.watch({}, this.updateServ.bind(this));
+        serverCompiler.watch({}, this.updateBundle.bind(this));
 
         return compile;
     }
 
     private update() {
-        if (!this.manifest || !this.bundle) {
-            return;
+        console.error(999999,  this.onReadyCb);
+        if (this.manifest && this.bundle) {
+            this.onReadyCb(this.bundle, {
+                template: this.template,
+                clientManifest: this.manifest,
+            });
+            Logger.debug('Update SSR bundle', 'SSR DEV SERVER');
+            this.ready();
         }
-
-        this.onReadyCb(this.bundle, {
-            template: this.template,
-            clientManifest: this.manifest,
-        });
-        Logger.debug('Update SSR bundle', 'SSR DEV SERVER');
-        this.ready();
     }
 
 
@@ -99,11 +102,19 @@ export class DevService {
         }
     }
 
-    private async updateManifest(stats: Stats) {
-        stats.compilation.errors.forEach(console.error);
-        stats.compilation.warnings.forEach(console.warn);
+    private warningLog(warning: any): void {
+        Logger.warn(JSON.stringify(warning), 'SSR SERVER');
+    }
 
-        if (stats.hasErrors()) {
+    private errorLog(error: any) {
+        Logger.error(JSON.stringify(error), 'SSR SERVER');
+
+    }
+
+    private updateManifest(stats: any) {
+        stats  = stats.toJson();
+        if (stats.errors.length) {
+            stats.compilation.errors.forEach(this.errorLog);
             return;
         }
 
@@ -114,12 +125,13 @@ export class DevService {
         this.update();
     }
 
-    private updateServ(err: any, stats: any) {
+    private updateBundle(err: any, stats: any) {
         if (err) {
             throw err;
         }
         stats = stats.toJson();
         if (stats.errors.length) {
+            stats.compilation.errors.forEach(this.errorLog);
             return;
         }
 

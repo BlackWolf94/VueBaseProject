@@ -2,9 +2,9 @@ import {WpBase} from './base.conf';
 import {Configuration} from 'webpack';
 import {loadPlugins} from './_plugins';
 import TerserPlugin from 'terser-webpack-plugin';
-import {makeEntry} from "./_env";
+import {makeEntry} from './_env';
 
-export const WpClient = {
+export const WpClient: Configuration = {
     ...WpBase,
     entry: {
         app: makeEntry('client'),
@@ -72,6 +72,6 @@ export const WpClient = {
         ],
     },
 
-} as Configuration;
+};
 
 export default WpClient;

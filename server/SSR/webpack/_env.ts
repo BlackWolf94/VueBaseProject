@@ -3,7 +3,7 @@ import {buildConf, srcDir} from '../../../build/untils/env';
 
 export const webDir = AppHelper.pathResolve('/web');
 export const distDir = AppHelper.pathResolve('/dist');
-export const tsconfig = AppHelper.pathResolve('tsconfig.json');
+export const tsconfig = AppHelper.pathResolve('tsconfig.ssr.json');
 
 export const isProd = AppHelper.isProd();
 

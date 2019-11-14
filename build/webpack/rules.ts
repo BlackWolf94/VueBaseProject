@@ -46,8 +46,7 @@ const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
         }),
     }));
 
-// @ts-ignore
-export const rules = [
+export const rules: any = [
     createRule(/\.vue$/)
         .use([
             createLoader('cache-loader', {

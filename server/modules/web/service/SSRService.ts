@@ -4,4 +4,7 @@ import {Injectable} from '@nestjs/common';
 export default class SSRService {
 
 
+    render() {
+
+    }
 }

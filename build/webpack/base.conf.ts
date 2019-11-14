@@ -35,7 +35,7 @@ export const WpBase = {
     module: {
         noParse: /^(vue|vue-router|vuex|vuex-router-sync)$/,
         // noParse: /es6-promise\.js$/, // avoid webpack shimming process
-        rules: rules.map((rule) => rule.conf),
+        rules: rules.map((rule: any) => rule.conf),
     },
     performance: {
         maxEntrypointSize: 300000,

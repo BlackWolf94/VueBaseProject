@@ -1,8 +1,13 @@
 import { NestFactory } from '@nestjs/core';
+import {DevService} from './service/DevService';
+import {SSRModule} from './SSRModule';
+import AppHelper from '../helper/AppHelper';
+import {Logger} from '@nestjs/common';
 
 async function bootstrap() {
-    // const app = await NestFactory.create(AppModule);
-    // await app.listen(AppHelper.port());
-    console.log(5555);
+    const app = await NestFactory.create(SSRModule);
+    DevService.instant(app);
+    await app.listen(AppHelper.ssrDevPort());
+    Logger.debug(`start on http://localhost:${AppHelper.ssrDevPort()}`, 'SSR dev server');
 }
 bootstrap();

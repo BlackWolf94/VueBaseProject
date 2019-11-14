@@ -1,7 +1,7 @@
 import {Configuration} from 'webpack';
 import {rules} from './_rules';
-import {distDir, isProd, webDir} from "./_env";
-import AppHelper from "../../helper/AppHelper";
+import {distDir, isProd, webDir} from './_env';
+import AppHelper from '../../helper/AppHelper';
 
 
 export const WpBase = {
@@ -34,8 +34,7 @@ export const WpBase = {
         ],
     },
     module: {
-        noParse: /^(vue|vue-router|vuex|vuex-router-sync)$/,
-        // noParse: /es6-promise\.js$/, // avoid webpack shimming process
+        noParse: /^(vue|vue-router|vuex|vuex-router-sync|es6-promise\.js)$/,
         rules: rules.map((rule) => rule.conf),
     },
     performance: {

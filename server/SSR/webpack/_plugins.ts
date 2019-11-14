@@ -17,6 +17,7 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import OptimizeCssnanoPlugin from '@intervolga/optimize-cssnano-plugin';
 // @ts-ignore
 import HashedModuleIdsPlugin from 'webpack-hashed-module-id-plugin';
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
 const defaultPlugins = [
     new VueLoaderPlugin(),
@@ -24,6 +25,7 @@ const defaultPlugins = [
     new FriendlyErrorsPlugin(),
     new ForkTsCheckerWebpackPlugin({tsconfig, vue: true}),
     new TsconfigPathsPlugin({configFile: tsconfig}),
+    new HardSourceWebpackPlugin(),
 ];
 
 const prodPlugin = [
@@ -47,7 +49,7 @@ const prodPlugin = [
             hashDigest: 'hex',
         },
     ),
-    /* config.plugin('named-chunks') */
+    // /* config.plugin('named-chunks') */
     new NamedChunksPlugin(),
     // new HtmlPwaPlugin({
     //         name: buildConf.APP_NAME,
