@@ -1,5 +1,5 @@
 import {Configuration} from 'webpack';
-import {rules} from './rules';
+import {_rules} from './_rules';
 import {isProd, outDir, pathResolve, publicDir, srcDir} from '../untils/env';
 
 
@@ -35,7 +35,7 @@ export const WpBase = {
     module: {
         noParse: /^(vue|vue-router|vuex|vuex-router-sync)$/,
         // noParse: /es6-promise\.js$/, // avoid webpack shimming process
-        rules: rules.map((rule: any) => rule.conf),
+        rules: _rules.map((rule: any) => rule.conf),
     },
     performance: {
         maxEntrypointSize: 300000,

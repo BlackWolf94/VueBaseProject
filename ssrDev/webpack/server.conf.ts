@@ -1,6 +1,6 @@
 import {WpBase} from './base.conf';
 import nodeExternals from 'webpack-node-externals';
-import {loadPlugins} from './plugins';
+import {loadPlugins} from './_plugins';
 import {Configuration} from 'webpack';
 import {makeEntry} from '../untils/env';
 

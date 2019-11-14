@@ -21,7 +21,9 @@ async function bootstrap() {
   app.use(compression({threshold: 0}));
   app.use('/dist', serve('./dist', true));
   app.use('/public', serve('./public', true));
-  await SSRService.initRender();
+  if(AppHelper.isProd())
+    await SSRService.initRender();
+
   await app.listen(AppHelper.port());
 
   Logger.log(`Server start http://localhost:${AppHelper.port()}`, 'LISTEN');

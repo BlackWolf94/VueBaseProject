@@ -1,6 +1,6 @@
 import {WpBase} from './base.conf';
 import {Configuration} from 'webpack';
-import {loadPlugins} from './plugins';
+import {loadPlugins} from './_plugins';
 import {isProd, makeEntry} from '../untils/env';
 import TerserPlugin from 'terser-webpack-plugin';
 
