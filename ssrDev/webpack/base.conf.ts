@@ -33,7 +33,7 @@ export const WpBase = {
         ],
     },
     module: {
-        noParse: /^(vue|vue-router|vuex|vuex-router-sync)$/,
+        noParse: /^(vue|vue-router|vuex|vuex-router-sync|axios.min.js)$/,
         // noParse: /es6-promise\.js$/, // avoid webpack shimming process
         rules: _rules.map((rule: any) => rule.conf),
     },
