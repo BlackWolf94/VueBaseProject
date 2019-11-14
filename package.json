@@ -8,11 +8,12 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test",
-    "sssr:dev": "tsnd --respawn --debug --ignore-watch dist --ignore-watch node_modules --ignore-watch web --ignore-watch docker server/SSR/main.ts",
-    "server:dev": "tsnd --respawn --debug --ignore-watch node_modules --ignore-watch web --ignore-watch docker --ignore-watch devServer server/main.ts",
-    "ssr:dev": "ts-node --project tsconfig.webpack.json server.ts",
-    "ssr:start": "cross-env NODE_ENV=production ts-node --project tsconfig.webpack.json server.ts",
-    "ssr:build": "rimraf dist && cross-env NODE_ENV=production ts-node --project tsconfig.webpack.json build/build.ts"
+    "server:ssr:dev": "rimraf dist && cross-env NODE_ENV=production ts-node --project tsconfig.webpack.json server/SSR/main.ts",
+    "server:dev": "tsnd --respawn --debug server/main.ts",
+    "server:start": "cross-env NODE_ENV=production ts-node server/main.ts",
+    "ssr:dev": "ts-node --project tsconfig.webpack.json ssrDev/ssrDevServer.ts",
+    "ssr:build": "rimraf dist && cross-env NODE_ENV=production ts-node --project tsconfig.webpack.json build/build.ts",
+    "start": "npm run ssr:build && npm run server:start"
   },
   "dependencies": {
     "@mdi/font": "^4.5.95",

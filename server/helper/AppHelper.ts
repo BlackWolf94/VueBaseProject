@@ -37,14 +37,22 @@ export default class AppHelper {
     }
 
     public static port() {
-        return this.getEnv('PORT') || 5000;
+        return this.getEnv('PORT') || 3000;
     }
 
     public static ssrDevPort() {
-        return this.getEnv('SSR_DEV_PORT') || 5001;
+        return this.getEnv('SSR_DEV_PORT') || 3030;
     }
 
     public static ssrTemplatePath() {
-        return this.pathResolve('/public/index.ssr.html');
+        return this.pathResolve('./public/index.ssr.html');
+    }
+
+    public static ssrBundle() {
+        return this.pathResolve('./dist/vue-ssr-server-bundle.json');
+    }
+
+    public static ssrManifest() {
+        return this.pathResolve('./dist/vue-ssr-client-manifest.json');
     }
 }

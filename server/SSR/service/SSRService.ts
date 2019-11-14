@@ -7,6 +7,7 @@ import {DevService} from './DevService';
 import AppHelper from '../../helper/AppHelper';
 import {BundleRenderer, createBundleRenderer} from 'vue-server-renderer';
 import LRU from 'lru-cache';
+import {distDir} from '../webpack/_env';
 
 @Injectable()
 export class SSRService {
@@ -25,14 +26,13 @@ export class SSRService {
     }
 
     private makeRender(bundle: any, options: any = {}) {
-        console.error('55555');
         this.render = createBundleRenderer(bundle, {
             ...options,
             cache: new LRU({
                 max: 1000,
                 maxAge: 1000 * 60 * 15,
             }),
-            basedir: AppHelper.pathResolve('/dist'),
+            basedir: distDir,
             runInNewContext: false});
     }
 

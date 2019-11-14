@@ -20,17 +20,17 @@ export const WpBase = {
         extensions: ['.ts', '.tsx', '.js', '.vue', '.json', '.wasm'],
         modules: [
             'node_modules',
-            AppHelper.pathResolve('/node_modules'),
-            AppHelper.pathResolve('/node_modules/@vue/cli-service/node_modules'),
+            AppHelper.pathResolve('./node_modules'),
+            AppHelper.pathResolve('./node_modules/@vue/cli-service/node_modules'),
         ],
     },
     resolveLoader: {
         modules: [
-            AppHelper.pathResolve('/node_modules/@vue/cli-plugin-typescript/node_modules'),
-            AppHelper.pathResolve('/node_modules/@vue/cli-plugin-babel/node_modules'),
+            AppHelper.pathResolve('./node_modules/@vue/cli-plugin-typescript/node_modules'),
+            AppHelper.pathResolve('./node_modules/@vue/cli-plugin-babel/node_modules'),
             'node_modules',
-            AppHelper.pathResolve('/node_modules'),
-            AppHelper.pathResolve('/node_modules/@vue/cli-service/node_modules'),
+            AppHelper.pathResolve('./node_modules'),
+            AppHelper.pathResolve('./node_modules/@vue/cli-service/node_modules'),
         ],
     },
     module: {

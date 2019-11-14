@@ -65,7 +65,6 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
             'process.env': makeConf({VUE_ENV}, stringify),
         }),
         ...(VUE_ENV === 'client' ? [
-            new VueSSRClientPlugin(),
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional
@@ -91,6 +90,7 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
             //         include: 'asyncChunks',
             //     },
             // ),
+            new VueSSRClientPlugin(),
         ] : [
             new VueSSRServerPlugin(),
 

@@ -1,6 +1,7 @@
 import {createLoader, createRule} from '../builder';
 import {isProd, webDir} from './_env';
 import AppHelper from '../../helper/AppHelper';
+// import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const defaultStyleLoader = (modules?: any) => ([
     createLoader('vue-style-loader', {
@@ -54,11 +55,11 @@ export const rules = [
     createRule(/\.vue$/)
         .use([
             createLoader('cache-loader', {
-                cacheDirectory: AppHelper.pathResolve('/node_modules/.cache/vue-loader'),
+                cacheDirectory: AppHelper.pathResolve('./node_modules/.cache/vue-loader'),
             }),
             createLoader('vue-loader', {
                 include: [webDir],
-                cacheDirectory: AppHelper.pathResolve('/node_modules/.cache/vue-loader'),
+                cacheDirectory: AppHelper.pathResolve('./node_modules/.cache/vue-loader'),
                 compilerOptions: {
                     whitespace: 'condense',
                 },
@@ -104,7 +105,7 @@ export const rules = [
         .oneOf(null, stylusLoader()),
     createRule(/\.ts$/).use([
         createLoader('cache-loader', {
-            cacheDirectory: AppHelper.pathResolve('/node_modules/.cache/ts-loader'),
+            cacheDirectory: AppHelper.pathResolve('./node_modules/.cache/ts-loader'),
         }),
         createLoader('thread-loader'),
         createLoader('babel-loader'),

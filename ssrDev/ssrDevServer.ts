@@ -5,8 +5,8 @@ import LRU from 'lru-cache';
 import {createBundleRenderer} from 'vue-server-renderer';
 import vhost from 'vhost-ts';
 import compression from 'compression';
-import {devServer} from './build/devServer';
-import {buildConf, isProd, outDir, publicDir} from './build/untils/env';
+import {devServer} from './devServer';
+import {buildConf, isProd, outDir, publicDir} from './untils/env';
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -35,7 +35,7 @@ function createRenderer(bundle: any, options: any) {
 
 let renderer: any;
 let readyPromise: any;
-const templatePath = resolve('./public/index.ssr.html');
+const templatePath = resolve('../public/index.ssr.html');
 
 if (isProd) {
     // In production: create server renderer using template and built server bundle.
@@ -67,8 +67,8 @@ const serve = (path: string, cache: any) => express.static(resolve(path), {
 });
 
 app.use(compression({threshold: 0}));
-app.use('/dist', serve('./dist', true));
-app.use('/public', serve('./public', true));
+app.use('/dist', serve('../dist', true));
+app.use('/public', serve('../public', true));
 
 function render(req: any, res: any) {
     const s = Date.now();
@@ -106,7 +106,7 @@ function render(req: any, res: any) {
 }
 
 const host = (buildConf as any).HOST || 'localhost';
-const port = (buildConf as any).PORT || 3000;
+const port = (buildConf as any).SSR_DEV_PORT || 3030;
 
 app.use(vhost(host, express.static('/')));
 
