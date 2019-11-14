@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
+import LRU from 'lru-cache';
 
 export const rootDir = path.resolve(process.cwd(), './');
 
@@ -54,5 +55,16 @@ export default class AppHelper {
 
     public static ssrManifest() {
         return this.pathResolve('./dist/vue-ssr-client-manifest.json');
+    }
+
+    public static ssrOptions() {
+        return {
+            runInNewContext: false,
+            basedir: this.pathResolve('./dist'),
+            cache: new LRU({
+                max: 1000,
+                maxAge: 1000 * 60 * 15,
+            }),
+        };
     }
 }
