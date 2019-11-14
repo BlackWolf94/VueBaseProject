@@ -8,12 +8,7 @@
         v-navigation-drawer( v-model="drawer" app clipped color="grey lighten-4")
             v-list( dense class="grey lighten-4")
                 template( v-for="(item, i) in items")
-                    v-layout( v-if="item.heading" :key="i" row align-center)
-                        v-flex( xs6)
-                            v-subheader( v-if="item.heading") {{ item.heading }}
-                        v-flex.text-xs-right(xs6)
-                            v-btn( small text) edit
-                    v-divider.my-3( v-else-if="item.divider" :key="i" dark)
+                    v-divider.my-3( v-if="item.divider" :key="i" dark)
                     v-list-item(v-else :key="i" @click="" :to="item.text")
                         v-list-item-action
                             v-icon {{item.icon}}
@@ -26,25 +21,36 @@
 <script lang="ts">
     import Vue from 'vue';
     import Component from 'vue-class-component';
+    import ComponentMetaParser from '@web/services/ComponentMetaParser';
 
     @Component({})
     export default class App extends Vue {
+        public $ssrContext: any;
+
+        public created() {
+            const componentMeta = new ComponentMetaParser(this);
+            if (componentMeta.hasMeta()) {
+                this.$ssrContext.title = `${componentMeta.getTitle()}`;
+            }
+        }
+
+        mounted() {
+            const componentMeta = new ComponentMetaParser(this);
+            if (componentMeta.hasMeta()) {
+                document.title = `${componentMeta.getTitle()}`;
+            }
+        }
+
         drawer: boolean = true;
         items = [
             { icon: 'lightbulb_outline', text: 'Notes' },
             { icon: 'touch_app', text: 'Reminders' },
             { divider: true },
-            { heading: 'Labels' },
             { icon: 'add', text: 'Create new label' },
             { divider: true },
             { icon: 'archive', text: 'archive' },
             { icon: 'delete', text: 'Trash' },
             { divider: true },
-            { icon: 'settings', text: 'Settings' },
-            { icon: 'chat_bubble', text: 'Trash' },
-            { icon: 'help', text: 'Help' },
-            { icon: 'phonelink', text: 'App downloads' },
-            { icon: 'keyboard', text: 'Keyboard shortcuts' },
         ]
     }
 </script>

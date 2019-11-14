@@ -16,27 +16,10 @@ const routes = [
         component: () => import('@web/pages/Archive.vue'),
     },
     {
-        path: '/404',
+        path: '*',
         name: '404',
         component: () => import('@web/pages/NotFound.vue'),
     },
-    {
-        path: '*',
-        redirect: '/404',
-    },
-    // {
-    //     path: '/hello',
-    //     name: 'hello',
-    //     component: () => import('@web/components/HelloWorld2.vue'),
-    // },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    // },
 ];
 
 export const createRouter = () => new VueRouter({
