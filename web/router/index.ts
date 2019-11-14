@@ -6,10 +6,29 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-      path: '/',
-      name: 'home',
-      component: HelloWorld,
+        path: '/',
+        name: 'home',
+        component: HelloWorld,
     },
+    {
+        path: '/archive',
+        name: 'archive',
+        component: () => import('@web/pages/Archive.vue'),
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('@web/pages/NotFound.vue'),
+    },
+    {
+        path: '*',
+        redirect: '/404',
+    },
+    // {
+    //     path: '/hello',
+    //     name: 'hello',
+    //     component: () => import('@web/components/HelloWorld2.vue'),
+    // },
     // {
     //   path: '/about',
     //   name: 'about',
