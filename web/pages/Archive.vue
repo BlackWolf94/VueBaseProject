@@ -1,15 +1,17 @@
 <template lang="pug">
     v-container
-        v-layout( text-center wrap)
-            v-flex ARCHIVE
+        archive-list
 
 </template>
 
 <script lang="ts">
     import Vue from 'vue';
     import Component from 'vue-class-component';
+    import ArchiveList from '@web/components/Archive/ArchiveList.vue';
 
-    @Component({})
+    @Component({
+        components: {ArchiveList}
+    })
     export default class Archive extends Vue {
     }
 </script>
