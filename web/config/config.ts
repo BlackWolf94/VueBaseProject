@@ -25,6 +25,10 @@ class ConfigManager {
         return this.VUE_ENV === 'server';
     }
 
+    get isDEV(): boolean {
+        return this.prop.NODE_ENV === 'server';
+    }
+
     get PROGRESS_BAR_COLOR(): string {
         return '#ffca2b';
     }

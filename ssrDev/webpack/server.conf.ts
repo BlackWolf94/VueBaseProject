@@ -5,6 +5,11 @@ import {Configuration} from 'webpack';
 import {makeEntry} from '../untils/env';
 
 
+// ****************************************
+// Server-Side Webpack Configuration
+// ****************************************
+
+
 export const WpServe = {
     ...WpBase,
     target: 'node',
@@ -15,8 +20,9 @@ export const WpServe = {
         libraryTarget: 'commonjs2',
     },
     // externals: nodeExternals({
+    //     whitelist: ['vue', 'vue-router', 'vuex', /\.css$/, /axios/, /vuetify\/lib/ ],
+    //     // modulesFromFile: true,
     //     // do not externalize CSS files in case we need to import it from a dep
-    //     whitelist: /\.css$/,
     // }),
     plugins: loadPlugins('server'),
 } as Configuration;

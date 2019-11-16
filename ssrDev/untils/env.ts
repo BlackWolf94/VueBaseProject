@@ -5,7 +5,7 @@ import * as fs from 'fs';
 export const rootDir = path.resolve(process.cwd(), './');
 export const srcDir = path.resolve(process.cwd(), 'web');
 export const outDir = (dir: string) => path.resolve(process.cwd(), dir);
-export const tsconfig = path.resolve(rootDir, 'tsconfig.json');
+export const tsconfig = path.resolve(rootDir, 'tsconfig.ssr.json');
 
 const loadEnv = (envFile: string) => {
     const filePath = path.resolve(rootDir, envFile);
@@ -17,7 +17,7 @@ export const buildConf = {
     DEBUG: true,
     APP_NAME: 'NestJs&VueJs',
     ...loadEnv('.env'),
-    ...process.env,
+    // ...process.env,
 };
 
 export const isProd = buildConf.NODE_ENV === 'production';

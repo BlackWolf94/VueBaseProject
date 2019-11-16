@@ -22,8 +22,8 @@
         // }
 
         mounted(){
-            console.error('mounted')
-            // Http.get<any[]>('fake').then( (items ) => (this.items = items)).catch( console.error)
+            // console.error('mounted', process.env)
+            Http.get<any[]>('fake').then( (items ) => (this.items = items)).catch( console.error)
             // this.items = await Http.get('fake')
         }
 

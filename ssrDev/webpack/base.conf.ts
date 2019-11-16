@@ -1,11 +1,12 @@
 import {Configuration} from 'webpack';
 import {_rules} from './_rules';
-import {isProd, outDir, pathResolve, publicDir, srcDir} from '../untils/env';
-
+import {isProd, outDir, pathResolve, publicDir, rootDir, srcDir, tsconfig} from '../untils/env';
+import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
 
 export const WpBase = {
     devtool: isProd ? false : '#cheap-module-source-map',
     mode: isProd ? 'production' : 'development',
+    context: rootDir,
     output: {
         path: outDir('./dist'),
         publicPath: '/dist/',
@@ -15,12 +16,16 @@ export const WpBase = {
         alias: {
             '@web': srcDir,
             'vue$': 'vue/dist/vue.runtime.esm.js',
+            // 'vuetify': 'vuetify/src',
         },
         extensions: ['.ts', '.tsx', '.js', '.vue', '.json', '.wasm'],
         modules: [
             'node_modules',
             pathResolve('/node_modules'),
             pathResolve('/node_modules/@vue/cli-service/node_modules'),
+        ],
+        plugins: [
+            new TsconfigPathsPlugin({configFile: tsconfig}),
         ],
     },
     resolveLoader: {
@@ -33,7 +38,7 @@ export const WpBase = {
         ],
     },
     module: {
-        noParse: /^(vue|vue-router|vuex|vuex-router-sync|axios.min.js)$/,
+        noParse: /^(vue|vue-router|vuex|vuex-router-sync|axios)$/,
         // noParse: /es6-promise\.js$/, // avoid webpack shimming process
         rules: _rules.map((rule: any) => rule.conf),
     },

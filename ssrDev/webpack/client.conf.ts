@@ -9,6 +9,7 @@ export const WpClient = {
     entry: {
         app: makeEntry('client'),
     },
+    target: 'web',
     plugins: loadPlugins('client'),
     optimization: {
         minimize: true,

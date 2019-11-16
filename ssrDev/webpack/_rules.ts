@@ -6,14 +6,10 @@ import {isProd, rootDir} from '../untils/env';
 const srcPath = path.resolve(process.cwd(), 'src');
 
 const defaultStyleLoader = (modules?: any) => ([
-    createLoader('vue-style-loader', {
+    createLoader(isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader', {
         sourceMap: false,
         shadowMode: false,
     }),
-    // createLoader(MiniCssExtractPlugin.loader, {
-    //     hmr: !isProd,
-    //     reloadAll: true,
-    // }),
     createLoader('css-loader', {
         sourceMap: false,
         importLoaders: 2,
@@ -46,6 +42,10 @@ const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
         }),
     }));
 
+const styleOptions = {
+    localIdentName: isProd ? '[name]_[local]_[hash:base64:5]' : '[name]_[local]',
+};
+
 export const _rules: any = [
     createRule(/\.vue$/)
         .use([
@@ -77,40 +77,31 @@ export const _rules: any = [
     createMediaRule(/\.(png|jpe?g|gif|webp)(\?.*)?$/, 'img'),
     createMediaRule(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, 'media'),
     createRule(/\.(svg)(\?.*)?$/).use(createLoader('file-loader', {
-            name: 'img/[name].[hash:8].[ext]',
+        name: isProd ? 'img/[name].[hash:8].[ext]' : 'img/[name].[ext]',
         }),
     ),
     createMediaRule(/\.(woff2?|eot|ttf|otf)(\?.*)?$/i, 'fonts'),
     ...[/\.css$/, /\.p(ost)?css$/].map((test) => createRule(test)
-        .oneOf(/module/, defaultStyleLoader({
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-        }))
+        .oneOf(/module/, defaultStyleLoader(styleOptions))
         .oneOf(/\?vue/, defaultStyleLoader())
-        .oneOf(/\.module\.\w+$/, defaultStyleLoader({
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-        }))
+        .oneOf(/\.module\.\w+$/, defaultStyleLoader(styleOptions))
         .oneOf(null, defaultStyleLoader())),
 
     createRule(/\.s[ac]ss$/)
-        .oneOf(/module/, sassLoader({
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-        }))
+        .oneOf(/module/, sassLoader(styleOptions))
         .oneOf(/\?vue/, sassLoader())
-        .oneOf(/\.module\.\w+$/, sassLoader({
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-        }))
+        .oneOf(/\.module\.\w+$/, sassLoader(styleOptions))
         .oneOf(null, sassLoader()),
 
     createRule(/\.styl(us)?$/)
-        .oneOf(/module/, stylusLoader({
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-        }))
+        .oneOf(/module/, stylusLoader(styleOptions))
         .oneOf(/\?vue/, stylusLoader())
-        .oneOf(/\.module\.\w+$/, stylusLoader({
-            localIdentName: '[name]_[local]_[hash:base64:5]',
-        }))
+        .oneOf(/\.module\.\w+$/, stylusLoader(styleOptions))
         .oneOf(null, stylusLoader()),
-    createRule(/\.ts$/).use([
+    createRule(/.js$/, 'babel-loader')
+        .exclude(/node_modules/),
+
+    createRule(/\.(ts|tsx)$/).use([
         // createLoader('cache-loader', {
         //     // cacheDirectory: path.resolve(__dirname, '../../node_modules/.cache/ts-loader'),
         // }),
