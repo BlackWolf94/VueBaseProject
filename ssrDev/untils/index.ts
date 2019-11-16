@@ -25,8 +25,8 @@ class WebpackRuleBuilder {
         return this;
     }
 
-    public exclude(exclude: RegExp) {
-        this.conf.exclude = new RegExp(exclude);
+    public exclude(exclude: RuleSetCondition) {
+        this.conf.exclude = exclude;
         return this;
     }
 
@@ -51,4 +51,3 @@ export const createRule = (test: RegExp, loader?: string, options?: RuleSetQuery
 
     return rule;
 };
-

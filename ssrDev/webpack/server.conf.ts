@@ -20,7 +20,7 @@ export const WpServe = {
         libraryTarget: 'commonjs2',
     },
     // externals: nodeExternals({
-    //     whitelist: ['vue', 'vue-router', 'vuex', /\.css$/, /axios/, /vuetify\/lib/ ],
+    //     whitelist: ['vue', 'vue-router', 'vuex', /\.css$/, /axios/ ],
     //     // modulesFromFile: true,
     //     // do not externalize CSS files in case we need to import it from a dep
     // }),

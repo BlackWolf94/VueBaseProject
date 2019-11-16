@@ -1,10 +1,10 @@
 import {Configuration} from 'webpack';
 import {_rules} from './_rules';
-import {isProd, outDir, pathResolve, publicDir, rootDir, srcDir, tsconfig} from '../untils/env';
+import {isProd, outDir, pathResolve, rootDir, srcDir, tsconfig} from '../untils/env';
 import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
 
 export const WpBase = {
-    devtool: isProd ? false : '#cheap-module-source-map',
+    devtool: isProd ? false : '#inline-source-map',
     mode: isProd ? 'production' : 'development',
     context: rootDir,
     output: {
@@ -38,8 +38,7 @@ export const WpBase = {
         ],
     },
     module: {
-        noParse: /^(vue|vue-router|vuex|vuex-router-sync|axios)$/,
-        // noParse: /es6-promise\.js$/, // avoid webpack shimming process
+        noParse: /^(es6-promise\.js|vue|vue-router|vuex|vuex-router-sync|axios)$/,
         rules: _rules.map((rule: any) => rule.conf),
     },
     performance: {

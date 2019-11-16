@@ -31,7 +31,7 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
     plugins.push(...[
         new VueLoaderPlugin(),
         new FriendlyErrorsPlugin(),
-        new ForkTsCheckerWebpackPlugin({tsconfig, vue: true}),
+        new ForkTsCheckerWebpackPlugin({tsconfig, vue: true, checkSyntacticErrors: false}),
         new VuetifyLoaderPlugin(),
         new DefinePlugin({
             'process.env': makeConf({VUE_ENV}, stringify),

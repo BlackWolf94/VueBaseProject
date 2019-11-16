@@ -25,6 +25,8 @@
 
     @Component({})
     export default class App extends Vue {
+        name: 'App';
+
         public $ssrContext: any;
 
         public created() {

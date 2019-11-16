@@ -1,7 +1,9 @@
 import {createLoader, createRule} from '../untils';
 import * as path from 'path';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import {isProd, rootDir} from '../untils/env';
+import {isProd, rootDir, tsconfig} from '../untils/env';
+import {VueLoaderOptions} from 'vue-loader';
+import {LoaderOptions} from 'ts-loader/dist/interfaces';
 
 const srcPath = path.resolve(process.cwd(), 'src');
 
@@ -46,18 +48,25 @@ const styleOptions = {
     localIdentName: isProd ? '[name]_[local]_[hash:base64:5]' : '[name]_[local]',
 };
 
+const cacheLoader = (loaderPref: string) => {
+    return createLoader('cache-loader', {
+        cacheDirectory: path.resolve(rootDir, `/node_modules/.cache/${loaderPref}-loader`),
+    });
+};
+
 export const _rules: any = [
     createRule(/\.vue$/)
         .use([
-            createLoader('cache-loader', {
-                cacheDirectory: path.resolve(rootDir, '/node_modules/.cache/vue-loader'),
-            }),
-            createLoader('vue-loader', {
-                include: [srcPath],
+            cacheLoader('vue'),
+            createLoader<VueLoaderOptions>('vue-loader', {
+                // include: [srcPath],
                 cacheDirectory: path.resolve(rootDir, '/node_modules/.cache/vue-loader'),
                 compilerOptions: {
                     whitespace: 'condense',
                 },
+                optimizeSSR: isProd,
+                hotReload: !isProd,
+                exposeFilename: !isProd,
                 transformAssetUrls: {
                     'v-app-bar': 'src',
                     'v-carousel-item': [
@@ -77,7 +86,7 @@ export const _rules: any = [
     createMediaRule(/\.(png|jpe?g|gif|webp)(\?.*)?$/, 'img'),
     createMediaRule(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, 'media'),
     createRule(/\.(svg)(\?.*)?$/).use(createLoader('file-loader', {
-        name: isProd ? 'img/[name].[hash:8].[ext]' : 'img/[name].[ext]',
+            name: isProd ? 'img/[name].[hash:8].[ext]' : 'img/[name].[ext]',
         }),
     ),
     createMediaRule(/\.(woff2?|eot|ttf|otf)(\?.*)?$/i, 'fonts'),
@@ -98,25 +107,32 @@ export const _rules: any = [
         .oneOf(/\?vue/, stylusLoader())
         .oneOf(/\.module\.\w+$/, stylusLoader(styleOptions))
         .oneOf(null, stylusLoader()),
-    createRule(/.js$/, 'babel-loader')
-        .exclude(/node_modules/),
+    createRule(/.js$/)
+        .use([
+            cacheLoader('babel'),
+            createLoader('babel-loader')])
+        .exclude((file) => (
+            /node_modules/.test(file) &&
+            !/\.vue\.js/.test(file)
+        )),
 
-    createRule(/\.(ts|tsx)$/).use([
-        // createLoader('cache-loader', {
-        //     // cacheDirectory: path.resolve(__dirname, '../../node_modules/.cache/ts-loader'),
-        // }),
-        // createLoader('thread-loader'),
-        // createLoader('babel-loader'),
-        createLoader('ts-loader', {
-            transpileOnly: true,
-            appendTsSuffixTo: [
-                '\\.vue$',
-            ],
-            // happyPackMode: true,
-        }),
-    ]),
+    createRule(/\.(ts|tsx)$/)
+        .exclude(/node_modules/)
+        .use([
+            createLoader('babel-loader'),
+            createLoader<LoaderOptions>('ts-loader', {
+                transpileOnly: true,
+                configFile: tsconfig,
+                appendTsSuffixTo: [
+                    /\\.vue$/,
+                ],
+                // happyPackMode: true,
+            }),
+        ]),
     createRule(/\.pug$/)
+    // это применяется к `<template lang="pug">` в компонентах Vue
         .oneOf(/^\?vue/, [createLoader('pug-plain-loader')])
+        // это применяется к импортам pug внутри JavaScript
         .oneOf(null, [
             createLoader('raw-loader'),
             createLoader('pug-plain-loader'),

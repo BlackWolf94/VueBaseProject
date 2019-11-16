@@ -18,13 +18,17 @@
         items: any[] = [];
 
         // async asyncData(){
-        //     this.items = await Http.get('fake')
+        //     try {
+        //         this.items = await Http.get('fake')
+        //     }catch (e) {
+        //         console.error(e)
+        //     }
         // }
 
-        mounted(){
-            // console.error('mounted', process.env)
-            Http.get<any[]>('fake').then( (items ) => (this.items = items)).catch( console.error)
-            // this.items = await Http.get('fake')
+        async created(){
+            console.error('created', process.env)
+            this.items = await Http.get<any[]>('fake')
+
         }
 
 
