@@ -13,7 +13,7 @@ const loadEnv = (envFile: string) => {
 };
 
 export const buildConf = {
-    NODE_ENV: 'development',
+    NODE_ENV: process.env.NODE_ENV || 'development',
     DEBUG: true,
     APP_NAME: 'NestJs&VueJs',
     ...loadEnv('.env'),
@@ -32,6 +32,7 @@ export const makeConf = (conf: any = {}, stringify: boolean = true) => {
     Object.keys(conf).forEach((key: string) => {
         conf[key] = JSON.stringify(conf[key]);
     });
+    // conf.DEBUG = 'runtime_process_env.DEBUG';
     return conf;
 };
 

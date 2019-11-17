@@ -30,6 +30,11 @@ class WebpackRuleBuilder {
         return this;
     }
 
+    public query(query: RuleSetQuery) {
+        this.conf.query = query;
+        return this;
+    }
+
     public oneOf(resourceQuery: RegExp, use: NewLoader[]) {
         if (resourceQuery) {
             this.conf.oneOf = [...this.conf.oneOf || [], {resourceQuery, use}];

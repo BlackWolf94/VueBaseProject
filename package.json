@@ -113,7 +113,7 @@
     "vue-style-loader": "latest",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.3.0",
-    "webpack": "latest",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-hashed-module-id-plugin": "^0.1.4",
     "webpack-hot-middleware": "^2.25.0",

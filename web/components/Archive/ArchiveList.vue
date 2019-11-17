@@ -17,18 +17,37 @@
     export default class ArchiveList extends Vue {
         items: any[] = [];
 
-        // async asyncData(){
-        //     try {
-        //         this.items = await Http.get('fake')
-        //     }catch (e) {
-        //         console.error(e)
-        //     }
-        // }
 
-        async created(){
-            console.error('created', process.env)
-            this.items = await Http.get<any[]>('fake')
+        serverPrefetch(){
+            console.error('serverPrefetch');
+            // return this.$store.dispatch('list/fetch')
+            // this.items = await Http.get('fake')
+            // this.foo = 'serverPrefetch'
+        };
 
+        beforeCreate(){
+            console.error('beforeCreate')
+            // console.error('created', process.env)
+            // this.items = await Http.get<any[]>('fake')
+
+        }
+
+        created(){
+            // this.items = this.$store.state.list.list;
+            console.error('created')
+        }
+
+        mounted(){
+            console.error('mounted');
+            // this.fetchItem()
+        }
+
+        async fetchItem(){
+            // this.items = await Http.get('fake')
+        }
+
+        beforeMount(){
+            console.error('beforeMount')
         }
 
 

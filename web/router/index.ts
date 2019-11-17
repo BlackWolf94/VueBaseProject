@@ -13,12 +13,12 @@ const routes = [
     {
         path: '/archive',
         name: 'archive',
-        component: () => import('@web/pages/Archive.vue'),
+        component: (resolve: any) => require(['@web/pages/Archive.vue'], (m) => resolve(m.default)),
     },
     {
         path: '*',
         name: '404',
-        component: () => import('@web/pages/NotFound.vue'),
+        component: (resolve: any) => require(['@web/pages/NotFound.vue'], (m) => resolve(m.default)),
     },
 ];
 

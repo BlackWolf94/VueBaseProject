@@ -107,10 +107,16 @@ export const _rules: any = [
         .oneOf(/\?vue/, stylusLoader())
         .oneOf(/\.module\.\w+$/, stylusLoader(styleOptions))
         .oneOf(null, stylusLoader()),
+
     createRule(/.js$/)
         .use([
             cacheLoader('babel'),
-            createLoader('babel-loader')])
+            createLoader('babel-loader', {
+                query: {
+                    presets: ['latest', 'stage-0', 'vue'],
+                },
+            }),
+            ])
         .exclude((file) => (
             /node_modules/.test(file) &&
             !/\.vue\.js/.test(file)
