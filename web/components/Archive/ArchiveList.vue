@@ -8,46 +8,46 @@
 <script lang="ts">
     import Vue from "vue";
     import Component from "vue-class-component";
-    import ArchiveListItem from '@web/components/Archive/ArchiveListItem.vue';
-    import Http from "@web/services/api/Http";
+    import ArchiveListItem from "@web/components/Archive/ArchiveListItem.vue";
 
     @Component({
         components: {ArchiveListItem}
     })
     export default class ArchiveList extends Vue {
-        items: any[] = [];
+        get items(): any[] {
+            return this.$store.state.list.list;
+        };
 
 
-        serverPrefetch(){
-            console.error('serverPrefetch');
-            // return this.$store.dispatch('list/fetch')
+        async serverPrefetch() {
+            console.error("serverPrefetch");
+            return this.fetchItem();
             // this.items = await Http.get('fake')
             // this.foo = 'serverPrefetch'
         };
 
-        beforeCreate(){
-            console.error('beforeCreate')
-            // console.error('created', process.env)
-            // this.items = await Http.get<any[]>('fake')
+        beforeCreate() {
+            console.error("beforeCreate");
 
         }
 
-        created(){
-            // this.items = this.$store.state.list.list;
-            console.error('created')
+        created() {
+            console.error("created");
         }
 
-        mounted(){
-            console.error('mounted');
-            // this.fetchItem()
+        mounted() {
+            console.error("mounted");
+            if (!this.items.length) {
+                this.fetchItem();
+            }
         }
 
-        async fetchItem(){
-            // this.items = await Http.get('fake')
+        async fetchItem() {
+            return this.$store.dispatch("fetch");
         }
 
-        beforeMount(){
-            console.error('beforeMount')
+        beforeMounted() {
+            console.error("beforeMounted");
         }
 
 

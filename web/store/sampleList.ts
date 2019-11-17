@@ -10,10 +10,11 @@ interface List {
 }
 
 export default () => ({
+    namespace: true,
     state: (): List => ({
         list: [],
     }),
-    muations: {
+    mutations: {
         init: (store: List, items: any[]) => {
             store.list = items;
         },

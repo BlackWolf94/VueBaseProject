@@ -2,6 +2,7 @@ import {createApp} from '@web/createApp';
 import {VueRouter} from 'vue-router/types/router';
 
 const isDev = process.env.NODE_ENV !== 'production';
+console.error(process.env);
 
 
 const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {

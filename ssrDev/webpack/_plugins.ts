@@ -33,9 +33,9 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
         new FriendlyErrorsPlugin(),
         new ForkTsCheckerWebpackPlugin({tsconfig, vue: true, checkSyntacticErrors: false}),
         new VuetifyLoaderPlugin(),
-        new DefinePlugin({
-            'process.env': makeConf({VUE_ENV}, stringify),
-        }),
+        // new DefinePlugin({
+        //     'process.env': makeConf({VUE_ENV}, stringify),
+        // }),
         new ProgressBarPlugin({
             format: `Build ${VUE_ENV} [:bar] ` + chalk.green.bold(':percent') + ' (:elapsed seconds)',
         }),
