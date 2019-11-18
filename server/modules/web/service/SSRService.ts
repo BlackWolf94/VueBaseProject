@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {FileHelper} from '../../../helper/FileHelper';
 import AppHelper from '../../../helper/AppHelper';
 import {BundleRenderer, createBundleRenderer} from 'vue-server-renderer';
@@ -20,12 +20,14 @@ export default class SSRService {
     private static render: BundleRenderer;
 
     public render(url: string): Promise<string> {
+        const s = new Date();
 
         return new Promise<string>((resolve, reject) => {
             SSRService.render.renderToString({url, title: AppHelper.getEnv('TITLE')}, (err: any, html: string) => {
                 if (err) {
                     reject(err);
                 }
+                Logger.debug(`render page ${url}: ${(new Date()).valueOf() - s.valueOf()}ms`, 'SSR SERVICE');
                 resolve(html);
             });
         });

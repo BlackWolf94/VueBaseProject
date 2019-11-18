@@ -8,7 +8,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 const server = process.env.SERVER || 'localhost';
 const port = process.env.PORT || '3000';
 
-const url = (path: string) => process.env.NODE_ENV === 'production' ? `${server}/api/${path}` : `${server}:${port}/api/${path}`;
+const url = (path: string) => process.env.NODE_ENV === 'production' ? `http://${server}:${port}/api/${path}` : `http://${server}:${port}/api/${path}`;
 
 export default class Http {
     public static async post<T, D = any>(path: string, data: D = null, token?: string): Promise<T> {
@@ -19,7 +19,7 @@ export default class Http {
         };
 
         try {
-            return (await axios.post<T>(`http://${url(path)}`, data, config)).data;
+            return (await axios.post<T>(url(path), data, config)).data;
         } catch ({status, message, code, ...other}) {
             throw {status, message, code};
         }
@@ -34,7 +34,7 @@ export default class Http {
         };
 
         try {
-            return (await axios.get<T>(`http://${url(path)}`, config)).data;
+            return (await axios.get<T>(url(path), config)).data;
         } catch ({status, message, code, ...other}) {
             throw {status, message, code};
         }
