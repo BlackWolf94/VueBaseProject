@@ -20,3 +20,7 @@ yarn-error.log*
 *.sln
 *.sw?
 .nuxt
+*.tmp*
+package.log.json
+package-lock.json
+

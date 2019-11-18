@@ -1,0 +1,27 @@
+/**
+ * @author Dmytro Zataidukh
+ * @created_at 11/14/19
+ */
+
+export default class ComponentMetaParser {
+    private metaInfo: {[key: string]: any} = {};
+    private metaParsed: boolean = false;
+
+    constructor(vm: any) {
+        const { metaInfo } = vm.$options;
+        if (metaInfo) {
+            this.metaParsed = true;
+            this.metaInfo = (typeof metaInfo === 'function')
+                ? metaInfo.call(vm)
+                : metaInfo;
+        }
+    }
+
+    public getTitle(): string {
+        return this.metaInfo.title;
+    }
+
+    public hasMeta(): boolean {
+        return this.metaParsed;
+    }
+}
