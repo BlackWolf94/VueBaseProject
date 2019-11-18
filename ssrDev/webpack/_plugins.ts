@@ -8,7 +8,7 @@ import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
 import chalk from 'chalk';
 // @ts-ignore
 import ProgressBarPlugin from 'progress-bar-webpack-plugin';
-import {DefinePlugin, NamedChunksPlugin} from 'webpack';
+import {DefinePlugin, EnvironmentPlugin, NamedChunksPlugin} from 'webpack';
 import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
 import VueSSRServerPlugin from 'vue-server-renderer/server-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -33,13 +33,16 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
         new FriendlyErrorsPlugin(),
         new ForkTsCheckerWebpackPlugin({tsconfig, vue: true, checkSyntacticErrors: false}),
         new VuetifyLoaderPlugin(),
-        // new DefinePlugin({
-        //     'process.env': makeConf({VUE_ENV}, stringify),
-        // }),
         new ProgressBarPlugin({
             format: `Build ${VUE_ENV} [:bar] ` + chalk.green.bold(':percent') + ' (:elapsed seconds)',
         }),
     ]);
+
+    if (VUE_ENV === 'client') {
+        plugins.push(
+            new EnvironmentPlugin(makeConf({VUE_ENV, DEBUG: false}, false)),
+        );
+    }
 
     if (isProd) {
         plugins.push(...[

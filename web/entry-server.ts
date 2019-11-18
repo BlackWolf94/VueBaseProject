@@ -1,10 +1,6 @@
 import {createApp} from '@web/createApp';
 import {VueRouter} from 'vue-router/types/router';
 
-const isDev = process.env.NODE_ENV !== 'production';
-console.error(process.env);
-
-
 const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
     router.onReady(resolve, reject);
 });
@@ -17,7 +13,6 @@ const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
 // return a Promise that resolves to the app instance.
 export default (context: any) => {
     return new Promise(async (resolve, reject) => {
-        const s = isDev && Date.now();
         const { app, router, store } = createApp();
 
         const { url } = context;
@@ -35,16 +30,6 @@ export default (context: any) => {
             if (!matchedComponents.length) {
                 return reject({ code: 404 });
             }
-
-            await Promise.all(matchedComponents.map((component: any) => {
-                const asyncData = component.asyncData || component.options && component.options.asyncData;
-                return asyncData && asyncData({
-                    store,
-                    route: router.currentRoute,
-                });
-            }));
-
-            isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`);
 
             context.state = store.state;
             resolve(app);
