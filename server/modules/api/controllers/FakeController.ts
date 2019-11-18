@@ -3,7 +3,7 @@
  * @created_at 11/14/19
  */
 import {ApiController} from '../ApiController';
-import {Get} from '@nestjs/common';
+import { Get, Param } from '@nestjs/common';
 import faker from 'faker';
 
 @ApiController('fake')
@@ -24,5 +24,10 @@ export default class FakeController {
         }
 
         return res;
+    }
+
+    @Get(':message')
+    public item(@Param('message') message: string) {
+        return message;
     }
 }

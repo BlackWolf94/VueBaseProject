@@ -15,6 +15,13 @@ const routes = [
         name: 'archive',
         component: (resolve: any) => require(['@web/pages/Archive.vue'], (m) => resolve(m.default)),
     },
+
+    {
+        path: '/item/:message',
+        name: 'sample',
+        component: () => import('@web/components/DynamicItem.vue'),
+    },
+
     {
         path: '*',
         name: '404',
