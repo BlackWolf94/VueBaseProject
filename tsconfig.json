@@ -21,7 +21,7 @@
       "node",
       "webpack-env",
       "vuetify",
-      "/node_modules/@types"
+      "node_modules/@types"
     ],
     "paths": {
       "@web/*": [

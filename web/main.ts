@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import App from './App.vue';
-import './registerServiceWorker';
-import {createRouter} from './router';
-import vuetify from './plugins/vuetify';
-import plugins from './plugins';
-import {createStore} from '@web/store';
+import Vue from "vue";
+import App from "./App.vue";
+import "./registerServiceWorker";
+import {createRouter} from "./router";
+import vuetify from "./plugins/vuetify";
+import plugins from "./plugins";
+import {createStore} from "@web/store";
 
 Vue.use(plugins);
 
@@ -15,4 +15,4 @@ new Vue({
   store: createStore(),
   vuetify,
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount("#app");
