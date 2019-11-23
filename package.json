@@ -111,7 +111,9 @@
     "webpack-node-externals": "^1.7.2"
   },
   "lint-staged": {
-
+    "*.ts": [
+      "tslint -p tsconfig.json -c tslint.json --fix && git add"
+    ],
     "*.vue": [
       "vue-cli-service lint --fix && git add "
     ]
