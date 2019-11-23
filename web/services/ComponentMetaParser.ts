@@ -17,11 +17,11 @@ export default class ComponentMetaParser {
         }
     }
 
-    public getTitle(): string {
+    getTitle(): string {
         return this.metaInfo.title;
     }
 
-    public hasMeta(): boolean {
+    hasMeta(): boolean {
         return this.metaParsed;
     }
 }

@@ -1,27 +1,22 @@
 import {Component} from 'vue';
 
-/**
- * @author Dmytro Zataidukh
- * @created_at 11/3/19
- */
-
-export interface TDialogButtons {
+export interface IDialogButtons {
     text?: string;
     icon?: string;
     color?: string;
     action?(): any;
 }
 
-export interface TDialogTitle {
+export interface IDialogTitle {
     text?: string;
     color?: string;
     icon?: string;
 }
 
-export interface TDialogProperty {
-    text(): string;
-    title(): TDialogTitle;
-    component(): Component | null;
+export interface IDialogProperty {
     componentProps?: any;
-    buttons(): TDialogButtons[];
+    text(): string;
+    title(): IDialogTitle;
+    component(): Component | null;
+    buttons(): IDialogButtons[];
 }

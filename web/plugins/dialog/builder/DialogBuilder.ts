@@ -2,7 +2,7 @@
  * @author Dmytro Zataidukh
  * @created_at 11/3/19
  */
-import {TDialogButtons, TDialogProperty} from '@web/plugins/dialog/builder/IDialogBuilder';
+import {IDialogButtons, IDialogProperty} from '@web/plugins/dialog/builder/IDialogBuilder';
 import {TObject} from '@web/types/IGeneral';
 import Vue, {Component} from 'vue';
 import Dialog from '@web/plugins/dialog/Dialog';
@@ -10,10 +10,10 @@ import Dialog from '@web/plugins/dialog/Dialog';
 export default class DialogBuilder {
 
     close: () => void;
-    private cancel: TDialogButtons = null;
-    private ok: TDialogButtons = null;
+    private cancel: IDialogButtons = null;
+    private ok: IDialogButtons = null;
 
-    private computed: TDialogProperty = {
+    private computed: IDialogProperty = {
         text: () => '',
         title: () => ({}),
         component: () => null,

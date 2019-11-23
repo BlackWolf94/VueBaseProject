@@ -5,17 +5,17 @@
 import {Store, StoreOptions} from 'vuex';
 import Http from '@web/services/api/Http';
 
-interface List {
+interface IList {
     list: any[];
 }
 
 export default () => ({
     namespace: true,
-    state: (): List => ({
+    state: (): IList => ({
         list: [],
     }),
     mutations: {
-        init: (store: List, items: any[]) => {
+        init: (store: IList, items: any[]) => {
             store.list = items;
         },
     },

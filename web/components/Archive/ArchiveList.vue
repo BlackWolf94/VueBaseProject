@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
-    import Component from "vue-class-component";
-    import ArchiveListItem from "@web/components/Archive/ArchiveListItem.vue";
+    import Vue from 'vue';
+    import Component from 'vue-class-component';
+    import ArchiveListItem from '@web/components/Archive/ArchiveListItem.vue';
 
     @Component({
         components: {ArchiveListItem}
@@ -16,42 +16,38 @@
     export default class ArchiveList extends Vue {
         get items(): any[] {
             return this.$store.state.list.list;
-        };
-
+        }
 
         async serverPrefetch() {
-            console.error("serverPrefetch");
+            console.error('serverPrefetch');
             return this.fetchItem();
-            // this.items = await Http.get('fake')
-            // this.foo = 'serverPrefetch'
-        };
+        }
 
         beforeCreate() {
-            console.error("beforeCreate");
-
+            console.error('beforeCreate');
         }
 
         created() {
-            console.error("created");
+            console.error('created');
         }
 
         mounted() {
-            console.error("mounted");
+            console.error('mounted');
             if (!this.items.length) {
                 this.fetchItem();
             }
         }
 
         async fetchItem() {
-            return this.$store.dispatch("fetch");
+            return this.$store.dispatch('fetch');
         }
 
         beforeMounted() {
-            console.error("beforeMounted");
+            console.error('beforeMounted');
         }
 
 
-    };
+    }
 </script>
 
 <style lang="scss" scoped>

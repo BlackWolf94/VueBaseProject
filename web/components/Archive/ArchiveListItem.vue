@@ -8,22 +8,22 @@
 </template>
 
 <script lang="ts">
-    import Vue from "vue";
-    import Component from "vue-class-component";
+    import Vue from 'vue';
+    import Component from 'vue-class-component';
     import {Prop} from 'vue-property-decorator';
 
     type TItem = {
-        firstName: string,
-        lastName: string,
-        address: string,
-        phone: string,
-        yearOld: number,
-    }
+        firstName: string;
+        lastName: string;
+        address: string;
+        phone: string;
+        yearOld: number;
+    };
 
     @Component({})
     export default class ArchiveListItem extends Vue {
-        @Prop() item: TItem
-    };
+        @Prop() item: TItem;
+    }
 </script>
 
 <style lang="scss" scoped>

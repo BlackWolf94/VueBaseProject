@@ -11,10 +11,10 @@
     export default class DynamicItem extends Vue {
       get message(): string {
         return this.$store.state.data.data;
-      };
+      }
 
       async serverPrefetch() {
-        return this.$store.dispatch("fetchItem", this.$route.params.message);
-      };
+        return this.$store.dispatch('fetchItem', this.$route.params.message);
+      }
     }
 </script>

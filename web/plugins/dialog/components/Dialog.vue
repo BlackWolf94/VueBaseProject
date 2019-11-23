@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {TDialogButtons, TDialogTitle} from '@web/plugins/dialog/builder/IDialogBuilder';
+import {IDialogButtons, IDialogTitle} from '@web/plugins/dialog/builder/IDialogBuilder';
 
 @Component({})
 export default class Dialog extends Vue {
@@ -33,11 +33,11 @@ export default class Dialog extends Vue {
         return '';
     }
 
-    get title(): TDialogTitle {
+    get title(): IDialogTitle {
         return {};
     }
 
-    get buttons(): TDialogButtons[] {
+    get buttons(): IDialogButtons[] {
         return [];
     }
 

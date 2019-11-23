@@ -11,7 +11,7 @@ const port = process.env.PORT || '3000';
 const url = (path: string) => process.env.NODE_ENV === 'production' ? `http://${server}:${port}/api/${path}` : `http://${server}:${port}/api/${path}`;
 
 export default class Http {
-    public static async post<T, D = any>(path: string, data: D = null, token?: string): Promise<T> {
+    static async post<T, D = any>(path: string, data: D = null, token?: string): Promise<T> {
         const config: AxiosRequestConfig = {
             headers: {
                 Authorization: token ? `Bearer ${token}` : null,
@@ -25,7 +25,7 @@ export default class Http {
         }
     }
 
-    public static async get<T, D = any>(path: string, data: D = null, token?: string): Promise<T> {
+    static async get<T, D = any>(path: string, data: D = null, token?: string): Promise<T> {
         const config: AxiosRequestConfig = {
             params: data,
             headers: {
