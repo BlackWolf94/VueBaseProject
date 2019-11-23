@@ -1,9 +1,9 @@
 import Http from '@web/services/api/Http';
 import { StoreOptions } from 'vuex';
 
-interface testData {
+type testData = {
   data: string;
-}
+};
 
 export default () => ({
   namespace: true,

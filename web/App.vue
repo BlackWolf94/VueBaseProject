@@ -19,17 +19,17 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
-    import Component from 'vue-class-component';
-    import ComponentMetaParser from '@web/services/ComponentMetaParser';
+    import Vue from "vue";
+    import Component from "vue-class-component";
+    import ComponentMetaParser from "@web/services/ComponentMetaParser";
 
     @Component({})
     export default class App extends Vue {
-        name: 'App';
+        name: "App";
 
-        public $ssrContext: any;
+        $ssrContext: any;
 
-        public created() {
+        created() {
             const componentMeta = new ComponentMetaParser(this);
             if (componentMeta.hasMeta()) {
                 this.$ssrContext.title = `${componentMeta.getTitle()}`;
@@ -45,14 +45,14 @@
 
         drawer: boolean = true;
         items = [
-            { icon: 'lightbulb_outline', text: 'Notes' },
-            { icon: 'touch_app', text: 'Reminders' },
-            { divider: true },
-            { icon: 'add', text: 'Create new label' },
-            { divider: true },
-            { icon: 'archive', text: 'archive' },
-            { icon: 'delete', text: 'Trash' },
-            { divider: true },
-        ]
+            {icon: "lightbulb_outline", text: "Notes"},
+            {icon: "touch_app", text: "Reminders"},
+            {divider: true},
+            {icon: "add", text: "Create new label"},
+            {divider: true},
+            {icon: "archive", text: "archive"},
+            {icon: "delete", text: "Trash"},
+            {divider: true},
+        ];
     }
 </script>

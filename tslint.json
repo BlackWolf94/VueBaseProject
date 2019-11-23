@@ -15,7 +15,7 @@
     "no-consecutive-blank-lines": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
-    "quotemark": [true, "double"],
+    "quotemark": [true, "single"],
     "type-literal-delimiter": true,
     "prefer-method-signature": true,
     "class-name": true,
@@ -26,6 +26,17 @@
     "no-string-literal": true,
     "no-duplicate-variable": [true, "check-parameters"],
     "no-eval": true,
-    "curly": [true, "as-needed"]
+    "curly": [true, "as-needed"],
+    "member-access": [true, "no-public"],
+    "interface-over-type-literal": false,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ]
+//    "liter"
   }
 }

@@ -5,11 +5,21 @@ module.exports = {
     "vuetify"
   ],
   configureWebpack: config => {
-    // config.entry = path.resolve(process.cwd(), './web/main.ts');
-    config.entry.app =  './web/main.ts';
-    config.resolve.alias['@web'] = path.resolve(process.cwd(), 'web');
-    delete config.resolve.alias['@'];
-    return config;
+    config.resolve.alias['@web'] = path.resolve(process.cwd(), 'web')
   },
-  outputDir: 'www'
+  outputDir: 'www',
+  pages: {
+    index: {
+      entry: 'web/main.ts',
+      template: 'public/index.html',
+      title: 'Index Page',
+    },
+  },
+  devServer: {
+    // proxy: 'http://localhost:3000',
+    overlay: {
+      warnings: false,
+      errors: true
+    }
+  }
 };

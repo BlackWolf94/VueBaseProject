@@ -2,10 +2,10 @@ import {PluginObject, VueConstructor} from 'vue';
 import {Store} from 'vuex';
 import DialogBuilder from '@web/plugins/dialog/builder/DialogBuilder';
 
-interface TDialogPluginOptions {
+type TDialogPluginOptions = {
     store: Store<any>;
     vuetify: any;
-}
+};
 
 export default {
     install: (Vue: VueConstructor, options: TDialogPluginOptions) => {

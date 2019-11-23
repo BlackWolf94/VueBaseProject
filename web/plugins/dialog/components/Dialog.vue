@@ -27,7 +27,7 @@ import {TDialogButtons, TDialogTitle} from '@web/plugins/dialog/builder/IDialogB
 @Component({})
 export default class Dialog extends Vue {
 
-    public value: any = null;
+    value: any = null;
 
     get text(): string {
         return '';

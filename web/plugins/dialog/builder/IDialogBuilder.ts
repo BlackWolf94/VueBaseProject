@@ -9,7 +9,7 @@ export interface TDialogButtons {
     text?: string;
     icon?: string;
     color?: string;
-    action?: () => any;
+    action?(): any;
 }
 
 export interface TDialogTitle {
@@ -19,9 +19,9 @@ export interface TDialogTitle {
 }
 
 export interface TDialogProperty {
-    text: () => string;
-    title: () => TDialogTitle;
-    component: () => Component | null;
+    text(): string;
+    title(): TDialogTitle;
+    component(): Component | null;
     componentProps?: any;
-    buttons: () => TDialogButtons[];
+    buttons(): TDialogButtons[];
 }

@@ -3,6 +3,6 @@
  * @created_at 11/3/19
  */
 
-export interface TObject {
+export type TObject = {
     [key: string]: any;
-}
+};
