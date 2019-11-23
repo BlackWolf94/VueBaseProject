@@ -11,7 +11,7 @@ const readFile = (fs: any, file: string) => {
     try {
         return fs.readFileSync(path.join(WpClient.output.path, file), 'utf-8');
     } catch (e) {
-        throw e
+        throw e;
     }
 };
 

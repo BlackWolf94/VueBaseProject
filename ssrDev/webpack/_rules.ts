@@ -48,11 +48,10 @@ const styleOptions = {
     localIdentName: isProd ? '[name]_[local]_[hash:base64:5]' : '[name]_[local]',
 };
 
-const cacheLoader = (loaderPref: string) => {
-    return createLoader('cache-loader', {
+const cacheLoader = (loaderPref: string) =>
+    createLoader('cache-loader', {
         cacheDirectory: path.resolve(rootDir, `/node_modules/.cache/${loaderPref}-loader`),
     });
-};
 
 export const _rules: any = [
     createRule(/\.vue$/)

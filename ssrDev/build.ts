@@ -7,8 +7,9 @@ clientCompiler.run(() => {
     console.error('Client build Complete');
     const serverCompiler = webpack(WpServe);
     serverCompiler.run((err) => {
-        if(err)
+        if (err) {
             console.error(err);
+        }
         console.error('server build Complete');
     });
 

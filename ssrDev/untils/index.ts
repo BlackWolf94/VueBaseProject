@@ -6,7 +6,7 @@ export const createLoader = <T>(loader: string, options?: Partial<T>): NewLoader
 
 class WebpackRuleBuilder {
 
-    public conf: RuleSetRule = {};
+    conf: RuleSetRule = {};
 
     constructor(test: RuleSetCondition, loader?: string) {
         this.conf.test = test;
@@ -15,31 +15,30 @@ class WebpackRuleBuilder {
         }
     }
 
-    public use(use: RuleSetUse) {
+    use(use: RuleSetUse) {
         this.conf.use = use;
         return this;
     }
 
-    public options(options: RuleSetQuery) {
+    options(options: RuleSetQuery) {
         this.conf.options = options;
         return this;
     }
 
-    public exclude(exclude: RuleSetCondition) {
+    exclude(exclude: RuleSetCondition) {
         this.conf.exclude = exclude;
         return this;
     }
 
-    public query(query: RuleSetQuery) {
+    query(query: RuleSetQuery) {
         this.conf.query = query;
         return this;
     }
 
-    public oneOf(resourceQuery: RegExp, use: NewLoader[]) {
+    oneOf(resourceQuery: RegExp, use: NewLoader[]) {
         if (resourceQuery) {
             this.conf.oneOf = [...this.conf.oneOf || [], {resourceQuery, use}];
-        }
-        else {
+        } else {
 
             this.conf.oneOf = [...this.conf.oneOf || [], {use}];
         }

@@ -1,15 +1,16 @@
 {
-  "name": "vue-base",
-  "version": "0.1.0",
+  "name": "nest-vue-ssr",
+  "version": "0.0.0",
   "private": false,
+  "description": "Vue SSR project base on typescript and use NestJs as server",
   "scripts": {
-    "format:lint": "tslint -p tsconfig.json -c tslint.json",
+    "format:lint": "tslint -p tsconfig.json -c tslint.json --fix",
     "serve": "vue-cli-service serve ",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test",
-    "server:dev": "tsnd --respawn --debug server/main.ts",
-    "server:start": "cross-env NODE_ENV=production ts-node server/main.ts",
+    "server:dev": "tsnd --respawn --debug -P ./tsconfig.serve.json server/main.ts",
+    "server:start": "cross-env NODE_ENV=production ts-node --project ./tsconfig.serve.json server/main.ts",
     "ssr:dev": "ts-node --project tsconfig.webpack.json ssrDev/ssrDevServer.ts",
     "ssr:build": "rimraf dist && cross-env NODE_ENV=production ts-node --project tsconfig.webpack.json ssrDev/build.ts",
     "start": "npm run ssr:build && npm run server:start"
@@ -77,8 +78,9 @@
     "faker": "^4.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "hard-source-webpack-plugin": "^0.13.1",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "^9.4.3",
     "lru-cache": "latest",
     "memory-fs": "latest",
     "mini-css-extract-plugin": "^0.8.0",
@@ -108,17 +110,15 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^1.7.2"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
   "lint-staged": {
-    "*.ts": [
-      "tslint -p tsconfig.json -c tslint.json",
-      "git add"
-    ],
+
     "*.vue": [
-      "vue-cli-service lint",
-      "git add"
+      "vue-cli-service lint --fix && git add "
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

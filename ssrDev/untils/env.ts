@@ -5,7 +5,7 @@ import * as fs from 'fs';
 export const rootDir = path.resolve(process.cwd(), './');
 export const srcDir = path.resolve(process.cwd(), 'web');
 export const outDir = (dir: string) => path.resolve(process.cwd(), dir);
-export const tsconfig = path.resolve(rootDir, 'tsconfig.ssr.json');
+export const tsconfig = path.resolve(rootDir, 'tsconfig.json');
 
 const loadEnv = (envFile: string) => {
     const filePath = path.resolve(rootDir, envFile);
