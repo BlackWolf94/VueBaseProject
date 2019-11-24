@@ -12,6 +12,7 @@ declare module 'vue/types/vue' {
         $t(key: string, ...params: Array<string | number>): string;
         $addLocale(lang: string, translates: VuetifyLocale): void;
         $dialog(): DialogBuilder;
+        $setLocale(lang: string): void;
     }
 }
 

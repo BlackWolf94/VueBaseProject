@@ -5,6 +5,7 @@
             span.title.ml-3.mr-5 Google&nbsp;<span class="font-weight-light">Keep</span>
             v-text-field(solo-inverted flat hide-details label="Search" prepend-inner-icon="search")
             v-spacer
+            v-btn(@click="changeLang") {{$t('Change language')}}
         v-navigation-drawer( v-model="drawer" app clipped color="grey lighten-4")
             v-list( dense class="grey lighten-4")
                 template( v-for="(item, i) in items")
@@ -22,6 +23,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import ComponentMetaParser from '@web/services/ComponentMetaParser';
+import { langs } from "@web/config/config";
 
 @Component({})
 export default class App extends Vue {
@@ -46,6 +48,11 @@ export default class App extends Vue {
     if (componentMeta.hasMeta()) {
       document.title = `${componentMeta.getTitle()}`;
     }
+  }
+
+  changeLang(){
+    const _langs = langs.filter( lang => (lang !== this.$currentLang));
+    this.$setLocale(_langs.pop())
   }
 }
 </script>
