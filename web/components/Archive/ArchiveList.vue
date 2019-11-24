@@ -23,16 +23,7 @@
             return this.fetchItem();
         }
 
-        beforeCreate() {
-            console.error('beforeCreate');
-        }
-
-        created() {
-            console.error('created');
-        }
-
         mounted() {
-            console.error('mounted');
             if (!this.items.length) {
                 this.fetchItem();
             }
@@ -41,14 +32,5 @@
         async fetchItem() {
             return this.$store.dispatch('fetch');
         }
-
-        beforeMounted() {
-            console.error('beforeMounted');
-        }
-
-
     }
 </script>
-
-<style lang="scss" scoped>
-</style>

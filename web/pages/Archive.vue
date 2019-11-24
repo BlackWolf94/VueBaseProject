@@ -1,5 +1,6 @@
 <template lang="pug">
     v-container
+        p {{$t('Archive')}}
         archive-list
 
 </template>

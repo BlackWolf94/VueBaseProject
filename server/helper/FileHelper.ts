@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { dirname } from 'path';
+import { dirname, resolve } from 'path';
 import rimraf from 'rimraf';
 
 export class FileHelper {
@@ -75,6 +75,16 @@ export class FileHelper {
                 resolve(files);
             });
         });
+    }
+
+    static async scanDir(entry: string ): Promise<string[]> {
+        const files: string[] = [];
+        const folders = await this.readDir(entry);
+        for (const idx in folders) {
+            const folder = resolve(process.cwd(), entry, folders[idx]);
+            files.push(...await(this.isDir(folder) ?  this.scanDir(folder) : [folder]) );
+        }
+        return files;
     }
 
     static removeDir(folder: string): Promise<any> {
