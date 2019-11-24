@@ -1,5 +1,6 @@
 import {Module} from '@nestjs/common';
 import FakeController from './controllers/FakeController';
+import LocaleController from './controllers/LocaleController';
 
 /**
  * @author Dmytro Zataidukh
@@ -9,7 +10,7 @@ import FakeController from './controllers/FakeController';
 @Module({
 
     imports: [],
-    controllers: [FakeController],
+    controllers: [FakeController, LocaleController],
     providers: [],
 })
 export default class ApiModule {

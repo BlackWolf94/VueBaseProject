@@ -8,6 +8,7 @@ import DialogBuilder from '@web/plugins/dialog/builder/DialogBuilder';
 
 declare module 'vue/types/vue' {
     interface Vue {
+        $currentLang: string;
         $t(key: string, ...params: Array<string | number>): string;
         $addLocale(lang: string, translates: VuetifyLocale): void;
         $dialog(): DialogBuilder;

@@ -19,20 +19,31 @@ const locales: Record<string, VuetifyLocale> = {
 
 Vue.use(Vuetify);
 
-Vue.prototype.$t = function(key: string, ...params: Array<string | number>): string {
-    return this.$vuetify.lang.t(`$vuetify.${key}`, ...params);
-};
-
-Vue.prototype.$addLocale = function(lang: string, translates: VuetifyLocale) {
-    this.$set(this.$vuetify.lang.locales, lang, {...locales[lang], ...translates});
-};
-
-export default new Vuetify({
+const vuetify = new Vuetify({
     icons: {
         iconfont: 'mdi',
     },
     lang: {
         locales,
-        current: 'uk',
+        current: 'none',
     },
 });
+
+Vue.prototype.$t = function(key: string, ...params: Array<string | number>): string {
+    return this.$vuetify.lang.t(`$vuetify.${key}`, ...params);
+};
+
+Vue.prototype.$addLocale = function(lang: string, translates: VuetifyLocale) {
+    this.$set(vuetify.framework.lang.locales, lang, {...locales[lang], ...translates});
+};
+
+Object.defineProperty(Vue.prototype, '$currentLang', {
+    get(): string {
+        return vuetify.framework.lang.current;
+    },
+    set(lang: any): void {
+        this.$set(vuetify.framework.lang, 'current', lang);
+    }
+});
+
+export default vuetify;

@@ -1,37 +1,26 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import HelloWorld from '@web/components/HelloWorld.vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import { publicRoutes } from '@web/router/public';
+import { beforeEach } from '@web/router/hooks';
 
 Vue.use(VueRouter);
 
-const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: HelloWorld,
-    },
-    {
-        path: '/archive',
-        name: 'archive',
-        component: (resolve: any) => require(['@web/pages/Archive.vue'], (m) => resolve(m.default)),
-    },
+const mapRoute = (route: RouteConfig) => ({
+  ...route,
+  path: `/:lang${route.path}`
+});
 
-    {
-        path: '/item/:message',
-        name: 'sample',
-        component: () => import('@web/components/DynamicItem.vue'),
-    },
-
-    {
-        path: '*',
-        name: '404',
-        component: (resolve: any) => require(['@web/pages/NotFound.vue'], (m) => resolve(m.default)),
-    },
-];
-
-export const createRouter = () => new VueRouter({
+export const createRouter = () => {
+  const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes,
-});
+    routes: [
+      ...publicRoutes
+    ].map(mapRoute),
+  });
+
+  router.beforeEach(beforeEach.bind(router));
+
+  return router;
+};
 

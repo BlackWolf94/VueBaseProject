@@ -37,4 +37,22 @@ Add this header to file template on IDEA
 export class ${NAME} {}
 ```
 
+## Nest API controller
+```typescript
+import {ApiController} from '../ApiController';
+import { Get, Param } from '@nestjs/common';
 
+@ApiController('${NAME}')
+export default class ${NAME} {
+
+    @Get()
+    public index() {
+    }
+
+    @Get(':id')
+    public item(@Param('id') id: string) {
+        return id;
+    }
+    
+}
+```
