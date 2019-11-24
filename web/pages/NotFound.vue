@@ -3,7 +3,7 @@
         v-layout.text--accent-3(align-center row)
             v-flex.display-4(md12)
                 p.font-weight-bold 404
-                p.display-2 {{$t('Page Not Found', $t('Page Not2 Found'))}}
+                p.display-2 {{$t('Page Not Found ')}}
 
 </template>
 
