@@ -6,6 +6,10 @@ import { RouteConfig } from 'vue-router';
 
 export const publicRoutes: RouteConfig[] = [
   {
+    path: '',
+    name: 'home',
+    component: () => import('@web/components/HelloWorld.vue')},
+  {
     path: '/archive',
     name: 'archive',
     component: () => import('@web/pages/Archive.vue')},

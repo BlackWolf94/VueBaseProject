@@ -10,7 +10,7 @@
             v-list( dense class="grey lighten-4")
                 template( v-for="(item, i) in items")
                     v-divider.my-3( v-if="item.divider" :key="i" dark)
-                    v-list-item(v-else :key="i" @click="" :to="item.text")
+                    v-list-item(v-else :key="i" @click="" :to="item.to")
                         v-list-item-action
                             v-icon {{item.icon}}
                         v-list-item-content
@@ -30,12 +30,14 @@ export default class App extends Vue {
   $ssrContext: any;
 
   drawer: boolean = true;
-  items = [
-    { icon: 'lightbulb_outline', text: 'Notes' },
-    { divider: true },
-    { icon: 'archive', text: 'archive' },
-    { divider: true },
-  ];
+  get items(){
+    return [
+      { icon: 'lightbulb_outline', to: 'notes', text: this.$t('Notes') },
+      { divider: true },
+      { icon: 'archive', to: {name: 'archive'}, text: this.$t('Archive') },
+      { divider: true },
+    ]
+  };
 
   created() {
     const componentMeta = new ComponentMetaParser(this);
