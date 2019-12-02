@@ -28,7 +28,7 @@ export class ParseService {
 
   async run() {
     if (!this.pattern) {
-      return ;
+      return;
     }
 
     const files = await FileHelper.scanDir(this.entry);
@@ -56,9 +56,20 @@ export class ParseService {
   }
 
   private async makeLangFile(lang: string) {
-    const localeFile = resolve(process.cwd(),  this.conf.outputDir, this.entry, `${lang}.json`);
+    const localeFile = resolve(process.cwd(), this.conf.outputDir, this.entry, `${lang}.json`);
     const locale = JSON.parse(await FileHelper.readFile(localeFile) || '{}');
-    await FileHelper.writeFile(localeFile, JSON.stringify({ ...this.locale[lang], ...locale }, null, '\t'));
+
+    /**
+     * remove old key that not exit in project file
+     */
+    Object.keys(locale).forEach(key => {
+      if (this.locale[lang][key]) {
+        return;
+      }
+      delete locale[key];
+    });
+
+    await FileHelper.writeFile(localeFile, JSON.stringify({ ...this.locale[lang], ...locale}, null, '\t'));
     console.log(chalk.green(`Update locale file: ${localeFile}`));
   }
 
