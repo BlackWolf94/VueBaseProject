@@ -7,6 +7,8 @@ import vhost from 'vhost-ts';
 import compression from 'compression';
 import {devServer} from './devServer';
 import {buildConf, isProd, outDir, publicDir} from './untils/env';
+import { FileHelper } from '../server/helper/FileHelper';
+import AppHelper from '../server/helper/AppHelper';
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -70,7 +72,7 @@ app.use(compression({threshold: 0}));
 app.use('/dist', serve('../dist', true));
 app.use('/public', serve('../public', true));
 
-function render(req: any, res: any) {
+async function render(req: any, res: any) {
     const s = Date.now();
 
     res.setHeader('Content-Type', 'text/html');
@@ -89,10 +91,7 @@ function render(req: any, res: any) {
         }
     };
 
-    const context = {
-        title: (buildConf as any).TITLE, // default title
-        url: req.url,
-    };
+    const context = JSON.parse(await FileHelper.readFile(AppHelper.pathResolve('.cache/srrContext.json')) || '{}');
     renderer.renderToString(context, (err: any, html: string) => {
         if (err) {
             console.error(err);

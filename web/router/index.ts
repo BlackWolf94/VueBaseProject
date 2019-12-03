@@ -20,7 +20,6 @@ export const createRouter = () => {
   });
 
   router.beforeEach(beforeEach.bind(router));
-
   return router;
 };
 

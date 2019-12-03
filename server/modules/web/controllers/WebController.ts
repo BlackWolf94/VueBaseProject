@@ -3,6 +3,8 @@ import {Request, Response} from 'express';
 import SSRService from '../service/SSRService';
 import AppHelper from '../../../helper/AppHelper';
 import LocaleHelper from '../../../helper/LocaleHelper';
+import SSRContext from '../service/SSRContext';
+import { FileHelper } from '../../../helper/FileHelper';
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -11,7 +13,7 @@ const serverInfo =
 @Controller()
 export class WebController {
 
-    constructor(private ssr: SSRService) {
+    constructor(private ssr: SSRService, private context: SSRContext) {
     }
 
     @Get([':lang', ':lang/*', '/*'])
@@ -26,16 +28,20 @@ export class WebController {
         if (await LocaleHelper.isLangAvailable(lang)) {
             url = req.url.split(`/${lang}`)[1];
         } else {
-            const [blang] = browserLangs.split(',');
-            lang = await LocaleHelper.isLangAvailable(blang) ? blang : LocaleHelper.defLang;
+            [lang] = browserLangs.split(',');
+            lang = await LocaleHelper.isLangAvailable(lang) ? lang : LocaleHelper.defLang;
         }
 
+        const context = await this.context.makeContext(req.url, lang);
+
         if (!AppHelper.isProd()) {
-            res.redirect(`http://localhost:${AppHelper.ssrDevPort()}${url}`);
+            await FileHelper.writeFile(AppHelper.pathResolve('.cache/srrContext.json'), JSON.stringify(context, null, '\t'));
+            // res.send(AppHelper.pathResolve('.cache/srrContext.json'));
+            res.redirect(`http://localhost:${AppHelper.ssrDevPort()}${req.url}`);
             return;
         }
 
-        return this.ssr.render(url);
+        return this.ssr.render(context);
     }
 
 

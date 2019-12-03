@@ -3,6 +3,7 @@
  * @email zidadindimon@gmail.com
  * @created_at 02.12.19
  */
+import { Store } from 'vuex';
 
 export type TSSRMeta = {
   [key: string]: any;
@@ -15,5 +16,6 @@ export type TSSRContext = {
   currentLang: string;
   meta?: TSSRMeta;
   user?: { [key: string]: any };
-  title: string
-}
+  title: string;
+  state?: Store<any>;
+};

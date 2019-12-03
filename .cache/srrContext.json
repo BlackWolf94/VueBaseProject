@@ -1,0 +1,14 @@
+{
+	"baseUrl": "/ru",
+	"currentLang": "ru",
+	"locale": {
+		"Change language": "Изменить язык",
+		"Notes": "Примечания",
+		"Archive": "Архив",
+		"Page Not Found": "Страница не найдена"
+	},
+	"meta": {},
+	"title": "App",
+	"url": "/ru/",
+	"user": {}
+}
