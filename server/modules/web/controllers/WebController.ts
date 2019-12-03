@@ -1,7 +1,8 @@
-import {Controller, Get, Header, Req, Res} from '@nestjs/common';
+import { Controller, Get, Header, Param, Req, Res, Headers } from '@nestjs/common';
 import {Request, Response} from 'express';
 import SSRService from '../service/SSRService';
 import AppHelper from '../../../helper/AppHelper';
+import LocaleHelper from '../../../helper/LocaleHelper';
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -13,16 +14,29 @@ export class WebController {
     constructor(private ssr: SSRService) {
     }
 
-    @Get('*')
+    @Get([':lang', ':lang/*', '/*'])
     @Header('Content-Type', 'text/html')
     @Header('Server', serverInfo)
-    public async index(@Req() req: Request, @Res() res: Response): Promise<string> {
-        if (AppHelper.isProd()) {
-            res.send(await this.ssr.render(req.url));
-            return ;
+    async index(@Req() req: Request,
+                @Res() res: Response,
+                @Param('lang') lang: string,
+                @Headers('accept-language') browserLangs: string ) {
+        let url = req.url;
+
+        if (await LocaleHelper.isLangAvailable(lang)) {
+            url = req.url.split(`/${lang}`)[1];
+        } else {
+            const [blang] = browserLangs.split(',');
+            lang = await LocaleHelper.isLangAvailable(blang) ? blang : LocaleHelper.defLang;
         }
 
+        if (!AppHelper.isProd()) {
+            res.redirect(`http://localhost:${AppHelper.ssrDevPort()}${url}`);
+            return;
+        }
 
-        res.redirect(`http://localhost:${AppHelper.ssrDevPort()}${req.url}`);
+        return this.ssr.render(url);
     }
+
+
 }
