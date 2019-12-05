@@ -1,14 +1,14 @@
 {
-	"baseUrl": "/ru",
-	"currentLang": "ru",
+	"baseUrl": "/uk",
+	"currentLang": "uk",
 	"locale": {
-		"Change language": "Изменить язык",
-		"Notes": "Примечания",
-		"Archive": "Архив",
-		"Page Not Found": "Страница не найдена"
+		"Change language": "Змінити мову",
+		"Notes": "Примітки",
+		"Archive": "Архів",
+		"Page Not Found": "Сторінку не знайдено"
 	},
 	"meta": {},
 	"title": "App",
-	"url": "/ru/",
+	"url": "/favicon.ico",
 	"user": {}
 }

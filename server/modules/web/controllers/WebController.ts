@@ -1,10 +1,11 @@
 import { Controller, Get, Header, Param, Req, Res, Headers } from '@nestjs/common';
 import {Request, Response} from 'express';
 import SSRService from '../service/SSRService';
-import AppHelper from '../../../helper/AppHelper';
-import LocaleHelper from '../../../helper/LocaleHelper';
+import AppHelper from '@common/helper/AppHelper';
+import LocaleHelper from '@common/helper/LocaleHelper';
 import SSRContext from '../service/SSRContext';
-import { FileHelper } from '../../../helper/FileHelper';
+import { FileHelper } from '@common/helper/FileHelper';
+import SSRDevService from '../service/SSRDevService';
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -13,7 +14,7 @@ const serverInfo =
 @Controller()
 export class WebController {
 
-    constructor(private ssr: SSRService, private context: SSRContext) {
+    constructor(private ssr: SSRDevService, private context: SSRContext) {
     }
 
     @Get([':lang', ':lang/*', '/*'])
@@ -33,6 +34,9 @@ export class WebController {
         }
 
         const context = await this.context.makeContext(req.url, lang);
+        res.send(await this.ssr.render(context));
+
+
 
         if (!AppHelper.isProd()) {
             await FileHelper.writeFile(AppHelper.pathResolve('.cache/srrContext.json'), JSON.stringify(context, null, '\t'));

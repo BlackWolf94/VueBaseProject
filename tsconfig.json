@@ -29,6 +29,9 @@
       ],
       "@server/*": [
         "server/*"
+      ],
+      "@common/*": [
+        "common/*"
       ]
     },
     "lib": [

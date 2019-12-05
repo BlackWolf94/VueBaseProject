@@ -6,7 +6,7 @@
 
 import { Bar } from 'cli-progress';
 import chalk from 'chalk';
-import { FileHelper } from '../../../server/helper/FileHelper';
+import { FileHelper } from '@common/helper/FileHelper';
 import { Ti18nConf } from '../conf';
 import { resolve } from 'path';
 

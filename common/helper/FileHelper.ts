@@ -3,6 +3,7 @@ import { dirname, resolve } from 'path';
 import rimraf from 'rimraf';
 
 export class FileHelper {
+
     static readFile(fileName: string, options: string = 'utf8'): Promise<string> {
         return new Promise<string>((resolve) => {
             if (!fs.existsSync(fileName)) {

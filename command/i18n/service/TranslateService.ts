@@ -8,8 +8,8 @@ import axios from 'axios';
 import chalk from 'chalk';
 import { Ti18nConf } from '../conf';
 import { resolve } from 'path';
-import { FileHelper } from '../../../server/helper/FileHelper';
 import { Bar } from 'cli-progress';
+import { FileHelper } from '@common/helper/FileHelper';
 
 export class TranslateService {
   private static async translate(message: string, from: string, to: string): Promise<string> {

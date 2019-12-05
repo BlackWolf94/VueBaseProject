@@ -15,49 +15,48 @@ export const buildConf: any = {
     DEBUG: true,
     APP_NAME: 'NestJs&VueJs',
     ...loadEnv('.env'),
-    ...process.env,
 };
 
 
 export default class AppHelper {
 
-    public static getEnv(key?: string): any {
-        return key ? buildConf[key] : buildConf;
+    static getEnv(key?: string): any {
+        return key ? buildConf[key] || process.env[key] : buildConf;
     }
 
-    public static isProd() {
+    static isProd() {
         return buildConf.NODE_ENV === 'production';
     }
 
-    public static isDev() {
+    static isDev() {
         return buildConf.NODE_ENV !== 'production';
     }
 
-    public static pathResolve(folder?: string): string {
-        return folder ? path.resolve(rootDir, folder) : rootDir;
+    static pathResolve(...folder: string[]): string {
+        return folder ? path.resolve(rootDir, ...folder) : rootDir;
     }
 
-    public static port() {
+    static port() {
         return this.getEnv('PORT') || 3000;
     }
 
-    public static ssrDevPort() {
+    static ssrDevPort() {
         return this.getEnv('SSR_DEV_PORT') || 3030;
     }
 
-    public static ssrTemplatePath() {
+    static ssrTemplatePath() {
         return this.pathResolve('./public/index.ssr.html');
     }
 
-    public static ssrBundle() {
+    static ssrBundle() {
         return this.pathResolve('./dist/vue-ssr-server-bundle.json');
     }
 
-    public static ssrManifest() {
+    static ssrManifest() {
         return this.pathResolve('./dist/vue-ssr-client-manifest.json');
     }
 
-    public static ssrOptions() {
+    static ssrOptions() {
         return {
             runInNewContext: false,
             basedir: this.pathResolve('./dist'),
@@ -67,4 +66,5 @@ export default class AppHelper {
             }),
         };
     }
+
 }
