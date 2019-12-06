@@ -4,21 +4,24 @@
  * @created_at 05.12.19
  */
 
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, INestApplication, Param } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { JSON_CONFIG_FILENAME } from 'tslint/lib/configuration';
+import SSRRenderService from './services/SSRRenderService';
+import { TSSRContext } from '@common/types/TSSR';
+import { SSRBuildService } from './services/SSRBuildService';
 
 @Controller()
 export default class AppController {
 
-  @MessagePattern({ type: 'sum' })
-  index(context: any  = '') {
-    console.error(context)
-    return JSON.stringify(context);
+  constructor(private ssr: SSRRenderService) {}
+
+  @MessagePattern({ type: 'ssr-render' })
+  index(context: TSSRContext) {
+    return this.ssr.render(context);
   }
 
-  // @MessagePattern({ type: 'sum' })
-  // async accumulate(data: number[]): Promise<number> {
-  //   return (data || []).reduce((a, b) => a + b);
-  // }
+  @MessagePattern({ type: 'ssr-middleware' })
+  middleware(): any[] {
+    return [SSRBuildService.devMiddleware, SSRBuildService.hotMiddleware];
+  }
 }

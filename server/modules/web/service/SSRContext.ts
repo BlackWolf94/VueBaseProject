@@ -5,8 +5,8 @@
  */
 
 import { Injectable } from '@nestjs/common';
-import { TSSRContext, TSSRMeta } from '../types/TSSR';
-import LocaleHelper from '../../../helper/LocaleHelper';
+import { TSSRContext, TSSRMeta } from '@common/types/TSSR';
+import LocaleHelper from '@common/helper/LocaleHelper';
 
 
 @Injectable()

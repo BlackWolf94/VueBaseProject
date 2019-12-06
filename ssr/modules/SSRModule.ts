@@ -6,14 +6,14 @@
 
 import { Module } from '@nestjs/common';
 import AppController from './AppController';
-import SSRService from './services/SSRService';
+import SSRRenderService from './services/SSRRenderService';
 
 @Module({
   controllers: [
     AppController
   ],
   providers: [
-    SSRService
+    SSRRenderService
   ]
 })
 export class SSRModule {

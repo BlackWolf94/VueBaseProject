@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { SSRModule } from './modules/SSRModule';
 import { Transport } from '@nestjs/microservices';
 import { SSRBuildService } from './modules/services/SSRBuildService';
+import SSRRenderService from './modules/services/SSRRenderService';
 
 /**
  * @author Dmytro Zataidukh
@@ -18,7 +19,7 @@ const bootstrap = async () => {
       retryAttempts: 5, retryDelay: 1000
     }
   });
-  await SSRBuildService.build();
+  await SSRRenderService.initRender();
 
   await app.listenAsync();
   Logger.log(`SSR Server start`, 'LISTEN');

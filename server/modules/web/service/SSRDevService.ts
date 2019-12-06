@@ -4,8 +4,9 @@
  * @created_at 05.12.19
  */
 
-import { Injectable } from '@nestjs/common';
+import { INestApplication, Injectable } from '@nestjs/common';
 import { Client, ClientProxy, Transport } from '@nestjs/microservices';
+import { NestApplication } from '@nestjs/core';
 
 @Injectable()
 export default class SSRDevService {
@@ -15,14 +16,19 @@ export default class SSRDevService {
       port: 5000
     }
   })
-  client: ClientProxy;
+  static client: ClientProxy;
+
+  static async connect(app: INestApplication) {
+    console.error(this.client);
+  }
+
 
   async render(context: any) {
-    const response = await this.client.send<string>(
-      { type: 'sum' },
-      context
-    );
-    return response.toPromise();
+    // const response = await this.client.send<string>(
+    //   { type: 'sum' },
+    //   context
+    // );
+    // return response.toPromise();
   }
 
 }
