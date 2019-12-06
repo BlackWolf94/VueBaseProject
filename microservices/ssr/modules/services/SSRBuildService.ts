@@ -4,8 +4,7 @@
  * @created_at 05.12.19
  */
 
-import { INestApplication, INestMicroservice, Injectable, Logger } from '@nestjs/common';
-import { FileHelper } from '../../../common/helper/FileHelper';
+import { Logger } from '@nestjs/common';
 import { SSRBuildConf } from './webpack/untils/SSRBuildConf';
 import chokidar from 'chokidar';
 import webpack, { HotModuleReplacementPlugin, Stats } from 'webpack';
@@ -15,6 +14,7 @@ import WebpackHotMiddleware from 'webpack-hot-middleware';
 
 import { join } from 'path';
 import MFS from 'memory-fs';
+import { FileHelper } from '../../../../common/helper/FileHelper';
 
 const readFile = (fs: any, file: string) => {
   try {
@@ -47,8 +47,6 @@ export class SSRBuildService {
 
     this.devMiddleware = WebpackDevMiddleware(clientCompiler, {
       publicPath: WpClient.output.publicPath,
-      serverSideRender: true,
-      lazy: true
     });
 
     clientCompiler.hooks.done.tap('dev server', this.onDone.bind(this));
@@ -83,11 +81,13 @@ export class SSRBuildService {
   }
 
   private static onDone(stats: Stats) {
+    console.error(1, 'clientManifest');
     stats.compilation.errors.forEach(console.error);
     stats.compilation.warnings.forEach(console.warn);
     if (stats.hasErrors()) {
       return;
     }
+    console.error(2, 'clientManifest');
     this.clientManifest = JSON.parse(readFile(this.devMiddleware.fileSystem, 'vue-ssr-client-manifest.json'));
     this.rebase();
   }
@@ -106,6 +106,7 @@ export class SSRBuildService {
   }
 
   private static rebase() {
+    console.error(1, !this.bundle, !this.clientManifest);
     if (!this.bundle || !this.clientManifest) {
       return;
     }

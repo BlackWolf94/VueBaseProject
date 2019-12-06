@@ -16,19 +16,12 @@ export default class SSRDevService {
       port: 5000
     }
   })
-  static client: ClientProxy;
-
-  static async connect(app: INestApplication) {
-    console.error(this.client);
-  }
-
+  client: ClientProxy;
 
   async render(context: any) {
-    // const response = await this.client.send<string>(
-    //   { type: 'sum' },
-    //   context
-    // );
-    // return response.toPromise();
+    console.error(this.client)
+    const response = await this.client.send<string>({ type: 'ssr-render' }, context);
+    return response.toPromise();
   }
 
 }

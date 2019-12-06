@@ -6,9 +6,9 @@
 
 import { Bar } from 'cli-progress';
 import chalk from 'chalk';
-import { FileHelper } from '@common/helper/FileHelper';
 import { Ti18nConf } from '../conf';
 import { resolve } from 'path';
+import { FileHelper } from '../../../common/helper/FileHelper';
 
 type TLangs = {
   [key: string]: any;

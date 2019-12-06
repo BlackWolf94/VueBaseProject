@@ -19,7 +19,7 @@ const bootstrap = async () => {
       retryAttempts: 5, retryDelay: 1000
     }
   });
-  await SSRRenderService.initRender();
+  SSRRenderService.initRender();
 
   await app.listenAsync();
   Logger.log(`SSR Server start`, 'LISTEN');

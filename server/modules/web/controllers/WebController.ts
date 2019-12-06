@@ -1,11 +1,10 @@
 import { Controller, Get, Header, Param, Req, Res, Headers } from '@nestjs/common';
 import {Request, Response} from 'express';
-import SSRService from '../service/SSRService';
-import AppHelper from '@common/helper/AppHelper';
-import LocaleHelper from '@common/helper/LocaleHelper';
 import SSRContext from '../service/SSRContext';
-import { FileHelper } from '@common/helper/FileHelper';
 import SSRDevService from '../service/SSRDevService';
+import { FileHelper } from '../../../../common/helper/FileHelper';
+import LocaleHelper from '../../../../common/helper/LocaleHelper';
+import AppHelper from '../../../../common/helper/AppHelper';
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +

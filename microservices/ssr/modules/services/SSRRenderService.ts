@@ -5,11 +5,11 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { FileHelper } from '@common/helper/FileHelper';
-import AppHelper from '@common/helper/AppHelper';
 import { BundleRenderer, createBundleRenderer } from 'vue-server-renderer';
 import { SSRBuildService } from './SSRBuildService';
-import { TSSRContext } from '@common/types/TSSR';
+import AppHelper from '../../../../common/helper/AppHelper';
+import { FileHelper } from '../../../../common/helper/FileHelper';
+import { TSSRContext } from '../../../../common/types/TSSR';
 
 @Injectable()
 export default class SSRRenderService {
@@ -23,10 +23,11 @@ export default class SSRRenderService {
 
       this.render = createBundleRenderer(bundle, renderOptions);
     } else {
-      await SSRBuildService.build();
       SSRBuildService.onReady( (bundle, renderOptions) => {
         this.render = createBundleRenderer(bundle, renderOptions);
+        Logger.debug('ssr render initialized', 'SSRRenderService');
       });
+      SSRBuildService.build();
     }
   }
   private static render: BundleRenderer;

@@ -2,9 +2,9 @@ import {Configuration} from 'webpack';
 import {_rules} from './_rules';
 import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
 import { SSRBuildConf } from './untils/SSRBuildConf';
-import AppHelper from '@common/helper/AppHelper';
 import { loadPlugins } from './_plugins';
 import TerserPlugin from 'terser-webpack-plugin';
+import AppHelper from '../../../../../common/helper/AppHelper';
 
 export const WpBase = {
     devtool: AppHelper.isProd() ? false : '#inline-source-map',

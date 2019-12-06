@@ -18,8 +18,8 @@ import OptimizeCssnanoPlugin from '@intervolga/optimize-cssnano-plugin';
 import HashedModuleIdsPlugin from 'webpack-hashed-module-id-plugin';
 // @ts-ignore
 import ProgressPlugin from 'progress-webpack-plugin';
-import AppHelper from '@common/helper/AppHelper';
 import { SSRBuildConf } from './untils/SSRBuildConf';
+import AppHelper from '../../../../../common/helper/AppHelper';
 
 export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
   const plugins: any[] = [];

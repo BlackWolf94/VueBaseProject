@@ -23,14 +23,14 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import ComponentMetaParser from '@web/services/ComponentMetaParser';
-import { langs } from "@web/config/config";
+import { langs } from '@web/config/config';
 
 @Component({})
 export default class App extends Vue {
   $ssrContext: any;
 
   drawer: boolean = true;
-  get items(){
+  get items() {
     return [
       { icon: 'lightbulb_outline', to: 'notes', text: this.$t('Notes') },
       { divider: true },

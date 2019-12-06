@@ -1,8 +1,8 @@
 import {Injectable, Logger} from '@nestjs/common';
 import {BundleRenderer, createBundleRenderer} from 'vue-server-renderer';
-import { FileHelper } from '@common/helper/FileHelper';
-import AppHelper from '@common/helper/AppHelper';
-import { TSSRContext } from '@common/types/TSSR';
+import { FileHelper } from '../../../../common/helper/FileHelper';
+import AppHelper from '../../../../common/helper/AppHelper';
+import { TSSRContext } from '../../../../common/types/TSSR';
 
 
 @Injectable()

@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint --fix",
     "test": "vue-cli-service test",
     "server:dev": "tsnd --respawn --debug -P ./tsconfig.serve.json server/main.ts",
-    "ssr:server:dev": "tsnd --respawn --debug -P ./tsconfig.serve.json ssr/main.ts",
+    "mcs:ssr:dev": "tsnd --respawn --debug -P ./tsconfig.serve.json microservices/ssr/main.ts",
     "server:start": "cross-env NODE_ENV=production ts-node --project ./tsconfig.serve.json server/main.ts",
     "ssr:dev": "ts-node --project tsconfig.webpack.json ssrDev/ssrDevServer.ts",
     "ssr:build": "rimraf dist && cross-env NODE_ENV=production ts-node --project tsconfig.webpack.json ssrDev/build.ts",

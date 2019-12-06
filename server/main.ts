@@ -32,7 +32,6 @@ async function bootstrap() {
   if (AppHelper.isProd()) {
     await SSRService.initRender();
   }
-  await SSRDevService.connect(app);
   await app.listen(AppHelper.port());
 
 

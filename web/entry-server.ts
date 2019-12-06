@@ -1,6 +1,6 @@
 import {createApp} from '@web/createApp';
 import {VueRouter} from 'vue-router/types/router';
-import { TSSRContext } from '@server/modules/web/types/TSSR';
+import { TSSRContext } from '@common/types/TSSR';
 
 const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
     router.onReady(resolve, reject);
