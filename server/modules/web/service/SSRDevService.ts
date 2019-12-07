@@ -10,6 +10,7 @@ import { NestApplication } from '@nestjs/core';
 
 @Injectable()
 export default class SSRDevService {
+
   @Client({
     transport: Transport.TCP,
     options: {
@@ -19,8 +20,12 @@ export default class SSRDevService {
   client: ClientProxy;
 
   async render(context: any) {
-    console.error(this.client)
     const response = await this.client.send<string>({ type: 'ssr-render' }, context);
+    return response.toPromise();
+  }
+
+  async asset(fileName: string) {
+    const response = await this.client.send<string>({ type: 'ssr-assets' }, fileName);
     return response.toPromise();
   }
 

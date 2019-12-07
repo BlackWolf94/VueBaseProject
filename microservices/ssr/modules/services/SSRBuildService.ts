@@ -27,8 +27,8 @@ const readFile = (fs: any, file: string) => {
 type TSSRDevServiceUpdate = (bundle: any, options: {template: any; clientManifest: any}) => void;
 
 export class SSRBuildService {
-  static devMiddleware: any;
   static hotMiddleware: any;
+  static devMiddleware: any;
 
   static async build() {
     this.template = await FileHelper.readFile(SSRBuildConf.template);
@@ -65,6 +65,10 @@ export class SSRBuildService {
   static onReady(cb: TSSRDevServiceUpdate) {
     this.cb = cb;
     this.rebase();
+  }
+
+  static getAsset(file: string) {
+    return readFile(this.devMiddleware.fileSystem, file.split(SSRBuildConf.publicDir).pop());
   }
 
   private static template: string;

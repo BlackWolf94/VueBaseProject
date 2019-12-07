@@ -10,6 +10,7 @@ import { SSRBuildService } from './SSRBuildService';
 import AppHelper from '../../../../common/helper/AppHelper';
 import { FileHelper } from '../../../../common/helper/FileHelper';
 import { TSSRContext } from '../../../../common/types/TSSR';
+import { SSRBuildConf } from "./webpack/untils/SSRBuildConf";
 
 @Injectable()
 export default class SSRRenderService {
@@ -27,7 +28,7 @@ export default class SSRRenderService {
         this.render = createBundleRenderer(bundle, renderOptions);
         Logger.debug('ssr render initialized', 'SSRRenderService');
       });
-      SSRBuildService.build();
+      await SSRBuildService.build();
     }
   }
   private static render: BundleRenderer;
@@ -45,5 +46,4 @@ export default class SSRRenderService {
       });
     });
   }
-
 }

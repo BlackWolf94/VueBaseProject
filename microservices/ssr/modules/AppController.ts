@@ -17,13 +17,17 @@ export default class AppController {
   }
 
   @MessagePattern({ type: 'ssr-render' })
-  async index(context: TSSRContext) {
-    console.error('5555');
-    return await this.ssr.render(context);
+  index(context: TSSRContext) {
+    return this.ssr.render(context);
   }
 
   @MessagePattern({ type: 'ssr-middleware' })
   middleware(): any[] {
     return [SSRBuildService.devMiddleware, SSRBuildService.hotMiddleware];
+  }
+
+  @MessagePattern({ type: 'ssr-assets' })
+  assets(fileName: string): string {
+    return SSRBuildService.getAsset(fileName);
   }
 }
