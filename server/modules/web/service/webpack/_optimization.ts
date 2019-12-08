@@ -15,7 +15,7 @@ const devOptimize = {
   removeEmptyChunks: false,
 } as Optimization;
 
-export const optimization =  AppHelper.isProd() ? devOptimize : {
+export const optimization =  AppHelper.isDev() ? devOptimize : {
   minimize: true,
   splitChunks: {
     cacheGroups: {

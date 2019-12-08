@@ -25,7 +25,6 @@ async function bootstrap() {
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }
-
   Logger.log(`Server start http://localhost:${AppHelper.port()}`, 'LISTEN');
   Logger.log(`Server start http://${internalIp.v4.sync()}:${AppHelper.port()}`, 'LISTEN');
 }

@@ -44,7 +44,7 @@ export const WpBase = {
         rules: _rules.map((rule: any) => rule.conf),
     },
     performance: {
-        maxEntrypointSize: 300000,
+        maxEntrypointSize: 3000000,
         hints: AppHelper.isProd() ? 'warning' : false,
     },
     parallelism: 2,
