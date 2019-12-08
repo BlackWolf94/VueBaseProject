@@ -11,7 +11,7 @@ const loadEnv = (envFile: string) => {
 };
 
 export const buildConf: any = {
-    NODE_ENV: 'development',
+    NODE_ENV: process.env.NODE_ENV || 'development',
     DEBUG: true,
     APP_NAME: 'NestJs&VueJs',
     ...loadEnv('.env'),

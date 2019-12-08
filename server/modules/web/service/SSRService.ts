@@ -27,6 +27,7 @@ export default class SSRService {
   protected bundleRender: BundleRenderer;
 
   async build(app: INestApplication) {
+    console.error('555', AppHelper.isProd());
     return AppHelper.isProd() ? this.buildProdApp() : this.buildDevApp(app);
   }
 
@@ -48,12 +49,24 @@ export default class SSRService {
     return FileHelper.readFile(SSRBuildConf.assetPath(fileName), 'utf-8', this.dfs);
   }
 
+  protected buildClient(): Promise<any> {
+    return new Promise<any>( (resolve) => webpack(WpClient).run(resolve));
+  }
+
+  protected buildServer(): Promise<any> {
+    return new Promise<any>( (resolve) => webpack(WpServe).run(resolve));
+  }
+
   protected async buildProdApp() {
+    const s = new Date();
+    await this.buildClient();
+    await this.buildServer();
+
     this.template = await FileHelper.readFile(SSRBuildConf.template, 'utf-8');
     this.bundle = JSON.parse(await FileHelper.readFile(SSRBuildConf.bundle, 'utf-8'));
     this.manifest = JSON.parse(await FileHelper.readFile(SSRBuildConf.manifest, 'utf-8'));
     this.onReady(AppHelper.ssrOptions() as BundleRendererOptions);
-
+    Logger.debug(`Build production  App from: ${(new Date()).valueOf() - s.valueOf()}ms`, this.constructor.name);
   }
 
   protected async buildDevApp(app: INestApplication) {

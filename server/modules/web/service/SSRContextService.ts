@@ -10,7 +10,7 @@ import { TSSRContext, TSSRMeta } from '../../../../common/types/TSSR';
 
 
 @Injectable()
-export default class SSRContext {
+export default class SSRContextService {
 
   async makeContext(url: string, lang: string = 'en' ): Promise<TSSRContext> {
     return {

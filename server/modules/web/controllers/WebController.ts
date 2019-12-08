@@ -1,6 +1,6 @@
 import { Controller, Get, Header, Param, Req, Res, Headers, Logger } from '@nestjs/common';
 import {Request} from 'express';
-import SSRContext from '../service/SSRContext';
+import SSRContextService from '../service/SSRContextService';
 import LocaleHelper from '../../../../common/helper/LocaleHelper';
 import SSRService from '../service/SSRService';
 import { FileHelper } from '../../../../common/helper/FileHelper';
@@ -13,7 +13,7 @@ const serverInfo =
 @Controller()
 export class WebController {
 
-    constructor(private ssr: SSRService, private context: SSRContext) {
+    constructor(private ssr: SSRService, private context: SSRContextService) {
     }
 
     @Get([':lang', ':lang/*', '/*'])
