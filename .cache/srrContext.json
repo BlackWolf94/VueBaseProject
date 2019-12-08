@@ -1,14 +1,14 @@
 {
-	"baseUrl": "/uk",
-	"currentLang": "uk",
+	"baseUrl": "/en",
+	"currentLang": "en",
 	"locale": {
-		"Change language": "Змінити мову",
-		"Notes": "Примітки",
-		"Archive": "Архів",
-		"Page Not Found": "Сторінку не знайдено"
+		"Change language": "Change language",
+		"Notes": "Notes",
+		"Archive": "Archive",
+		"Page Not Found": "Page Not Found"
 	},
 	"meta": {},
 	"title": "App",
-	"url": "/fonts/9bfeb985a91e5545d78b906676d8e6fb.ttf",
+	"url": "/en",
 	"user": {}
 }

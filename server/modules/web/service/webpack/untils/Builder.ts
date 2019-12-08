@@ -44,7 +44,6 @@ class WebpackRuleBuilder {
     if (resourceQuery) {
       this.conf.oneOf = [...this.conf.oneOf || [], {resourceQuery, use}];
     } else {
-
       this.conf.oneOf = [...this.conf.oneOf || [], {use}];
     }
     return this;
@@ -56,6 +55,5 @@ export const createRule = (test: RegExp, loader?: string, options?: RuleSetQuery
   if (options) {
     rule.options(options);
   }
-
   return rule;
 };

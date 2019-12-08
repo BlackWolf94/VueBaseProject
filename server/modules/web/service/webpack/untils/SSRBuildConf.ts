@@ -42,4 +42,9 @@ export class SSRBuildConf {
   static entry(entry: 'client'| 'server') {
     return AppHelper.pathResolve(srcDir, `entry-${entry}.ts`);
   }
+
+  static assetPath(fileName: string): string {
+    fileName = fileName.split(this.publicDir).pop();
+    return AppHelper.pathResolve(outDir, fileName);
+  }
 }

@@ -74,6 +74,10 @@ export const WpServe = {
     plugins: loadPlugins('server'),
 } as Configuration;
 
+// ****************************************
+// Client-Side Webpack Configuration
+// ****************************************
+
 
 export const WpClient = {
     ...WpBase,

@@ -38,6 +38,7 @@ export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
       tsconfig: SSRBuildConf.tsConfig,
       vue: true,
       tslint: true,
+      ignoreLintWarnings: AppHelper.isDev(),
       formatter: 'codeframe',
       checkSyntacticErrors: false,
     }),

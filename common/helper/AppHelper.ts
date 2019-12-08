@@ -59,7 +59,6 @@ export default class AppHelper {
     static ssrOptions() {
         return {
             runInNewContext: false,
-            basedir: this.pathResolve('./dist'),
             cache: new LRU({
                 max: 1000,
                 maxAge: 1000 * 60 * 15,

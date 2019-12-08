@@ -7,8 +7,8 @@ import vhost from 'vhost-ts';
 import compression from 'compression';
 import {devServer} from './devServer';
 import {buildConf, isProd, outDir, publicDir} from './untils/env';
-import { FileHelper } from '../server/helper/FileHelper';
-import AppHelper from '../server/helper/AppHelper';
+import { FileHelper } from "../common/helper/FileHelper";
+import AppHelper from "../common/helper/AppHelper";
 
 const serverInfo =
     `express/${require('express/package.json').version} ` +
