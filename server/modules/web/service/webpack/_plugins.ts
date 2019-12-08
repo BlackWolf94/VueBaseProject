@@ -20,18 +20,20 @@ import HashedModuleIdsPlugin from 'webpack-hashed-module-id-plugin';
 import ProgressPlugin from 'progress-webpack-plugin';
 import { SSRBuildConf } from './untils/SSRBuildConf';
 import AppHelper from '../../../../../common/helper/AppHelper';
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
-export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
+export const loadPlugins = (VUE_ENV: string) => {
   const plugins: any[] = [];
 
   if (AppHelper.isProd()) {
     plugins.push(new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
     }));
   }
 
   plugins.push(...[
+    new HardSourceWebpackPlugin(),
     new VueLoaderPlugin(),
     new FriendlyErrorsPlugin(),
     new ForkTsCheckerWebpackPlugin({
