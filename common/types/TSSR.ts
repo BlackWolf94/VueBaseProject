@@ -9,18 +9,21 @@ export type TSSRMeta = {
   [key: string]: any;
 };
 
+export type TSSRAppConf = {
+  router: {
+    baseUrl: string;
+  };
+  i18n: {
+    locale: { [key: string]: string };
+    currentLang: string;
+  };
+};
+
 export type TSSRContext = {
+  url: string;
   meta?: TSSRMeta;
   title: string;
-  content: any;
-  state: {
-    initialState?: Store<any>;
-    app?: {
-      baseUrl: string;
-      url: string;
-      locale: { [key: string]: string };
-      currentLang: string;
-      user?: { [key: string]: any };
-    };
-  };
+  appConf: TSSRAppConf;
+  appContext: string;
+  state?: Store<any>;
 };

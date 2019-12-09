@@ -6,36 +6,40 @@
 
 import { Injectable } from '@nestjs/common';
 import LocaleHelper from '../../../../common/helper/LocaleHelper';
-import { TSSRContext, TSSRMeta } from '../../../../common/types/TSSR';
+import { TSSRAppConf, TSSRContext, TSSRMeta } from '../../../../common/types/TSSR';
 
 
 @Injectable()
 export default class SSRContextService {
 
-  async makeContext(url: string, lang: string = 'en'): Promise<TSSRContext> {
+  async context(url: string, lang: string = 'en'): Promise<TSSRContext> {
+    const appConf = await this.conf(lang);
     return {
-      title: 'App',
-      meta: await this.generateMeta(lang),
-      content: JSON.stringify({
-        baseUrl: `/${lang}/`,
-        currentLang: lang,
-        locale: await LocaleHelper.getLocale(lang),
-        url,
-        user: {}
-      }, null),
-      state: {
-        app: {
-          baseUrl: `/${lang}/`,
-          currentLang: lang,
-          locale: await LocaleHelper.getLocale(lang),
-          url,
-          user: {}
-        }
-      }
+      url,
+      title: await this.title(lang),
+      meta: await this.meta(lang),
+      appConf,
+      appContext: JSON.stringify(appConf)
     };
   }
 
-  private async generateMeta(lang: string): Promise<TSSRMeta> {
+  private async meta(lang: string): Promise<TSSRMeta> {
     return {};
+  }
+
+  private async title(lang: string): Promise<string> {
+    return `App ${lang}`;
+  }
+
+  private async conf(lang: string): Promise<TSSRAppConf> {
+    return {
+      router: {
+        baseUrl: `/${lang}/`
+      },
+      i18n: {
+        currentLang: lang,
+        locale: await LocaleHelper.getLocale(lang),
+      }
+    };
   }
 }

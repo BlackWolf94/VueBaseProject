@@ -31,7 +31,7 @@ export class WebController {
             [lang] = browserLangs.split(',');
             lang = await LocaleHelper.isLangAvailable(lang) ? lang : LocaleHelper.defLang;
         }
-        const context = await this.context.makeContext(req.url, lang);
+        const context = await this.context.context(req.url, lang);
 
         await FileHelper.writeFile(AppHelper.pathResolve('.cache/srrContext.json'),
           JSON.stringify(context, null, '\t'));

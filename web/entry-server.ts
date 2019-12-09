@@ -13,9 +13,9 @@ const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
 // Since data fetching is async, this function is expected to
 // return a Promise that resolves to the app instance.
 export default (context: TSSRContext) => new Promise(async (resolve, reject) => {
-  const { app, router, store } = createApp(context);
+  const {appConf, url} = context;
+  const { app, router, store } = createApp(appConf);
 
-  const { url } = context.state.app;
   const { fullPath } = router.resolve(url).route;
   if (fullPath !== url) {
     return reject({ url: fullPath });
@@ -31,10 +31,7 @@ export default (context: TSSRContext) => new Promise(async (resolve, reject) => 
       return reject({ code: 404 });
     }
 
-    context.state = {
-      initialState: store.state,
-      app: context.state.app,
-    };
+    context.state = store.state;
     resolve(app);
 
   } catch (e) {

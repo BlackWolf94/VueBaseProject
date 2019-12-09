@@ -10,9 +10,9 @@
   <link rel="shortcut icon" sizes="48x48" href="/public/favicon.ico">
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
   <meta name="theme-color" content="#f60">
-  <script> window.__INITIAL_APP_ = {{ content }} </script>
 </head>
 <body>
-<!--vue-ssr-outlet-->
+  <script> window.__INITIAL_APP_CONF__ = {{{ appContext }}} </script>
+  <!--vue-ssr-outlet-->
 </body>
 </html>

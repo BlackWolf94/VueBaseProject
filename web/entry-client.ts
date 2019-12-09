@@ -1,21 +1,11 @@
 import 'es6-promise/auto';
 import {createApp} from '@web/createApp';
-import { TSSRContext } from '@common/types/TSSR';
 
-const context: TSSRContext = {
-    meta: {},
-    title: '',
-    state: {}
-};
+const state = (window as any).__INITIAL_STATE__ || {};
+const appConf = (window as any).__INITIAL_APP_CONF__ || {};
 
-if ((window as any).__INITIAL_STATE__) {
-    context.state = (window as any).__INITIAL_STATE__;
-}
 
-const {app, router} = createApp(context);
-
-(window as any).__INITIAL_STATE__ = {};
-
+const {app, router} = createApp(appConf, state);
 
 (window as any).runtime_process_env = {
     DEBUG: true,

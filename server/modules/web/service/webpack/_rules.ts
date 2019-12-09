@@ -48,7 +48,7 @@ const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
     limit: 4096,
     outputPath: `/${prefix}/`,
     fallback: createLoader('file-loader', {
-      name: AppHelper.isProd() ? `/${prefix}/[name].[hash:8].[ext]` : `/${prefix}/[name].[ext]`
+      name: AppHelper.isProd() ? `/${prefix}/[name].[hash:8].[ext]` : `${prefix}/[name].[ext]`
     })
   }));
 
