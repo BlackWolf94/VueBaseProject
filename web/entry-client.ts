@@ -1,12 +1,13 @@
 import 'es6-promise/auto';
 import {createApp} from '@web/createApp';
 
+// if ((window as any).__INITIAL_STATE__) {
+//     store.replaceState((window as any).__INITIAL_STATE__);
+// }
 
-const {app, router, store} = createApp();
+const {app, router} = createApp((window as any).__INITIAL_STATE__);
 
-if ((window as any).__INITIAL_STATE__) {
-    store.replaceState((window as any).__INITIAL_STATE__);
-}
+
 
 (window as any).runtime_process_env = {
     DEBUG: true,

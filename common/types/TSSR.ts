@@ -17,5 +17,8 @@ export type TSSRContext = {
   meta?: TSSRMeta;
   user?: { [key: string]: any };
   title: string;
-  state?: Store<any>;
+  state?: {
+    store: Store<any>;
+    app: any;
+  };
 };

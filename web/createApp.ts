@@ -1,22 +1,34 @@
 import Vue from 'vue';
 import App from './App.vue';
 // import './registerServiceWorker';
-import {createRouter} from './router';
+import { createRouter } from './router';
 import vuetify from './plugins/vuetify';
 import plugins from './plugins';
-import {createStore} from '@web/store';
+import { createStore } from '@web/store';
+
 Vue.use(plugins);
 
 
-export function createApp() {
-    const router = createRouter();
-    const store = createStore();
-    const app = new Vue({
-            router,
-            store,
-            vuetify,
-            render: (h) => h(App),
-        });
+export function createApp(initial: any) {
+  const router = createRouter();
+  const store = createStore();
 
-    return {app, router, store};
+  if (initial.store) {
+    store.replaceState(initial.store);
+  }
+
+
+  console.error(initial.app);
+
+  const app = new Vue({
+    router,
+    store,
+    vuetify,
+    render: (h) => h(App)
+  });
+
+  app.$addLocale(initial.app.i18n.currentLang, initial.app.i18n.locale);
+  app.$currentLang = initial.app.i18n.currentLang;
+
+  return { app, router, store };
 }
