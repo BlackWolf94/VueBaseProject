@@ -1,18 +1,18 @@
 import {Configuration} from 'webpack';
-import {_rules} from './_rules';
+import {loadRules} from './_rules';
 import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
 import { SSRBuildConf } from './untils/SSRBuildConf';
 import { loadPlugins } from './_plugins';
 import AppHelper from '../../../../../common/helper/AppHelper';
 import { optimization } from './_optimization';
 
-export const WpBase = {
+const WpBase = (VUE_ENV: 'client' | 'server' ): Configuration => ({
     devtool: AppHelper.isProd() ? false : '#inline-source-map',
     mode: AppHelper.isProd() ? 'production' : 'development',
     context: AppHelper.pathResolve(),
     output: {
         path: SSRBuildConf.outDir,
-        publicPath: '/dist/',
+        publicPath: SSRBuildConf.publicDir,
         filename: 'js/[name].[chunkhash].js',
     },
     resolve: {
@@ -41,24 +41,23 @@ export const WpBase = {
     },
     module: {
         noParse: /^(es6-promise\.js|vue|vue-router|vuex|vuex-router-sync|axios)$/,
-        rules: _rules.map((rule: any) => rule.conf),
+        rules: loadRules(VUE_ENV === 'server'),
     },
     performance: {
         maxEntrypointSize: 3000000,
         hints: AppHelper.isProd() ? 'warning' : false,
     },
     parallelism: 2,
+    plugins: loadPlugins(VUE_ENV),
 
-} as Configuration;
+});
 
 
 // ****************************************
 // Server-Side Webpack Configuration
 // ****************************************
-
-
 export const WpServe = {
-    ...WpBase,
+    ...WpBase('server'),
     target: 'node',
     devtool: '#source-map',
     entry: SSRBuildConf.entry('server'),
@@ -71,21 +70,17 @@ export const WpServe = {
     //     // modulesFromFile: true,
     //     // do not externalize CSS files in case we need to import it from a dep
     // }),
-    plugins: loadPlugins('server'),
 } as Configuration;
+
 
 // ****************************************
 // Client-Side Webpack Configuration
 // ****************************************
-
-
 export const WpClient = {
-    ...WpBase,
+    ...WpBase('client'),
     entry: {
         app: SSRBuildConf.entry('client'),
     },
     target: 'web',
-    plugins: loadPlugins('client'),
     optimization,
-
 } as Configuration;

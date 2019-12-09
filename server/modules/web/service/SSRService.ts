@@ -27,7 +27,6 @@ export default class SSRService {
   protected bundleRender: BundleRenderer;
 
   async build(app: INestApplication) {
-    console.error('555', AppHelper.isProd());
     return AppHelper.isProd() ? this.buildProdApp() : this.buildDevApp(app);
   }
 

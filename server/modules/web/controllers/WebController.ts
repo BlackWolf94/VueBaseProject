@@ -22,18 +22,18 @@ export class WebController {
     async index(@Req() req: Request,
                 @Param('lang') lang: string,
                 @Headers('accept-language') browserLangs: string ) {
-        let url = req.url;
+        // let url = req.url;
 
         if (req.url.match('fonts')) {
             return this.ssr.getAssets(req.url);
         }
 
-        if (await LocaleHelper.isLangAvailable(lang)) {
-            url = req.url.split(`/${lang}`)[1];
-        } else {
-            [lang] = browserLangs.split(',');
-            lang = await LocaleHelper.isLangAvailable(lang) ? lang : LocaleHelper.defLang;
-        }
+        // if (await LocaleHelper.isLangAvailable(lang)) {
+        //     url = req.url.split(`/${lang}`)[1];
+        // } else {
+        //     [lang] = browserLangs.split(',');
+        //     lang = await LocaleHelper.isLangAvailable(lang) ? lang : LocaleHelper.defLang;
+        // }
         const context = await this.context.makeContext(req.url, lang);
 
         await FileHelper.writeFile(AppHelper.pathResolve('.cache/srrContext.json'),

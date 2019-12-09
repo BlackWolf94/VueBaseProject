@@ -14,7 +14,7 @@ export default class SSRContextService {
 
   async makeContext(url: string, lang: string = 'en' ): Promise<TSSRContext> {
     return {
-      baseUrl: `/${lang}`,
+      baseUrl: `/`,
       currentLang: lang,
       locale: await LocaleHelper.getLocale(lang),
       meta: await this.generateMeta(lang),
