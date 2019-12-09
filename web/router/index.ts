@@ -10,17 +10,17 @@ const mapRoute = (route: RouteConfig) => ({
   path: `/:lang${route.path}`
 });
 
-export const createRouter = () => {
+export const createRouter = (BASE_URL: string) => {
   const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: publicRoutes,
-    // routes: [
-    //   ...publicRoutes
-    // ].map(mapRoute),
+    // routes: publicRoutes,
+    routes: [
+      ...publicRoutes
+    ].map(mapRoute),
   });
 
-  // router.beforeEach(beforeEach.bind(router));
+  router.beforeEach(beforeEach.bind(router));
   return router;
 };
 

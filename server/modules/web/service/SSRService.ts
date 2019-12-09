@@ -38,7 +38,7 @@ export default class SSRService {
         if (err) {
           reject(err);
         }
-        Logger.debug(`render page ${context.url}: ${(new Date()).valueOf() - s.valueOf()}ms`, 'SSR SERVICE');
+        Logger.debug(`render page ${context.state.app.url}: ${(new Date()).valueOf() - s.valueOf()}ms`, 'SSR SERVICE');
         resolve(html);
       });
     });

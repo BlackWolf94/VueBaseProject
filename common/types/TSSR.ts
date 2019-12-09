@@ -10,15 +10,16 @@ export type TSSRMeta = {
 };
 
 export type TSSRContext = {
-  baseUrl: string;
-  url: string;
-  locale: { [key: string]: string };
-  currentLang: string;
   meta?: TSSRMeta;
-  user?: { [key: string]: any };
   title: string;
-  state?: {
-    store: Store<any>;
-    app: any;
+  state: {
+    initialState?: Store<any>;
+    app?: {
+      baseUrl: string;
+      url: string;
+      locale: { [key: string]: string };
+      currentLang: string;
+      user?: { [key: string]: any };
+    };
   };
 };

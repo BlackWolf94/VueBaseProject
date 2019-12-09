@@ -21,19 +21,16 @@ export class WebController {
     @Header('Server', serverInfo)
     async index(@Req() req: Request,
                 @Param('lang') lang: string,
-                @Headers('accept-language') browserLangs: string ) {
-        // let url = req.url;
+                @Headers('accept-language') browserLangs: string  = '') {
 
         if (req.url.match('fonts')) {
             return this.ssr.getAssets(req.url);
         }
 
-        // if (await LocaleHelper.isLangAvailable(lang)) {
-        //     url = req.url.split(`/${lang}`)[1];
-        // } else {
-        //     [lang] = browserLangs.split(',');
-        //     lang = await LocaleHelper.isLangAvailable(lang) ? lang : LocaleHelper.defLang;
-        // }
+        if (!(await LocaleHelper.isLangAvailable(lang))) {
+            [lang] = browserLangs.split(',');
+            lang = await LocaleHelper.isLangAvailable(lang) ? lang : LocaleHelper.defLang;
+        }
         const context = await this.context.makeContext(req.url, lang);
 
         await FileHelper.writeFile(AppHelper.pathResolve('.cache/srrContext.json'),

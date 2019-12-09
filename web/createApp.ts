@@ -5,20 +5,15 @@ import { createRouter } from './router';
 import vuetify from './plugins/vuetify';
 import plugins from './plugins';
 import { createStore } from '@web/store';
+import { TSSRContext } from '@common/types/TSSR';
 
 Vue.use(plugins);
 
-
-export function createApp(initial: any) {
-  const router = createRouter();
+export function createApp({ state, meta }: TSSRContext) {
+  const router = createRouter(state.app.baseUrl);
   const store = createStore();
 
-  if (initial.store) {
-    store.replaceState(initial.store);
-  }
-
-
-  console.error(initial.app);
+  console.error(state.app);
 
   const app = new Vue({
     router,
@@ -27,8 +22,12 @@ export function createApp(initial: any) {
     render: (h) => h(App)
   });
 
-  app.$addLocale(initial.app.i18n.currentLang, initial.app.i18n.locale);
-  app.$currentLang = initial.app.i18n.currentLang;
+  if (state.initialState) {
+    store.replaceState(state.initialState);
+  }
+
+  app.$addLocale(state.app.currentLang, state.app.locale);
+  app.$currentLang = state.app.currentLang;
 
   return { app, router, store };
 }

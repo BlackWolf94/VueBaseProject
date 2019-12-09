@@ -14,13 +14,17 @@ export default class SSRContextService {
 
   async makeContext(url: string, lang: string = 'en' ): Promise<TSSRContext> {
     return {
-      baseUrl: `/`,
-      currentLang: lang,
-      locale: await LocaleHelper.getLocale(lang),
-      meta: await this.generateMeta(lang),
       title: 'App',
-      url,
-      user: {}
+      meta: await this.generateMeta(lang),
+      state: {
+        app: {
+          baseUrl: `/${lang}/`,
+          currentLang: lang,
+          locale: await LocaleHelper.getLocale(lang),
+          url,
+          user: {},
+        }
+      }
     };
   }
 

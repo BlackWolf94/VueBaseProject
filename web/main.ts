@@ -6,6 +6,6 @@ import { createApp } from '@web/createApp';
 Vue.use(plugins);
 
 Vue.config.productionTip = false;
-const { app } = createApp();
+const { app } = createApp({state: {}, title: ''});
 
 app.$mount('#app');

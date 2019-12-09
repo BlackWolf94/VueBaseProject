@@ -13,11 +13,9 @@ const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
 // Since data fetching is async, this function is expected to
 // return a Promise that resolves to the app instance.
 export default (context: TSSRContext) => new Promise(async (resolve, reject) => {
-  const { app, router, store } = createApp();
+  const { app, router, store } = createApp(context);
 
-  // app.$addLocale(context.currentLang, context.locale);
-  // app.$currentLang = context.currentLang;
-  const { url } = context;
+  const { url } = context.state.app;
   const { fullPath } = router.resolve(url).route;
   if (fullPath !== url) {
     return reject({ url: fullPath });
@@ -33,12 +31,9 @@ export default (context: TSSRContext) => new Promise(async (resolve, reject) => 
       return reject({ code: 404 });
     }
 
-    const {locale, currentLang} = {...context};
     context.state = {
-      store: store.state,
-      app: {
-        i18n: {locale, currentLang}
-      },
+      initialState: store.state,
+      app: context.state.app,
     };
     resolve(app);
 

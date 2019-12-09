@@ -10,6 +10,7 @@ import ru from 'vuetify/src/locale/ru';
 import en from 'vuetify/src/locale/en';
 import uk from 'vuetify/src/locale/uk';
 import { VuetifyLocale } from 'vuetify/types/services/lang';
+import Http from '@web/services/api/Http';
 
 const locales: Record<string, VuetifyLocale> = {
   ru: { ...ru, ...ru_RU },
