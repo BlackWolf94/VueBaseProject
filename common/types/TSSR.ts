@@ -12,6 +12,7 @@ export type TSSRMeta = {
 export type TSSRContext = {
   meta?: TSSRMeta;
   title: string;
+  content: any;
   state: {
     initialState?: Store<any>;
     app?: {
