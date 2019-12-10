@@ -48,7 +48,7 @@ const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
     limit: 4096,
     outputPath: `/${prefix}/`,
     fallback: createLoader('file-loader', {
-      name: AppHelper.isProd() ? `/${prefix}/[name].[hash:8].[ext]` : `${prefix}/[name].[ext]`
+      name: AppHelper.isProd() ? `${prefix}/[name].[hash:8].[ext]` : `${prefix}/[name].[ext]`
     })
   }));
 
@@ -94,7 +94,7 @@ export const loadRules = (isServer: boolean = false): RuleSetRule[] =>  {
     createMediaRule(/\.(png|jpe?g|gif|webp)(\?.*)?$/, 'img'),
     createMediaRule(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, 'media'),
     createRule(/\.(svg)(\?.*)?$/).use(createLoader('file-loader', {
-        name: AppHelper.isProd() ? '/img/[name].[hash:8].[ext]' : 'img/[name].[ext]'
+        name: AppHelper.isProd() ? 'img/[name].[hash:8].[ext]' : 'img/[name].[ext]'
       })
     ),
     createMediaRule(/\.(woff2?|eot|ttf|otf)(\?.*)?$/i, 'fonts'),

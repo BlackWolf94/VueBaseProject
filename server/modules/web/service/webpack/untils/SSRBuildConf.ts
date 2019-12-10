@@ -7,7 +7,7 @@ import AppHelper from '../../../../../../common/helper/AppHelper';
 
 
 
-const outDir = 'dist';
+const outDir = 'dist/';
 const srcDir = 'web';
 
 export class SSRBuildConf {

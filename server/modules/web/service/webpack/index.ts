@@ -11,9 +11,9 @@ const WpBase = (VUE_ENV: 'client' | 'server' ): Configuration => ({
     mode: AppHelper.isProd() ? 'production' : 'development',
     context: AppHelper.pathResolve(),
     output: {
-        path: SSRBuildConf.outDir,
-        publicPath: SSRBuildConf.publicDir,
-        filename: 'js/[name].[chunkhash].js',
+        path: SSRBuildConf.outDir + '/',
+        publicPath: SSRBuildConf.publicDir + '/',
+        filename: AppHelper.isProd() ? 'js/[name].[chunkhash].js' : 'js/[name].js',
     },
     resolve: {
         alias: {
@@ -56,7 +56,7 @@ const WpBase = (VUE_ENV: 'client' | 'server' ): Configuration => ({
 // ****************************************
 // Server-Side Webpack Configuration
 // ****************************************
-export const WpServe = {
+export const WpServe: Configuration  = {
     ...WpBase('server'),
     target: 'node',
     devtool: '#source-map',
@@ -70,17 +70,17 @@ export const WpServe = {
     //     // modulesFromFile: true,
     //     // do not externalize CSS files in case we need to import it from a dep
     // }),
-} as Configuration;
+};
 
 
 // ****************************************
 // Client-Side Webpack Configuration
 // ****************************************
-export const WpClient = {
+export const WpClient: Configuration = {
     ...WpBase('client'),
     entry: {
         app: SSRBuildConf.entry('client'),
     },
     target: 'web',
     optimization,
-} as Configuration;
+};
