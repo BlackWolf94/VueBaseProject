@@ -3,12 +3,11 @@
  * @email zidadindimon@gmail.com
  * @created_at 05.12.19
  */
-import AppHelper from '../../../../../../common/helper/AppHelper';
-
+import AppHelper from '../../../../../../../common/helper/AppHelper';
 
 
 const outDir = 'dist/';
-const srcDir = 'web';
+const srcDir = 'src/web';
 
 export class SSRBuildConf {
 

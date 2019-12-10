@@ -5,7 +5,7 @@ import compression from 'compression';
 import SSRService from './modules/web/service/SSRService';
 import {Logger} from '@nestjs/common';
 import internalIp from 'internal-ip';
-import AppHelper from '../common/helper/AppHelper';
+import AppHelper from '../../common/helper/AppHelper';
 declare const module: any;
 const serve = (path: string, cache: any) => express.static(AppHelper.pathResolve(path), {
   maxAge: cache && AppHelper.isProd() ? 1000 * 60 * 60 * 24 * 30 : 0,

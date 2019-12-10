@@ -6,7 +6,7 @@
 
 import { ApiController } from '../ApiController';
 import { Get, Param } from '@nestjs/common';
-import LocaleHelper from '../../../../common/helper/LocaleHelper';
+import LocaleHelper from '../../../helper/LocaleHelper';
 
 @ApiController('locale')
 export default class LocaleController {

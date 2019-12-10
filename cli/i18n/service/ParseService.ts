@@ -31,7 +31,7 @@ export class ParseService {
       return;
     }
 
-    const files = await FileHelper.scanDir(this.entry);
+    const files = await FileHelper.scanDir(`src/${this.entry}`);
     this.progress.start(files.length, 0);
 
     for (const index in files) {
@@ -59,14 +59,14 @@ export class ParseService {
     const localeFile = resolve(process.cwd(), this.conf.outputDir, this.entry, `${lang}.json`);
     const locale = JSON.parse(await FileHelper.readFile(localeFile) || '{}');
 
+    const keys = Object.keys(this.locale[lang]);
     /**
      * remove old key that not exit in project file
      */
-    Object.keys(locale).forEach(key => {
-      if (this.locale[lang][key]) {
-        return;
+    Object.keys(locale).forEach( key => {
+      if (!keys.includes(key)) {
+        delete locale[key];
       }
-      delete locale[key];
     });
 
     await FileHelper.writeFile(localeFile, JSON.stringify({ ...this.locale[lang], ...locale}, null, '\t'));

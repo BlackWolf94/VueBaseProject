@@ -3,8 +3,8 @@ import {loadRules} from './_rules';
 import {TsconfigPathsPlugin} from 'tsconfig-paths-webpack-plugin';
 import { SSRBuildConf } from './untils/SSRBuildConf';
 import { loadPlugins } from './_plugins';
-import AppHelper from '../../../../../common/helper/AppHelper';
 import { optimization } from './_optimization';
+import AppHelper from '../../../../../../common/helper/AppHelper';
 
 const WpBase = (VUE_ENV: 'client' | 'server' ): Configuration => ({
     devtool: AppHelper.isProd() ? false : '#inline-source-map',

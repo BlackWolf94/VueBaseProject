@@ -1,8 +1,5 @@
 import { INestApplication, Injectable, Logger } from '@nestjs/common';
 import { BundleRenderer, BundleRendererOptions, createBundleRenderer } from 'vue-server-renderer';
-import { FileHelper } from '../../../../common/helper/FileHelper';
-import AppHelper from '../../../../common/helper/AppHelper';
-import { TSSRContext } from '../../../../common/types/TSSR';
 import { SSRBuildConf } from './webpack/untils/SSRBuildConf';
 import chokidar from 'chokidar';
 import { WpClient, WpServe } from './webpack';
@@ -10,6 +7,9 @@ import webpack, { HotModuleReplacementPlugin, Stats } from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
 import MFS from 'memory-fs';
+import AppHelper from '../../../../../common/helper/AppHelper';
+import { TSSRContext } from '../../../../../common/types/TSSR';
+import { FileHelper } from '../../../../../common/helper/FileHelper';
 
 
 let renderDone: (value?: (PromiseLike<any> | any)) => void = null;

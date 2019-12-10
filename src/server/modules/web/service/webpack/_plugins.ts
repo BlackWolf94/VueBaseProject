@@ -19,8 +19,8 @@ import HashedModuleIdsPlugin from 'webpack-hashed-module-id-plugin';
 // @ts-ignore
 import ProgressPlugin from 'progress-webpack-plugin';
 import { SSRBuildConf } from './untils/SSRBuildConf';
-import AppHelper from '../../../../../common/helper/AppHelper';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+import AppHelper from '../../../../../../common/helper/AppHelper';
 
 export const loadPlugins = (VUE_ENV: string) => {
   const plugins: any[] = [];

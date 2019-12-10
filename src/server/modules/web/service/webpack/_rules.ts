@@ -4,8 +4,8 @@ import { VueLoaderOptions } from 'vue-loader';
 import { LoaderOptions } from 'ts-loader/dist/interfaces';
 import { createLoader, createRule } from './untils/Builder';
 import { SSRBuildConf } from './untils/SSRBuildConf';
-import AppHelper from '../../../../../common/helper/AppHelper';
 import { RuleSetRule } from 'webpack';
+import AppHelper from '../../../../../../common/helper/AppHelper';
 
 const defaultStyleLoader = (isServer: boolean = false, modules?: any) => {
   const loaders = [

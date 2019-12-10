@@ -1,7 +1,7 @@
-import AppHelper from '../../../../../common/helper/AppHelper';
 import * as webpack from 'webpack';
 import Optimization = webpack.Options.Optimization;
 import TerserPlugin from 'terser-webpack-plugin';
+import AppHelper from '../../../../../../common/helper/AppHelper';
 
 /**
  * @author Dmytro Zataidukh

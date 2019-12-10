@@ -3,9 +3,8 @@
  * @email zidadindimon@gmail.com
  * @created_at 02.12.19
  */
-
-import { FileHelper } from './FileHelper';
-import AppHelper from './AppHelper';
+import AppHelper from '../../../common/helper/AppHelper';
+import { FileHelper } from '../../../common/helper/FileHelper';
 
 
 export default class LocaleHelper {

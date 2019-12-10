@@ -23,10 +23,10 @@
     ],
     "paths": {
       "@web/*": [
-        "web/*"
+        "src/web/*"
       ],
       "@server/*": [
-        "server/*"
+        "src/server/*"
       ],
       "@common/*": [
         "common/*"
@@ -48,13 +48,12 @@
     "runtime",
     "tests",
     "**/*spec.ts",
-    "**/*test.ts",
-    "build"
+    "**/*test.ts"
   ],
   "include": [
-    "web/**/*.ts",
-    "web/**/*.tsx",
-    "web/**/*.vue"
+    "src/web/**/*.ts",
+    "src/web/**/*.tsx",
+    "src/web/**/*.vue"
 //    "tests/**/*.ts",
 //    "tests/**/*.tsx"
   ]
