@@ -45,7 +45,7 @@ const stylusLoader = (isServer: boolean = false, modules?: any) => [...defaultSt
 
 const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
   .use(createLoader('file-loader', {
-    limit: 4096,
+    limit: 10 * 1024,
     outputPath: `/${prefix}/`,
     fallback: createLoader('file-loader', {
       name: AppHelper.isProd() ? `${prefix}/[name].[hash:8].[ext]` : `${prefix}/[name].[ext]`
@@ -92,7 +92,9 @@ export const loadRules = (isServer: boolean = false): RuleSetRule[] =>  {
         })
       ]),
     createMediaRule(/\.(png|jpe?g|gif|webp)(\?.*)?$/, 'img'),
+
     createMediaRule(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, 'media'),
+
     createRule(/\.(svg)(\?.*)?$/).use(createLoader('file-loader', {
         name: AppHelper.isProd() ? 'img/[name].[hash:8].[ext]' : 'img/[name].[ext]'
       })

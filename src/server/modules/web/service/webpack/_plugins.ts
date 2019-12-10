@@ -22,14 +22,41 @@ import { SSRBuildConf } from './untils/SSRBuildConf';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import AppHelper from '../../../../../../common/helper/AppHelper';
 
+// @ts-ignore
+import ImageminPlugin from 'imagemin-webpack';
+
 export const loadPlugins = (VUE_ENV: string) => {
   const plugins: any[] = [];
 
   if (AppHelper.isProd()) {
-    plugins.push(new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
-      chunkFilename: 'css/[id].[hash].css',
-    }));
+    plugins.push(...[
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[hash].css',
+        chunkFilename: 'css/[id].[hash].css'
+      }),
+      new ImageminPlugin({
+        filter: (source: any) => source.byteLength > 8192,
+        bail: false, // Ignore errors on corrupted images
+        cache: true,
+        imageminOptions: {
+          plugins: [
+            ['gifsicle', { interlaced: true }],
+            ['jpegtran', { progressive: true }],
+            ['optipng', { optimizationLevel: 5 }],
+            [
+              'svgo',
+              {
+                plugins: [
+                  {
+                    removeViewBox: false
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      })
+    ]);
   }
 
   plugins.push(...[
@@ -42,14 +69,14 @@ export const loadPlugins = (VUE_ENV: string) => {
       tslint: true,
       ignoreLintWarnings: AppHelper.isDev(),
       formatter: 'codeframe',
-      checkSyntacticErrors: false,
+      checkSyntacticErrors: false
     }),
-    new VuetifyLoaderPlugin(),
+    new VuetifyLoaderPlugin()
   ]);
 
   if (VUE_ENV === 'client') {
     plugins.push(
-      new EnvironmentPlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false })),
+      new EnvironmentPlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false }))
     );
   }
 
@@ -57,7 +84,7 @@ export const loadPlugins = (VUE_ENV: string) => {
     plugins.push(...[
       new OptimizeCssnanoPlugin({ sourceMap: false }),
       new HashedModuleIdsPlugin({ hashDigest: 'hex' }),
-      new NamedChunksPlugin(),
+      new NamedChunksPlugin()
     ]);
   }
 
