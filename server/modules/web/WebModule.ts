@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { WebController } from './controllers/WebController';
 import SSRService from './service/SSRService';
-import SSRContext from './service/SSRContext';
+import SSRContextService from './service/SSRContextService';
 
 @Module({
     imports: [],
     controllers: [WebController],
-    providers: [SSRService, SSRContext],
+    providers: [SSRService, SSRContextService],
 })
 export default class WebModule {}

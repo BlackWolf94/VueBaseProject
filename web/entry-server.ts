@@ -1,9 +1,9 @@
-import {createApp} from '@web/createApp';
-import {VueRouter} from 'vue-router/types/router';
-import { TSSRContext } from '@server/modules/web/types/TSSR';
+import { createApp } from '@web/createApp';
+import { VueRouter } from 'vue-router/types/router';
+import { TSSRContext } from '@common/types/TSSR';
 
 const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
-    router.onReady(resolve, reject);
+  router.onReady(resolve, reject);
 });
 
 
@@ -13,33 +13,31 @@ const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
 // Since data fetching is async, this function is expected to
 // return a Promise that resolves to the app instance.
 export default (context: TSSRContext) => new Promise(async (resolve, reject) => {
-    const {app, router, store} = createApp();
+  const {appConf, url} = context;
+  const { app, router, store } = createApp(appConf);
 
-    // app.$addLocale(context.currentLang, context.locale);
-    // app.$currentLang = context.currentLang;
-    const {url} = context;
-    const {fullPath} = router.resolve(url).route;
-    if (fullPath !== url) {
-        return reject({url: fullPath});
+  const { fullPath } = router.resolve(url).route;
+  if (fullPath !== url) {
+    return reject({ url: fullPath });
+  }
+
+  // set router's location
+  router.push(url);
+
+  try {
+    await routerOnReady(router);
+    const matchedComponents = router.getMatchedComponents();
+    if (!matchedComponents.length) {
+      return reject({ code: 404 });
     }
 
-    // set router's location
-    router.push(url);
+    context.state = store.state;
+    resolve(app);
 
-    try {
-        await routerOnReady(router);
-        const matchedComponents = router.getMatchedComponents();
-        if (!matchedComponents.length) {
-            return reject({code: 404});
-        }
-
-        context.state = store.state;
-        resolve(app);
-
-    } catch (e) {
-        console.error(e);
-        reject(e);
-    }
+  } catch (e) {
+    console.error(e);
+    reject(e);
+  }
 
 });
 

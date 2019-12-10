@@ -3,14 +3,15 @@ import { dirname, resolve } from 'path';
 import rimraf from 'rimraf';
 
 export class FileHelper {
-    static readFile(fileName: string, options: string = 'utf8'): Promise<string> {
+
+    static readFile(fileName: string, options: string = 'utf8', fileSystem: any = fs): Promise<string> {
         return new Promise<string>((resolve) => {
-            if (!fs.existsSync(fileName)) {
+            if (!fileSystem.existsSync(fileName)) {
                 resolve(null);
                 return;
             }
 
-            fs.readFile(fileName, options, (error, contents) => {
+            fileSystem.readFile(fileName, options, (error: any, contents: string) => {
                 if (error) {
                     resolve(null);
                     return;
@@ -20,14 +21,14 @@ export class FileHelper {
         });
     }
 
-    static createDir(dirName: string): Promise<boolean> {
+    static createDir(dirName: string, fileSystem: any = fs): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
-            if (fs.existsSync(dirName)) {
+            if (fileSystem.existsSync(dirName)) {
                 resolve(true);
                 return;
             }
 
-            fs.mkdir(dirName, { recursive: true }, (err) => {
+            fileSystem.mkdir(dirName, { recursive: true }, (err: any) => {
                 if (err) {
                     resolve(false);
                     return;
