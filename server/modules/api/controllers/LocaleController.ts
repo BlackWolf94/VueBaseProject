@@ -6,16 +6,14 @@
 
 import { ApiController } from '../ApiController';
 import { Get, Param } from '@nestjs/common';
-import { FileHelper } from '../../../helper/FileHelper';
-import AppHelper from '../../../helper/AppHelper';
+import LocaleHelper from '../../../../common/helper/LocaleHelper';
 
 @ApiController('locale')
 export default class LocaleController {
 
   @Get(':lang')
   async index(@Param('lang') lang: string) {
-    const locale = await FileHelper.readFile(AppHelper.pathResolve(`locale/web/${lang}.json`)) || '{}';
-    return JSON.parse(locale);
+    return LocaleHelper.getLocale(lang);
   }
 
 }

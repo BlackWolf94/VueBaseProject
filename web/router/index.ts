@@ -14,13 +14,13 @@ export const createRouter = () => {
   const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
+    // routes: publicRoutes,
     routes: [
       ...publicRoutes
     ].map(mapRoute),
   });
 
   router.beforeEach(beforeEach.bind(router));
-
   return router;
 };
 

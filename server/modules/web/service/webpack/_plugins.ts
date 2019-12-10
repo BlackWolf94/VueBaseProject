@@ -1,6 +1,10 @@
+/**
+ * @author Dmytro Zataidukh
+ * @email zidadindimon@gmail.com
+ * @created_at 05.12.19
+ */
 import { VueLoaderPlugin } from 'vue-loader';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import { isProd, makeConf, tsconfig } from '../untils/env';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 // @ts-ignore
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
@@ -14,41 +18,46 @@ import OptimizeCssnanoPlugin from '@intervolga/optimize-cssnano-plugin';
 import HashedModuleIdsPlugin from 'webpack-hashed-module-id-plugin';
 // @ts-ignore
 import ProgressPlugin from 'progress-webpack-plugin';
+import { SSRBuildConf } from './untils/SSRBuildConf';
+import AppHelper from '../../../../../common/helper/AppHelper';
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
-export const loadPlugins = (VUE_ENV: string, stringify: boolean = true) => {
+export const loadPlugins = (VUE_ENV: string) => {
   const plugins: any[] = [];
 
-  if (isProd) {
+  if (AppHelper.isProd()) {
     plugins.push(new MiniCssExtractPlugin({
-        filename: '[name].[hash].css',
-        chunkFilename: '[id].[hash].css',
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
     }));
   }
 
   plugins.push(...[
+    new HardSourceWebpackPlugin(),
     new VueLoaderPlugin(),
     new FriendlyErrorsPlugin(),
     new ForkTsCheckerWebpackPlugin({
-        tsconfig,
-        vue: true,
-        tslint: true,
-        formatter: 'codeframe',
-        checkSyntacticErrors: false,
+      tsconfig: SSRBuildConf.tsConfig,
+      vue: true,
+      tslint: true,
+      ignoreLintWarnings: AppHelper.isDev(),
+      formatter: 'codeframe',
+      checkSyntacticErrors: false,
     }),
     new VuetifyLoaderPlugin(),
   ]);
 
   if (VUE_ENV === 'client') {
     plugins.push(
-        new EnvironmentPlugin(makeConf({ VUE_ENV, DEBUG: false }, false)),
+      new EnvironmentPlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false })),
     );
   }
 
-  if (isProd) {
+  if (AppHelper.isProd()) {
     plugins.push(...[
-        new OptimizeCssnanoPlugin({ sourceMap: false }),
-        new HashedModuleIdsPlugin({ hashDigest: 'hex' }),
-        new NamedChunksPlugin(),
+      new OptimizeCssnanoPlugin({ sourceMap: false }),
+      new HashedModuleIdsPlugin({ hashDigest: 'hex' }),
+      new NamedChunksPlugin(),
     ]);
   }
 
