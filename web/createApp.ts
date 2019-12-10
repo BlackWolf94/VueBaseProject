@@ -10,7 +10,7 @@ import { TSSRAppConf} from '@common/types/TSSR';
 Vue.use(plugins);
 
 export function createApp(conf?: TSSRAppConf, state?: any) {
-  const router = createRouter(conf ? conf.router.baseUrl : '/' );
+  const router = createRouter();
   const store = createStore();
 
   if (state) {
