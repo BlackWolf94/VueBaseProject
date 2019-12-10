@@ -14,17 +14,21 @@ export default class SSRContextService {
 
   async context(url: string, lang: string = 'en'): Promise<TSSRContext> {
     const appConf = await this.conf(lang);
+    const meta = await this.meta(lang);
     return {
       url,
       title: await this.title(lang),
-      meta: await this.meta(lang),
+      meta: Object.keys(meta).map( (key) => `<meta name="${key}" content="${meta[key]}">`).join('\n'),
       appConf,
       appContext: JSON.stringify(appConf)
     };
   }
 
   private async meta(lang: string): Promise<TSSRMeta> {
-    return {};
+    return {
+      author: "Dmytro Zataidukh",
+      lang
+    };
   }
 
   private async title(lang: string): Promise<string> {

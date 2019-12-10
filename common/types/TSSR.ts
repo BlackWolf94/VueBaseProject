@@ -21,7 +21,7 @@ export type TSSRAppConf = {
 
 export type TSSRContext = {
   url: string;
-  meta?: TSSRMeta;
+  meta?: string;
   title: string;
   appConf: TSSRAppConf;
   appContext: string;
