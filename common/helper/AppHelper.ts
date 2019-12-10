@@ -40,22 +40,6 @@ export default class AppHelper {
         return this.getEnv('PORT') || 3000;
     }
 
-    static ssrDevPort() {
-        return this.getEnv('SSR_DEV_PORT') || 3030;
-    }
-
-    static ssrTemplatePath() {
-        return this.pathResolve('./public/index.ssr.html');
-    }
-
-    static ssrBundle() {
-        return this.pathResolve('./dist/vue-ssr-server-bundle.json');
-    }
-
-    static ssrManifest() {
-        return this.pathResolve('./dist/vue-ssr-client-manifest.json');
-    }
-
     static ssrOptions() {
         return {
             runInNewContext: false,
