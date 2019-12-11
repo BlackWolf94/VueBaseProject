@@ -6,6 +6,11 @@ import { createApp } from '@web/createApp';
 Vue.use(plugins);
 
 Vue.config.productionTip = false;
-const { app } = createApp( );
 
-app.$mount('#app');
+async function bootstrap() {
+  const { app } = await createApp( );
+
+  app.$mount('#app');
+}
+
+bootstrap();
