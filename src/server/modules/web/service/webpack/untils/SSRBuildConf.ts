@@ -29,13 +29,13 @@ export class SSRBuildConf {
   }
 
   static stringify(conf: {[key: string]: any} = {}): {[key: string]: string} {
-    conf = this.buildOptions(conf);
+    const env: any = {};
 
-    Object.keys(conf).forEach((key: string) => {
-      conf[key] = JSON.stringify(conf[key]);
+    Object.keys(this.buildOptions(conf)).forEach((key: string) => {
+      env[`process.env.${key}`] = JSON.stringify(conf[key]);
     });
     // conf.DEBUG = 'runtime_process_env.DEBUG';
-    return conf;
+    return env;
   }
 
   static entry(entry: 'client'| 'server') {

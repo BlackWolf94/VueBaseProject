@@ -30,4 +30,5 @@ async function  bootstrap() {
   router.onReady(onReady);
 }
 
+bootstrap();
 

@@ -8,7 +8,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 // @ts-ignore
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin';
-import { EnvironmentPlugin, NamedChunksPlugin } from 'webpack';
+import { DefinePlugin, EnvironmentPlugin, NamedChunksPlugin } from 'webpack';
 import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
 import VueSSRServerPlugin from 'vue-server-renderer/server-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -75,8 +75,9 @@ export const loadPlugins = (VUE_ENV: string) => {
   ]);
 
   if (VUE_ENV === 'client') {
+    console.error(VUE_ENV);
     plugins.push(
-      new EnvironmentPlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false }))
+      new DefinePlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false }))
     );
   }
 

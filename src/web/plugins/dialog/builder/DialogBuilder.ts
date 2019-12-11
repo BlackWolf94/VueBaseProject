@@ -78,6 +78,7 @@ export default class DialogBuilder {
                 }
 
                 dialog.$destroy();
+                document.removeChild(dialog.$el);
                 dialog = null;
                 reject();
             };
@@ -91,11 +92,13 @@ export default class DialogBuilder {
             if (this.ok) {
                 this.ok.action = () => {
                     dialog.$destroy();
+                    document.removeChild(dialog.$el);
                     resolve(dialog.value);
                 };
             }
 
             dialog.$mount();
+            document.appendChild(dialog.$el);
         });
     }
 

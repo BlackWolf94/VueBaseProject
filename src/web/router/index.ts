@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import { publicRoutes } from '@web/router/public';
-import { beforeEach } from '@web/router/hooks';
+import { beforeEach, afterEach } from '@web/router/hooks';
 
 Vue.use(VueRouter);
 
@@ -21,6 +21,7 @@ export const createRouter = () => {
   });
 
   router.beforeEach(beforeEach.bind(router));
+  router.afterEach(afterEach.bind(router));
   return router;
 };
 
