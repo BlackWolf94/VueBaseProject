@@ -72,6 +72,7 @@ export default class DialogBuilder {
                 vuetify: this.vuetify,
             });
 
+
             this.close = () => {
                 if (!dialog) {
                     return;

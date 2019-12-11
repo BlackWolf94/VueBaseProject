@@ -6,7 +6,7 @@ import { Route } from 'vue-router';
 import Vue from 'vue';
 import { VueRouter } from 'vue-router/types/router';
 import Http from '@web/services/api/Http';
-import { defaultLang, langs } from '@web/config/config';
+import { defaultLang, isClientRender, langs } from '@web/config/config';
 
 let dialog: any = null;
 
@@ -14,11 +14,13 @@ export async function beforeEach(to: Route, from: Route, next: any): Promise<any
   const [root, lang, ...path] = to.path.split('/');
   // @ts-ignore
   const app: Vue = (this as VueRouter).app;
-  console.error(process.env.VUE_ENV);
+  if (isClientRender) {
+    app.$dialog().show();
+
+  }
   // dialog = app.$dialog();
 
   // dialog.show()
-  console.error('beforeEach');
 
   if (app.$currentLang === lang) {
     next();
@@ -37,8 +39,8 @@ export async function beforeEach(to: Route, from: Route, next: any): Promise<any
 
 
 export async function afterEach(to: Route, from: Route) {
-  // console.error('afterEach')
-  // if(dialog)
-  //   console.error(dialog);
+  if (isClientRender) {
+  }
+
 
 }
