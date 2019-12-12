@@ -7,13 +7,15 @@ import { optimization } from './_optimization';
 import AppHelper from '../../../../../../common/helper/AppHelper';
 
 const WpBase = (VUE_ENV: 'client' | 'server' ): Configuration => ({
-    devtool: AppHelper.isProd() ? false : '#inline-source-map',
+    devtool: AppHelper.isProd() ? 'source-map' : '#inline-source-map',
     mode: AppHelper.isProd() ? 'production' : 'development',
     context: AppHelper.pathResolve(),
+    cache: !AppHelper.isProd(),
     output: {
         path: SSRBuildConf.outDir + '/',
         publicPath: SSRBuildConf.publicDir + '/',
         filename: AppHelper.isProd() ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+        sourceMapFilename: AppHelper.isProd() ? 'js/[name].[chunkhash].js.map' : 'js/[name].js.map',
     },
     resolve: {
         alias: {

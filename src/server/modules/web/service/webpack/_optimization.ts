@@ -8,15 +8,14 @@ import AppHelper from '../../../../../../common/helper/AppHelper';
  * @created_at 12/8/19
  */
 
-const devOptimize = {
-  minimize: false,
-  splitChunks: false,
-  removeAvailableModules: false,
-  removeEmptyChunks: false,
-} as Optimization;
-
-export const optimization =  AppHelper.isDev() ? devOptimize : {
-  minimize: true,
+export const optimization: Optimization =   {
+  minimize: AppHelper.isProd(),
+  removeAvailableModules: true,
+  removeEmptyChunks: true,
+  mergeDuplicateChunks: true,
+  flagIncludedChunks: true,
+  runtimeChunk: true,
+  namedChunks: AppHelper.isDev(),
   splitChunks: {
     cacheGroups: {
       vendors: {
@@ -34,7 +33,7 @@ export const optimization =  AppHelper.isDev() ? devOptimize : {
       },
     },
   },
-  minimizer: [
+  minimizer:  AppHelper.isProd() ? [
     new TerserPlugin(
       {
         terserOptions: {
@@ -73,5 +72,5 @@ export const optimization =  AppHelper.isDev() ? devOptimize : {
         extractComments: false,
       },
     ),
-  ]
-} as Optimization;
+  ] : [],
+};

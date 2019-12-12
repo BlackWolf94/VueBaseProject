@@ -7,17 +7,18 @@ import {Logger} from '@nestjs/common';
 import internalIp from 'internal-ip';
 import AppHelper from '../../common/helper/AppHelper';
 import { SSRBuildConf } from './modules/web/service/webpack/untils/SSRBuildConf';
+import { NestExpressApplication } from '@nestjs/platform-express';
 declare const module: any;
 const serve = (path: string, cache: any) => express.static(path, {
   maxAge: cache && AppHelper.isProd() ? 1000 * 60 * 60 * 24 * 30 : 0,
 });
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   await app.get(SSRService).build(app);
 
   app.use(compression({threshold: 0}));
-  app.use(SSRBuildConf.publicDir, serve(SSRBuildConf.outDir, true));
+  app.use('/dist', serve(SSRBuildConf.outDir, true));
   app.use('/public', serve(AppHelper.pathResolve('public'), true));
 
   await app.listen(AppHelper.port());

@@ -44,7 +44,7 @@ export default class SSRService {
     });
   }
 
-  getAssets(fileName: string) {
+  getAssets(fileName: string): Promise<any> {
     return FileHelper.readFile(SSRBuildConf.assetPath(fileName), 'utf-8', this.dfs);
   }
 

@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { VueLoaderOptions } from 'vue-loader';
 import { LoaderOptions } from 'ts-loader/dist/interfaces';
@@ -39,17 +38,15 @@ const sassLoader = (isServer: boolean = false, modules?: any) => [...defaultStyl
 })];
 
 const stylusLoader = (isServer: boolean = false, modules?: any) => [...defaultStyleLoader(isServer, modules), createLoader('stylus-loader', {
-  sourceMap: false,
+  sourceMap: true,
   preferPathResolver: 'webpack'
 })];
 
 const createMediaRule = (test: RegExp, prefix: string) => createRule(test, null)
   .use(createLoader('file-loader', {
     limit: 10 * 1024,
-    outputPath: `/${prefix}/`,
-    fallback: createLoader('file-loader', {
-      name: AppHelper.isProd() ? `${prefix}/[name].[hash:8].[ext]` : `${prefix}/[name].[ext]`
-    })
+    outputPath: `${prefix}`,
+    name: AppHelper.isProd() ? `[name].[hash:8].[ext]` : `[name].[ext]`
   }));
 
 const styleOptions = {
@@ -65,7 +62,7 @@ export const loadRules = (isServer: boolean = false): RuleSetRule[] =>  {
   const rules = [
     createRule(/\.vue$/)
       .use([
-        cacheLoader('vue'),
+        // cacheLoader('vue'),
         createLoader<VueLoaderOptions>('vue-loader', {
           // include: [srcPath],
           cacheDirectory: AppHelper.pathResolve('/node_modules/.cache/vue-loader'),
@@ -121,7 +118,7 @@ export const loadRules = (isServer: boolean = false): RuleSetRule[] =>  {
 
     createRule(/.js$/)
       .use([
-        cacheLoader('babel'),
+        // cacheLoader('babel'),
         createLoader('babel-loader', {
           query: {
             presets: ['latest', 'stage-0', 'vue']
