@@ -1,6 +1,9 @@
 <template lang="pug">
     v-container
-        p {{$t('Archive')}}
+        v-layout(row).pa-5
+            v-flex {{$t('Archive')}}
+            v-flex
+                v-btn(@click="dialogShow") dialog
         archive-list
 
 </template>
@@ -14,5 +17,11 @@
         components: {ArchiveList}
     })
     export default class Archive extends Vue {
+
+      dialogShow(){
+        this.$dialog('Test')
+          .buttonCancel('Cancel')
+          .show()
+      }
     }
 </script>

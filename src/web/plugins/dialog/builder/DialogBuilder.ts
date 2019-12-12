@@ -2,10 +2,11 @@
  * @author Dmytro Zataidukh
  * @created_at 11/3/19
  */
-import {IDialogButtons, IDialogProperty} from '@web/plugins/dialog/builder/IDialogBuilder';
 import {TObject} from '@web/types/IGeneral';
 import Vue, {Component} from 'vue';
-import Dialog from '@web/plugins/dialog/Dialog';
+import Dialog from '@web/plugins/dialog/components/Dialog.vue';
+import { IDialogButtons, IDialogProperty } from '@web/plugins/dialog/builder/IDialogBuilder';
+import { Store } from 'vuex';
 
 export default class DialogBuilder {
 
@@ -27,7 +28,7 @@ export default class DialogBuilder {
         value: null,
     };
 
-    constructor(private store: any, private vuetify: any) {
+    constructor(private store: Store<any>, private vuetify: any, private name: string) {
     }
 
     model(value: any): this {
@@ -61,26 +62,28 @@ export default class DialogBuilder {
         return this;
     }
 
-
     show<T = any>(): Promise<T> {
         return new Promise<T>((resolve, reject) => {
 
             let dialog = new (Vue.extend(Dialog))({
+                name: `${this.name}Dialog`,
                 computed: this.computed,
                 data: () => this.data,
                 store: this.store,
                 vuetify: this.vuetify,
             });
 
+            const removeFromDOM = () => {
+                document.body.removeChild(dialog.$el);
+                dialog.$destroy();
+                dialog = null;
+            };
 
             this.close = () => {
                 if (!dialog) {
                     return;
                 }
-
-                dialog.$destroy();
-                document.removeChild(dialog.$el);
-                dialog = null;
+                removeFromDOM();
                 reject();
             };
 
@@ -92,14 +95,14 @@ export default class DialogBuilder {
 
             if (this.ok) {
                 this.ok.action = () => {
-                    dialog.$destroy();
-                    document.removeChild(dialog.$el);
-                    resolve(dialog.value);
+                    const {value} = dialog;
+                    removeFromDOM();
+                    resolve(value);
                 };
             }
 
             dialog.$mount();
-            document.appendChild(dialog.$el);
+            document.body.appendChild(dialog.$el);
         });
     }
 

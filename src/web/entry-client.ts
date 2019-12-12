@@ -6,6 +6,7 @@ const appConf = (window as any).__INITIAL_APP_CONF__ || {};
 
 async function  bootstrap() {
   const { app, router } = await createApp(appConf, state);
+  (self as any).$vm = app;
 
   (window as any).runtime_process_env = {
     DEBUG: true

@@ -15,7 +15,7 @@ export async function beforeEach(to: Route, from: Route, next: any): Promise<any
   // @ts-ignore
   const app: Vue = (this as VueRouter).app;
   if (isClientRender) {
-    app.$dialog().show();
+    // app.$dialog().show();
 
   }
   // dialog = app.$dialog();

@@ -10,7 +10,7 @@ type TDialogPluginOptions = {
 export default {
     install: (Vue: VueConstructor, options: TDialogPluginOptions) => {
 
-        Vue.prototype.$dialog = () =>  new DialogBuilder(options.store, options.vuetify);
+        Vue.prototype.$dialog = (name: string) =>  new DialogBuilder(options.store, options.vuetify, name);
 
         // Vue.prototype.$dialogAlert = function () {
         //     return (new DialogBuilder(options.store, options.vuetify))
