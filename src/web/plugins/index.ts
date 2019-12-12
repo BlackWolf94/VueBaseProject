@@ -1,11 +1,11 @@
 import {PluginObject} from 'vue';
-import Dialog from '@web/plugins/dialog/Dialog';
 import { Store } from 'vuex';
+import VuetifyPlugins from '@web/plugins/vuetify/VuetifyPlugins';
 
 export default function loadPlugins(store: Store<any>, vuetify: any): PluginObject<any> {
     return {
         install(Vue) {
-            Vue.use(Dialog, {store, vuetify});
+            Vue.use(VuetifyPlugins, {store, vuetify});
         },
     };
 }

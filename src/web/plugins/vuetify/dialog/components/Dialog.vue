@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {IDialogButtons, IDialogTitle} from '@web/plugins/dialog/builder/IDialogBuilder';
+import { IDialogButtons, IDialogTitle } from '@web/plugins/vuetify/dialog/builder/IDialogBuilder';
 
 @Component({})
 export default class Dialog extends Vue {

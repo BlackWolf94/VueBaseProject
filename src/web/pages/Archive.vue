@@ -19,9 +19,7 @@
     export default class Archive extends Vue {
 
       dialogShow(){
-        this.$dialog('Test')
-          .buttonCancel('Cancel')
-          .show()
+        this.$appProgress.show()
       }
     }
 </script>

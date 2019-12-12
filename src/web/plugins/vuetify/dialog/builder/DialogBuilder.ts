@@ -4,9 +4,9 @@
  */
 import {TObject} from '@web/types/IGeneral';
 import Vue, {Component} from 'vue';
-import Dialog from '@web/plugins/dialog/components/Dialog.vue';
-import { IDialogButtons, IDialogProperty } from '@web/plugins/dialog/builder/IDialogBuilder';
+import Dialog from '@web/plugins/vuetify/dialog/components/Dialog.vue';
 import { Store } from 'vuex';
+import { IDialogButtons, IDialogProperty } from '@web/plugins/vuetify/dialog/builder/IDialogBuilder';
 
 export default class DialogBuilder {
 
