@@ -30,11 +30,11 @@ export class SSRBuildConf {
 
   static stringify(conf: {[key: string]: any} = {}): {[key: string]: string} {
     const env: any = {};
+    conf = this.buildOptions(conf);
 
-    Object.keys(this.buildOptions(conf)).forEach((key: string) => {
+    Object.keys(conf).forEach((key: string) => {
       env[`process.env.${key}`] = JSON.stringify(conf[key]);
     });
-    // conf.DEBUG = 'runtime_process_env.DEBUG';
     return env;
   }
 

@@ -12,8 +12,8 @@ export default class ProgressBarBuilder {
   private progress: ProgressBar;
 
   constructor(private store: Store<any>, private vuetify: any, private name: string) {
-    this.progress = new Vue(ProgressBar);
-    this.progress.$mount();
+    // this.progress = new (Vue.extend(ProgressBar))();
+    // this.progress.$mount();
 
   }
 

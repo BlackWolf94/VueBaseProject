@@ -7,7 +7,7 @@ import { optimization } from './_optimization';
 import AppHelper from '../../../../../../common/helper/AppHelper';
 
 const WpBase = (VUE_ENV: 'client' | 'server' ): Configuration => ({
-    devtool: AppHelper.isProd() ? 'source-map' : '#inline-source-map',
+    devtool: AppHelper.isProd() ? false : '#inline-source-map',
     mode: AppHelper.isProd() ? 'production' : 'development',
     context: AppHelper.pathResolve(),
     cache: !AppHelper.isProd(),

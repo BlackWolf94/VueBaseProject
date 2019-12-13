@@ -36,8 +36,8 @@ export default class App extends Vue {
       { divider: true },
       { icon: 'archive', to: {name: 'archive'}, text: this.$t('Archive') },
       { divider: true },
-    ]
-  };
+    ];
+  }
 
   created() {
     const componentMeta = new ComponentMetaParser(this);

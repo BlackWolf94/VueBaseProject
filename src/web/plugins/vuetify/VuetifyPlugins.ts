@@ -12,6 +12,7 @@ type TDialogPluginOptions = {
 const pluginClient: PluginObject<TDialogPluginOptions> = {
     install: (Vue: VueConstructor, {store, vuetify}: TDialogPluginOptions) => {
         Vue.prototype.$vDialog = (name: string) =>  new DialogBuilder(store, vuetify, name);
+        console.error('pluginClient');
         // Vue.prototype.$dialogAlert = function () {
         //     return (new DialogBuilder(options.store, options.vuetify))
         //         .title(Vue.prototype.$t('Warning!'), 'warning')
@@ -21,17 +22,18 @@ const pluginClient: PluginObject<TDialogPluginOptions> = {
         // TODO add prompt / error / loading confirm dialogs
         // TODO add toast here for analogue
 
-        const progress = new ProgressBarBuilder(store, vuetify, 'AppProgressBar');
-        Vue.prototype.$appProgress = {
-            show: () => progress.show(),
-            hide: () => progress.hide()
-        };
+        // const progress = new ProgressBarBuilder(store, vuetify, 'AppProgressBar');
+        // Vue.prototype.$appProgress = {
+        //     show: () => progress.show(),
+        //     hide: () => progress.hide()
+        // };
 
     },
 };
 
 const pluginServer: PluginObject<TDialogPluginOptions> = {
     install: (Vue: VueConstructor, {store, vuetify}: TDialogPluginOptions) => {
+        console.error('pluginServer');
         Vue.prototype.$vDialog = (name: string) =>  {};
         Vue.prototype.$appProgress = {
             show: () => {},

@@ -14,7 +14,7 @@ const routerOnReady = (router: VueRouter) => new Promise((resolve, reject) => {
 // return a Promise that resolves to the app instance.
 export default (context: TSSRContext) => new Promise(async (resolve, reject) => {
   const {appConf, url} = context;
-  const { app, router, store } = await createApp(appConf);
+  const { app, router, store } = createApp(appConf);
 
   const { fullPath } = router.resolve(url).route;
   if (fullPath !== url) {
