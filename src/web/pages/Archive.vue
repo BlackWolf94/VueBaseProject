@@ -19,7 +19,9 @@
     export default class Archive extends Vue {
 
       dialogShow(){
-        this.$appProgress.show()
+        this.$dialog('aaaa')
+          .base('Test')
+          .show()
       }
     }
 </script>

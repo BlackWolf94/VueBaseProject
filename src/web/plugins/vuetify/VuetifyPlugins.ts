@@ -9,33 +9,45 @@ type TDialogPluginOptions = {
     vuetify: any;
 };
 
-const pluginClient: PluginObject<TDialogPluginOptions> = {
-    install: (Vue: VueConstructor, {store, vuetify}: TDialogPluginOptions) => {
-        Vue.prototype.$vDialog = (name: string) =>  new DialogBuilder(store, vuetify, name);
-        console.error('pluginClient');
-        // Vue.prototype.$dialogAlert = function () {
-        //     return (new DialogBuilder(options.store, options.vuetify))
-        //         .title(Vue.prototype.$t('Warning!'), 'warning')
-        //         .buttonOk('ok')
-        // }
+const pluginClient: PluginObject<any> = {
+    install: (vm: VueConstructor) => {
+
+        vm.prototype.$dialog = function(name: string) {
+            const store = this.$store;
+            const vuetify = this.$vuetify;
+            console.error('');
+            const dialogs = {
+                base: (title: string) =>  new DialogBuilder(store, vuetify, name)
+                  .title(title)
+                  .buttonCancel(this.$t('Close'))
+                  .buttonOk(this.$t('OK'), null, 'primary'),
+                // confirm: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                // alert: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                // prompt: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                // info: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                // error: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+            };
+
+            return dialogs;
+        };
 
         // TODO add prompt / error / loading confirm dialogs
         // TODO add toast here for analogue
 
-        // const progress = new ProgressBarBuilder(store, vuetify, 'AppProgressBar');
-        // Vue.prototype.$appProgress = {
-        //     show: () => progress.show(),
-        //     hide: () => progress.hide()
-        // };
+        const progress = new ProgressBarBuilder('AppProgressBar');
+        vm.prototype.$appProgress = {
+            show: () => progress.show(),
+            hide: () => progress.hide()
+        };
+        console.error('pluginClient');
 
     },
 };
 
 const pluginServer: PluginObject<TDialogPluginOptions> = {
-    install: (Vue: VueConstructor, {store, vuetify}: TDialogPluginOptions) => {
+    install: (vm: VueConstructor) => {
         console.error('pluginServer');
-        Vue.prototype.$vDialog = (name: string) =>  {};
-        Vue.prototype.$appProgress = {
+        vm.prototype.$appProgress = {
             show: () => {},
             hide: () => {}
         };

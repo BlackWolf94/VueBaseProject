@@ -11,10 +11,9 @@ import ProgressBar from '@web/plugins/vuetify/dialog/components/ProgressBar.vue'
 export default class ProgressBarBuilder {
   private progress: ProgressBar;
 
-  constructor(private store: Store<any>, private vuetify: any, private name: string) {
-    // this.progress = new (Vue.extend(ProgressBar))();
-    // this.progress.$mount();
-
+  constructor(private name: string) {
+    this.progress = new (Vue.extend(ProgressBar))();
+    this.progress.$mount();
   }
 
   hide() {

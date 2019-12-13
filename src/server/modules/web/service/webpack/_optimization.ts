@@ -10,12 +10,12 @@ import AppHelper from '../../../../../../common/helper/AppHelper';
 
 export const optimization: Optimization =   {
   minimize: AppHelper.isProd(),
-  removeAvailableModules: true,
-  removeEmptyChunks: true,
-  mergeDuplicateChunks: true,
-  flagIncludedChunks: true,
-  runtimeChunk: true,
-  namedChunks: AppHelper.isDev(),
+  removeAvailableModules: false,
+  removeEmptyChunks: false,
+  // mergeDuplicateChunks: true,
+  // flagIncludedChunks: true,
+  // runtimeChunk: true,
+  // namedChunks: AppHelper.isDev(),
   splitChunks: {
     cacheGroups: {
       vendors: {
