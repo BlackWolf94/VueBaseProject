@@ -12,33 +12,38 @@ type TDialogPluginOptions = {
 const pluginClient: PluginObject<any> = {
     install: (vm: VueConstructor) => {
 
-        vm.prototype.$dialog = function(name: string) {
-            const store = this.$store;
-            const vuetify = this.$vuetify;
-            console.error('');
-            const dialogs = {
-                base: (title: string) =>  new DialogBuilder(store, vuetify, name)
-                  .title(title)
-                  .buttonCancel(this.$t('Close'))
-                  .buttonOk(this.$t('OK'), null, 'primary'),
-                // confirm: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
-                // alert: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
-                // prompt: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
-                // info: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
-                // error: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
-            };
+        Object.defineProperty(vm.prototype, '$dialog', {
+            value(name: string)  {
+                const store = this.$store;
+                const vuetify = this.$vuetify;
+                console.error('asdas');
 
-            return dialogs;
-        };
+                return {
+                    // base: (title: string) =>  new DialogBuilder(store, vuetify, name)
+                    //   .title(title)
+                    //   .buttonCancel(this.$t('Close'))
+                    //   .buttonOk(this.$t('OK'), null, 'primary'),
+                    // confirm: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                    // alert: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                    // prompt: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                    // info: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                    // error: (title: string) =>  new DialogBuilder(store, vuetify, name).title(title),
+                };
+            }
+        });
 
-        // TODO add prompt / error / loading confirm dialogs
-        // TODO add toast here for analogue
 
         const progress = new ProgressBarBuilder('AppProgressBar');
-        vm.prototype.$appProgress = {
-            show: () => progress.show(),
-            hide: () => progress.hide()
-        };
+        Object.defineProperty(vm.prototype, '$appProgress', {
+            get() {
+                return {
+                    show: () => progress.show(),
+                    hide: () => progress.hide()
+                };
+            }
+        });
+
+
         console.error('pluginClient');
 
     },

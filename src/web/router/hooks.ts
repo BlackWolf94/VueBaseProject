@@ -12,9 +12,9 @@ export async function beforeEach(to: Route, from: Route, next: any): Promise<any
   const [root, lang, ...path] = to.path.split('/');
   // @ts-ignore
   const app: Vue = (this as VueRouter).app;
-  // if (app.$el) {
-  //   app.$appProgress.show();
-  // }
+  if (app.$el) {
+    app.$appProgress.show();
+  }
 
   if (app.$currentLang === lang) {
     next();
@@ -34,6 +34,6 @@ export async function beforeEach(to: Route, from: Route, next: any): Promise<any
 
 export async function afterEach(to: Route, from: Route) {
   // @ts-ignore
-  // const app: Vue = (this as VueRouter).app;
-  // app.$appProgress.hide();
+  const app: Vue = (this as VueRouter).app;
+  app.$appProgress.hide();
 }

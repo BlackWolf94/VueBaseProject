@@ -19,6 +19,7 @@
     export default class Archive extends Vue {
 
       dialogShow(){
+
         this.$dialog('aaaa')
           .base('Test')
           .show()
