@@ -57,10 +57,14 @@ export const loadPlugins = (VUE_ENV: string) => {
       //   }
       // })
     ]);
+  } else {
+    plugins.push(
+      new HardSourceWebpackPlugin(),
+    );
   }
 
   plugins.push(...[
-    new HardSourceWebpackPlugin(),
+    // new HardSourceWebpackPlugin(),
     new VueLoaderPlugin(),
     new FriendlyErrorsPlugin(),
     new ForkTsCheckerWebpackPlugin({

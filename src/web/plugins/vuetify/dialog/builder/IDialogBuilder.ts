@@ -1,5 +1,3 @@
-import {Component} from 'vue';
-
 export interface IDialogButtons {
     text?: string;
     icon?: string;
@@ -17,6 +15,6 @@ export interface IDialogProperty {
     componentProps?: any;
     text(): string;
     title(): IDialogTitle;
-    component(): Component | null;
+    component(): any;
     buttons(): IDialogButtons[];
 }
