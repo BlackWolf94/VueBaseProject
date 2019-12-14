@@ -5,7 +5,6 @@
 import Vue from 'vue';
 import {VuetifyLocale} from 'vuetify/types/services/lang';
 import DialogBuilder from '@web/plugins/vuetify/dialog/builder/DialogBuilder';
-import ProgressBarBuilder from '@web/plugins/vuetify/dialog/builder/ProgressBarBuilder';
 
 declare module 'vue/types/vue' {
 
@@ -18,8 +17,16 @@ declare module 'vue/types/vue' {
         $addLocale(lang: string, translates: VuetifyLocale): void;
         $setLocale(lang: string): void;
 
-        $vDialog(name: string): DialogBuilder;
-        $vConfirmDialog(name?: string): DialogBuilder;
+        $dialog(name: string): {
+            base(text: string): DialogBuilder;
+            confirm(text: string, title?: string): DialogBuilder;
+            warn(text: string, title?: string): DialogBuilder;
+            prompt(text: string, title?: string): DialogBuilder;
+            info(text: string, title?: string): DialogBuilder;
+            error(text: string, title?: string): DialogBuilder;
+            success(text: string, title?: string): DialogBuilder;
+            // prompt(title?: string, component: any): DialogBuilder;
+        };
     }
 }
 

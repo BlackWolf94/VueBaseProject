@@ -1,10 +1,12 @@
 import * as fs from 'fs';
 import { dirname, resolve } from 'path';
 import rimraf from 'rimraf';
+import normalize from 'memory-fs/lib/normalize';
 
 export class FileHelper {
 
     static readFile(fileName: string, options: string = 'utf8', fileSystem: any = fs): Promise<string> {
+        fileName = normalize(fileName);
         return new Promise<string>((resolve) => {
             if (!fileSystem.existsSync(fileName)) {
                 resolve(null);

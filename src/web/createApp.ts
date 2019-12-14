@@ -5,15 +5,15 @@ import { createRouter } from './router';
 import vuetify from './plugins/vuetify';
 import { createStore } from '@web/store';
 import { TSSRAppConf} from '@common/types/TSSR';
-import loadPlugins from '@web/plugins';
+import plugins from '@web/plugins';
 
+Vue.use(plugins);
 
-export async function createApp(conf?: TSSRAppConf, state?: any) {
+export function createApp(conf?: TSSRAppConf, state?: any) {
 
   const router = createRouter();
   const store = createStore();
 
-  Vue.use(loadPlugins(store, vuetify));
 
   if (state) {
     store.replaceState(state);

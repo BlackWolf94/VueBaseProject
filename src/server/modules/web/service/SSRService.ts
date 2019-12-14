@@ -44,7 +44,7 @@ export default class SSRService {
     });
   }
 
-  getAssets(fileName: string) {
+  getAssets(fileName: string): Promise<any> {
     return FileHelper.readFile(SSRBuildConf.assetPath(fileName), 'utf-8', this.dfs);
   }
 
@@ -58,8 +58,10 @@ export default class SSRService {
 
   protected async buildProdApp() {
     const s = new Date();
-    await this.buildClient();
-    await this.buildServer();
+    await Promise.all([
+      this.buildClient(),
+      this.buildServer(),
+    ]);
 
     this.template = await FileHelper.readFile(SSRBuildConf.template, 'utf-8');
     this.bundle = JSON.parse(await FileHelper.readFile(SSRBuildConf.bundle, 'utf-8'));

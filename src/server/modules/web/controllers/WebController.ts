@@ -1,5 +1,5 @@
 import { Controller, Get, Header, Param, Req, Res, Headers, Logger } from '@nestjs/common';
-import {Request} from 'express';
+import { Request} from 'express';
 import SSRContextService from '../service/SSRContextService';
 import SSRService from '../service/SSRService';
 import AppHelper from '../../../../../common/helper/AppHelper';
@@ -16,16 +16,17 @@ export class WebController {
     constructor(private ssr: SSRService, private context: SSRContextService) {
     }
 
+    @Get('/*.*')
+    async assets(@Req() req: Request) {
+        return this.ssr.getAssets(req.url);
+    }
+
     @Get([':lang', ':lang/*', '/*'])
     @Header('Content-Type', 'text/html')
     @Header('Server', serverInfo)
     async index(@Req() req: Request,
                 @Param('lang') lang: string,
                 @Headers('accept-language') browserLangs: string  = '') {
-
-        if (req.url.match('fonts')) {
-            return this.ssr.getAssets(req.url);
-        }
 
         if (!(await LocaleHelper.isLangAvailable(lang))) {
             [lang] = browserLangs.split(',');

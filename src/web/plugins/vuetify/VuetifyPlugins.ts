@@ -1,43 +1,59 @@
-import {PluginObject, VueConstructor} from 'vue';
-import {Store} from 'vuex';
+import Vue, { PluginObject, VueConstructor } from 'vue';
 import DialogBuilder from '@web/plugins/vuetify/dialog/builder/DialogBuilder';
-import { isClientRender } from '@web/config/config';
 import ProgressBarBuilder from '@web/plugins/vuetify/dialog/builder/ProgressBarBuilder';
+import vuetify from '../vuetify';
 
-type TDialogPluginOptions = {
-    store: Store<any>;
-    vuetify: any;
-};
+export default {
+  install(vm: VueConstructor) {
 
-const pluginClient: PluginObject<TDialogPluginOptions> = {
-    install: (Vue: VueConstructor, {store, vuetify}: TDialogPluginOptions) => {
-        Vue.prototype.$vDialog = (name: string) =>  new DialogBuilder(store, vuetify, name);
-        // Vue.prototype.$dialogAlert = function () {
-        //     return (new DialogBuilder(options.store, options.vuetify))
-        //         .title(Vue.prototype.$t('Warning!'), 'warning')
-        //         .buttonOk('ok')
-        // }
+    Object.defineProperty(Vue.prototype, '$dialog', {
+      value(name: string) {
+        const store = this.$store;
 
-        // TODO add prompt / error / loading confirm dialogs
-        // TODO add toast here for analogue
+        return {
+          confirm: (text: string, title?: string) => new DialogBuilder(store, vuetify, name)
+            .buttonCancel(this.$t('Close'))
+            .buttonOk(this.$t('OK'), null, 'primary')
+            .title(title || this.$t('Confirm'), 'primary')
+            .text(text),
 
-        const progress = new ProgressBarBuilder(store, vuetify, 'AppProgressBar');
-        Vue.prototype.$appProgress = {
-            show: () => progress.show(),
-            hide: () => progress.hide()
+          warn: (text: string, title?: string) => new DialogBuilder(store, vuetify, name)
+            .text(text)
+            .title(title || this.$t('Warning'), 'warning', 'mdi-bell-warn-outline')
+            .buttonOk(this.$t('OK'), null, 'primary'),
+
+          info: (text: string, title?: string) => new DialogBuilder(store, vuetify, name)
+            .text(text)
+            .title(title || this.$t('Info'), 'primary', 'mdi-information')
+            .buttonOk(this.$t('OK'), null, 'primary'),
+
+          error: (text: string, title?: string) => new DialogBuilder(store, vuetify, name)
+            .text(text)
+            .title(title || this.$t('Error'), 'error', 'mdi-alert-decagram')
+            .buttonOk(this.$t('OK'), null, 'primary'),
+
+          success: (text: string, title?: string) => new DialogBuilder(store, vuetify, name)
+            .text(text)
+            .title(title || this.$t('Success'), 'success', 'mdi-check-outline')
+            .buttonOk(this.$t('OK'), null, 'primary'),
+
+          base: (text: string ) => new DialogBuilder(store, vuetify, name)
+            .text(text)
+            .buttonOk(this.$t('OK'), null, 'primary')
         };
+      }
+    });
 
-    },
-};
 
-const pluginServer: PluginObject<TDialogPluginOptions> = {
-    install: (Vue: VueConstructor, {store, vuetify}: TDialogPluginOptions) => {
-        Vue.prototype.$vDialog = (name: string) =>  {};
-        Vue.prototype.$appProgress = {
-            show: () => {},
-            hide: () => {}
+    const progress = new ProgressBarBuilder('AppProgressBar');
+    Object.defineProperty(Vue.prototype, '$appProgress', {
+      get() {
+        return {
+          show: () => progress.show(),
+          hide: () => progress.hide()
         };
-    },
-};
+      }
+    });
+  }
+} as PluginObject<any>;
 
-export default isClientRender ? pluginClient : pluginServer;

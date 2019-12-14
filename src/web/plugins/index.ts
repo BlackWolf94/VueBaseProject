@@ -1,11 +1,8 @@
-import {PluginObject} from 'vue';
-import { Store } from 'vuex';
-import VuetifyPlugins from '@web/plugins/vuetify/VuetifyPlugins';
+import { PluginObject } from 'vue';
+import vuetifyPlugin from '@web/plugins/vuetify/VuetifyPlugins';
 
-export default function loadPlugins(store: Store<any>, vuetify: any): PluginObject<any> {
-    return {
-        install(Vue) {
-            Vue.use(VuetifyPlugins, {store, vuetify});
-        },
-    };
-}
+export default {
+  install(Vue) {
+    Vue.use( vuetifyPlugin);
+  }
+} as PluginObject<any>;

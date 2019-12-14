@@ -3,7 +3,10 @@
         v-layout(row).pa-5
             v-flex {{$t('Archive')}}
             v-flex
-                v-btn(@click="dialogShow") dialog
+                v-btn(@click="dialogShow('confirm')") Confirm
+                v-btn(@click="dialogShow('alert')") Alert
+                v-btn(@click="dialogShow('info')") Info
+                v-btn(@click="dialogShow('error')") Error
         archive-list
 
 </template>
@@ -18,8 +21,11 @@
     })
     export default class Archive extends Vue {
 
-      dialogShow(){
-        this.$appProgress.show()
+      dialogShow(type: string){
+
+        this.$dialog('alert')
+          .confirm(this.$t('I m a {0} dialog', type))
+          .show()
       }
     }
 </script>

@@ -34,33 +34,37 @@ export const loadPlugins = (VUE_ENV: string) => {
         filename: 'css/[name].[hash].css',
         chunkFilename: 'css/[id].[hash].css'
       }),
-      new ImageminPlugin({
-        filter: (source: any) => source.byteLength > 8192,
-        bail: false, // Ignore errors on corrupted images
-        cache: true,
-        imageminOptions: {
-          plugins: [
-            ['gifsicle', { interlaced: true }],
-            ['jpegtran', { progressive: true }],
-            ['optipng', { optimizationLevel: 5 }],
-            [
-              'svgo',
-              {
-                plugins: [
-                  {
-                    removeViewBox: false
-                  }
-                ]
-              }
-            ]
-          ]
-        }
-      })
+      // new ImageminPlugin({
+      //   filter: (source: any) => source.byteLength > 8192,
+      //   bail: false, // Ignore errors on corrupted images
+      //   cache: true,
+      //   imageminOptions: {
+      //     plugins: [
+      //       ['gifsicle', { interlaced: true }],
+      //       ['jpegtran', { progressive: true }],
+      //       ['optipng', { optimizationLevel: 5 }],
+      //       [
+      //         'svgo',
+      //         {
+      //           plugins: [
+      //             {
+      //               removeViewBox: false
+      //             }
+      //           ]
+      //         }
+      //       ]
+      //     ]
+      //   }
+      // })
     ]);
+  } else {
+    plugins.push(
+      new HardSourceWebpackPlugin(),
+    );
   }
 
   plugins.push(...[
-    new HardSourceWebpackPlugin(),
+    // new HardSourceWebpackPlugin(),
     new VueLoaderPlugin(),
     new FriendlyErrorsPlugin(),
     new ForkTsCheckerWebpackPlugin({
@@ -75,9 +79,8 @@ export const loadPlugins = (VUE_ENV: string) => {
   ]);
 
   if (VUE_ENV === 'client') {
-    console.error(VUE_ENV);
     plugins.push(
-      new DefinePlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false }))
+      new DefinePlugin(SSRBuildConf.stringify({ VUE_ENV, DEBUG: false })),
     );
   }
 
