@@ -18,8 +18,14 @@ declare module 'vue/types/vue' {
         $setLocale(lang: string): void;
 
         $dialog(name: string): {
-            base(title: string): DialogBuilder;
-            confirm(title: string): DialogBuilder;
+            base(text: string): DialogBuilder;
+            confirm(text: string, title?: string): DialogBuilder;
+            warn(text: string, title?: string): DialogBuilder;
+            prompt(text: string, title?: string): DialogBuilder;
+            info(text: string, title?: string): DialogBuilder;
+            error(text: string, title?: string): DialogBuilder;
+            success(text: string, title?: string): DialogBuilder;
+            // prompt(title?: string, component: any): DialogBuilder;
         };
     }
 }

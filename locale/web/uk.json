@@ -2,7 +2,12 @@
 	"Change language": "Змінити мову",
 	"Notes": "Примітки",
 	"Archive": "Архів",
+	"I m a {0} dialog": "I ma {0}",
 	"Page Not Found": "Сторінку не знайдено",
 	"Close": "Закрити",
-	"OK": "OK"
+	"OK": "OK",
+	"Confirm": "Підтвердити",
+	"Alert": "Оповіщення",
+	"Info": "Інформація",
+	"Error": "Помилка"
 }

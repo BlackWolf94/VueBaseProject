@@ -2,7 +2,9 @@
     v-dialog(:value="true" :max-width="400" persistent attach="#app")
         v-card
             v-app-bar(:color="title.color" v-if="title.text" dark)
-                span.headline {{ title.text }}
+                v-icon {{title.icon}}
+                span.headline.ml-2 {{ title.text }}
+                v-spacer
             v-card-text
                 component(v-if="activeComponent" :is="component" v-model="value" v-bind="componentProps")
                 component(v-else-if="!activeComponent" :is="component" v-bind="componentProps")

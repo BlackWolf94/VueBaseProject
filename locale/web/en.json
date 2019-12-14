@@ -2,7 +2,12 @@
 	"Change language": "Change language",
 	"Notes": "Notes",
 	"Archive": "Archive",
+	"I m a {0} dialog": "I m a {0} dialog",
 	"Page Not Found": "Page Not Found",
 	"Close": "Close",
-	"OK": "OK"
+	"OK": "OK",
+	"Confirm": "Confirm",
+	"Alert": "Alert",
+	"Info": "Info",
+	"Error": "Error"
 }
