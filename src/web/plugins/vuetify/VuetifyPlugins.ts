@@ -41,8 +41,12 @@ export default {
             .text(text)
             .buttonOk(this.$t('OK'), null, 'primary')
         };
+
+        // TODO add loading/prompt dialog
       }
     });
+
+    // TODO add toaster
 
 
     const progress = new ProgressBarBuilder('AppProgressBar');
