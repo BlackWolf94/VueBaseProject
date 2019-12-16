@@ -41,3 +41,11 @@ Guide
 - [TRANSLATION](docs/Translation.md)
 - [SERVER SIDE RENDER](docs/SSR.md)
 
+## GIT
+```bash 
+git remote add github git@github.com:BlackWolf94/VueSSR.git
+git remote add bb git@bitbucket.org:gwynblaid/vuessr.git
+
+git push github develop
+
+```
