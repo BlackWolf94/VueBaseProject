@@ -5,14 +5,14 @@ module.exports = {
     "vuetify"
   ],
   configureWebpack: config => {
-    config.resolve.alias['@web'] = path.resolve(process.cwd(), 'web')
+    config.resolve.alias['@web'] = path.resolve(process.cwd(), 'src/web')
   },
   outputDir: 'www',
   pages: {
     index: {
-      entry: 'web/main.ts',
+      entry: 'src/web/main.ts',
       template: 'public/index.html',
-      title: 'Index Page',
+      title: 'Vue APP',
     },
   },
   devServer: {
