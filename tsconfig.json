@@ -53,7 +53,5 @@
   "include": [
     "**/*.ts",
     "**/*.vue"
-//    "tests/**/*.ts",
-//    "tests/**/*.tsx"
   ]
 }
