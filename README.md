@@ -1,4 +1,5 @@
 # Vue + SSR + TypeScript + Vuetify 
+
 <p  align="center">
     <p >
        <a href="https://vuejs.org/" target="_blank"><img  width="150" src="https://vuejs.org/images/logo.png" alt="Vuetify"/></a>
@@ -19,8 +20,8 @@
     </p>
 </p>
 
+Guide
 
-  
 ## CLI
  COMMAND  | DESCRIPTION    
 ---|---
