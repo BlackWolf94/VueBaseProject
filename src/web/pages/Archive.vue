@@ -12,20 +12,20 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
-    import Component from 'vue-class-component';
-    import ArchiveList from '@web/components/Archive/ArchiveList.vue';
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import ArchiveList from '@web/components/Archive/ArchiveList.vue';
 
-    @Component({
-        components: {ArchiveList}
-    })
-    export default class Archive extends Vue {
+@Component({
+    components: {ArchiveList}
+})
+export default class Archive extends Vue {
 
-      dialogShow(type: string){
+  dialogShow(type: string) {
 
-        this.$dialog('alert')
-          .confirm(this.$t('I m a {0} dialog', type))
-          .show()
-      }
-    }
+    this.$dialog('alert')
+      .confirm(this.$t('I m a {0} dialog', type))
+      .show();
+  }
+}
 </script>

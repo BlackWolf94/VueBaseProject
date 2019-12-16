@@ -52,9 +52,8 @@ export default class App extends Vue {
     }
   }
 
-  changeLang(){
-    const _langs = langs.filter( lang => (lang !== this.$currentLang));
-    this.$setLocale(_langs.pop())
+  changeLang() {
+    this.$setLocale(langs.filter( (lang) => (lang !== this.$currentLang)).pop());
   }
 }
 </script>

@@ -9,6 +9,7 @@ import DialogBuilder from '@web/plugins/vuetify/dialog/builder/DialogBuilder';
 declare module 'vue/types/vue' {
 
 
+    // tslint:disable-next-line:interface-name
     interface Vue {
         $currentLang: string;
         $appProgress: {show(): void; hide(): void };
