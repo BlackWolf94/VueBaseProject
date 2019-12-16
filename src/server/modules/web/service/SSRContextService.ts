@@ -26,7 +26,7 @@ export default class SSRContextService {
 
   private async meta(lang: string): Promise<TSSRMeta> {
     return {
-      author: "Dmytro Zataidukh",
+      author: 'Dmytro Zataidukh',
       lang
     };
   }

@@ -11,7 +11,7 @@ const srcDir = 'src/web';
 
 export class SSRBuildConf {
 
-  static tsConfig = AppHelper.pathResolve('tsconfig.json');
+  static tsConfig = AppHelper.pathResolve('tsconfig.web.json');
   static srcDir = AppHelper.pathResolve(srcDir);
   static outDir = AppHelper.pathResolve(outDir);
   static publicDir = AppHelper.pathResolve(`/${outDir}/`);

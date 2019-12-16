@@ -83,7 +83,6 @@
     "figlet": "latest",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "hard-source-webpack-plugin": "^0.13.1",
-    "husky": "^3.1.0",
     "imagemin-webpack": "^5.1.0",
     "jest": "^24.9.0",
     "lint-staged": "^9.4.3",
@@ -117,7 +116,8 @@
     "webpack-dev-middleware": "latest",
     "webpack-hashed-module-id-plugin": "^0.1.4",
     "webpack-hot-middleware": "^2.25.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "yorkie": "^2.0.0"
   },
   "lint-staged": {
     "*.ts": [
@@ -127,9 +127,7 @@
       "vue-cli-service lint --fix && git add "
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   }
 }

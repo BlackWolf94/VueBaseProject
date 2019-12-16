@@ -7,7 +7,9 @@ import { FileHelper } from '../../../../../common/helper/FileHelper';
 import LocaleHelper from '../../../helper/LocaleHelper';
 
 const serverInfo =
+    // tslint:disable-next-line:no-var-requires
     `express/${require('express/package.json').version} ` +
+    // tslint:disable-next-line:no-var-requires
     `vue-server-renderer/${require('vue-server-renderer/package.json').version}`;
 
 @Controller()

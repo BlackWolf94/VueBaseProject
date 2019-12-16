@@ -10,6 +10,7 @@
     ]
   },
   "rules": {
+    "forin": false,
     "indent": [true, "spaces", 4],
     "interface-name":  [true, "always-prefix"],
     "no-consecutive-blank-lines": false,

@@ -41,11 +41,8 @@ class WebpackRuleBuilder {
   }
 
   oneOf(resourceQuery: RegExp, use: NewLoader[]) {
-    if (resourceQuery) {
-      this.conf.oneOf = [...this.conf.oneOf || [], {resourceQuery, use}];
-    } else {
-      this.conf.oneOf = [...this.conf.oneOf || [], {use}];
-    }
+    this.conf.oneOf = resourceQuery ? [...this.conf.oneOf || [], {resourceQuery, use}]
+        : [...this.conf.oneOf || [], { use }];
     return this;
   }
 }

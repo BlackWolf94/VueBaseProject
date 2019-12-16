@@ -46,6 +46,7 @@ export class ParseService {
     const content = await FileHelper.readFile(file);
     let messages: any;
 
+    // tslint:disable-next-line:no-conditional-assignment
     while ((messages = this.pattern.exec(content)) !== null) {
       if (messages.index === this.pattern.lastIndex) {
         this.pattern.lastIndex++;
@@ -63,7 +64,7 @@ export class ParseService {
     /**
      * remove old key that not exit in project file
      */
-    Object.keys(locale).forEach( key => {
+    Object.keys(locale).forEach( (key) => {
       if (!keys.includes(key)) {
         delete locale[key];
       }

@@ -10,7 +10,7 @@ import faker from 'faker';
 export default class FakeController {
 
     @Get()
-    public index() {
+    index() {
         const res: any[] = [];
 
         for (let i = 0; i < 10; i++) {
@@ -27,7 +27,7 @@ export default class FakeController {
     }
 
     @Get(':message')
-    public item(@Param('message') message: string) {
+    item(@Param('message') message: string) {
         return message;
     }
 }

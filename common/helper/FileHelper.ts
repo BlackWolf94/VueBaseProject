@@ -7,75 +7,75 @@ export class FileHelper {
 
     static readFile(fileName: string, options: string = 'utf8', fileSystem: any = fs): Promise<string> {
         fileName = normalize(fileName);
-        return new Promise<string>((resolve) => {
+        return new Promise<string>((res) => {
             if (!fileSystem.existsSync(fileName)) {
-                resolve(null);
+                res(null);
                 return;
             }
 
             fileSystem.readFile(fileName, options, (error: any, contents: string) => {
                 if (error) {
-                    resolve(null);
+                    res(null);
                     return;
                 }
-                resolve(contents);
+                res(contents);
             });
         });
     }
 
     static createDir(dirName: string, fileSystem: any = fs): Promise<boolean> {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((res) => {
             if (fileSystem.existsSync(dirName)) {
-                resolve(true);
+                res(true);
                 return;
             }
 
             fileSystem.mkdir(dirName, { recursive: true }, (err: any) => {
                 if (err) {
-                    resolve(false);
+                    res(false);
                     return;
                 }
-                resolve(true);
+                res(true);
             });
         });
     }
 
     static writeFile(fileName: string, content: string): Promise<boolean> {
-        return new Promise<boolean>(async (resolve, reject) => {
+        return new Promise<boolean>(async (res, reject) => {
             await this.createDir(dirname(fileName));
             fs.writeFile(fileName, content, 'utf8', (error) => {
                 if (error) {
                     reject(error);
                     return;
                 }
-                resolve(true);
+                res(true);
             });
         });
     }
 
     static removeFile(fileName: string): Promise<boolean> {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((res) => {
             if (!fs.existsSync(fileName)) {
-                resolve(true);
+                res(true);
                 return;
             }
 
             fs.unlink(fileName, (error) => {
                 if (error) {
-                    resolve(false);
+                    res(false);
                 }
-                resolve(true);
+                res(true);
             });
         });
     }
 
     static readDir(folder: string): Promise<string[]> {
-        return new Promise<string[]>((resolve, reject) => {
+        return new Promise<string[]>((res, reject) => {
             fs.readdir(folder, (error, files) => {
                 if (error) {
-                    resolve([]);
+                    res([]);
                 }
-                resolve(files);
+                res(files);
             });
         });
     }
@@ -91,8 +91,8 @@ export class FileHelper {
     }
 
     static removeDir(folder: string): Promise<any> {
-        return new Promise((resolve) => {
-            rimraf(folder, resolve);
+        return new Promise((res) => {
+            rimraf(folder, res);
         });
     }
 
